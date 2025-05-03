@@ -65,7 +65,7 @@
             </div>
         </div>
         <span class="flex flex-row gap-2 text-muted-foreground text-xs">
-            preference:
+            pref:
             <svelte:component this={contact.priority} class="text-amber-500 size-4" />
         </span>
     </LinkItem>

@@ -12,7 +12,7 @@
     value="whoami-about-sean-taemin-kim-skarokin-new-jersey-bio-biography"
 >
     <div class="flex flex-row gap-2 items-center">
-        <Avatar.Root class="size-24 border">
+        <Avatar.Root class="size-16 sm:size-24 border">
             <Avatar.Image
                 src={sean}
                 alt="Sean Kim"
@@ -22,10 +22,10 @@
         <div class="flex flex-col gap-2 items-start">
             <div class="flex flex-col items-start">
                 <p
-                    class="text-lg font-semibold flex flex-row gap-2 items-center"
+                    class="text-base sm:text-lg font-semibold flex flex-row gap-2 items-center"
                 >
                     sean kim
-                    <span class="text-sm font-normal opacity-50">/ skarokin</span>
+                    <span class="text-xs sm:text-sm font-normal opacity-50">/ skarokin</span>
                 </p>
                 <p class="text-sm font-sans">김태민</p>
             </div>
@@ -43,17 +43,17 @@
         </div>
         <div class="flex items-center gap-1">
             <span class="sm:hidden">•</span>
-            <span>go</span>
-            <span class="hidden sm:inline">•</span>
-        </div>
-        <div class="flex items-center gap-1">
-            <span class="sm:hidden">•</span>
             <span>typescript</span>
             <span class="hidden sm:inline">•</span>
         </div>
         <div class="flex items-center gap-1">
             <span class="sm:hidden">•</span>
-            <span>gcp</span>
+            <span>go</span>
+            <span class="hidden sm:inline">•</span>
+        </div>
+        <div class="flex items-center gap-1">
+            <span class="sm:hidden">•</span>
+            <span>aws</span>
         </div>
     </div>
 </Item>

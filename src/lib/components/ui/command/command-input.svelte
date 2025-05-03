@@ -2,6 +2,7 @@
     import { Command as CommandPrimitive } from 'bits-ui';
     import { cn } from '$lib/utils.js';
     import ExternalLink from "@lucide/svelte/icons/external-link";
+    import Search from "@lucide/svelte/icons/search";
 
     let {
         ref = $bindable(null),
@@ -14,10 +15,11 @@
 <div class="flex items-center border-b px-3" data-command-input-wrapper="">
     <div class="pr-3 mr-3 border-r h-full flex items-center">
         <kbd
-            class="bg-muted text-muted-foreground pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border px-1.5 text-[10px]"
+            class="hidden sm:inline-flex bg-muted text-muted-foreground pointer-events-none h-5 select-none items-center gap-1 rounded border px-1.5 text-[10px]"
         >
             <span class="text-xs">⌘</span>k
         </kbd>
+        <Search class="sm:hidden size-4 text-muted-foreground" />
     </div>
     <CommandPrimitive.Input
         class={cn(
@@ -30,7 +32,7 @@
     />
     <div class="pl-3 h-full flex items-center">
         <kbd
-            class="bg-muted text-muted-foreground pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border px-1.5 text-[10px]"
+            class="hidden sm:inline-flex bg-muted text-muted-foreground pointer-events-none h-5 select-none items-center gap-1 rounded border px-1.5 text-[10px]"
         >
             <ExternalLink class="size-3 text-muted-foreground" />
             <span class="text-xs">enter</span>

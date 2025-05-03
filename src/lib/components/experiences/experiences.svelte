@@ -9,7 +9,7 @@
 
     const experiences = [
         {
-            company: "rutgers university",
+            company: "rutgers",
             title: "cs",
             date: "sep 2022 - dec 2025",
         },
@@ -24,7 +24,7 @@
             date: "jan 2025 - now",
         },
         {
-            company: "acl agency llc",
+            company: "acl agency",
             title: "swe intern",
             date: "may 2024 - aug 2024",
         }
