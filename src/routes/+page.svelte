@@ -42,7 +42,7 @@
 <svelte:document onkeydown={handleKeydown} />
 
 <div class="flex flex-col gap-4 justify-center items-center h-full">
-    <Command.Root class="max-w-4xl rounded-lg border shadow-md" filter={customFilter}>
+    <Command.Root class="max-w-4xl rounded-lg border shadow-md" filter={customFilter} loop={true} vimBindings={false} >
         <Command.Input
             placeholder="search for stuff about me..."
             id="inputref"
@@ -52,7 +52,7 @@
             <Command.Empty>
                 no results found baka ૮₍ ˃ ⤙ ˂ ₎ა
             </Command.Empty>
-            <Command.Group heading="whoami">
+            <Command.Group heading="whoami" >
                 <About />
             </Command.Group>
             <Command.Separator />
