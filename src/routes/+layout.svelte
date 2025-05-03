@@ -5,7 +5,6 @@
     import { Label } from "$lib/components/ui/label";
     import { onMount } from "svelte";
     import { browser } from "$app/environment";
-
     let { children } = $props();
 
     let themeLoaded = $state(false);
@@ -33,7 +32,7 @@
 <div class="h-screen flex flex-col items-center w-full font-mono">
 	<header class="shrink-0 border-zinc-700 border-b border-dashed w-full">
 		<div class="flex justify-between border-zinc-700 border-none sm:border-x sm:border-dashed mx-auto container p-4">
-			<h1 class="text-xs font-bold">skarokin</h1>
+			<h1 class="text-xs font-bold">[skarokin]</h1>
             <div class="flex items-center gap-2">
                 <Switch 
                     id="theme-switch"
@@ -59,7 +58,7 @@
     <footer class="shrink-0 flex-none border-zinc-700 border-t border-dashed w-full">
 		<div class="flex flex-row justify-between border-zinc-700 border-none sm:border-x sm:border-dashed mx-auto container p-4">
             <p class="text-xs text-muted-foreground">
-        	    &copy; lil milk
+        	    [&copy; lil milk]
             </p>
             <a 
                 class="text-xs text-muted-foreground hover:underline"
@@ -67,7 +66,7 @@
                 target="_blank"
                 rel="noopener noreferrer"
             >
-                gyatthub repo
+                [gyatthub repo]
             </a>
         </div>
     </footer>
