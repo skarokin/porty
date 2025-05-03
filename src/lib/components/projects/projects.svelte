@@ -43,7 +43,7 @@
             description: `student-focused note sharing platform with real-time collaboration, leveraging horizontally-scaling websocket servers.`,
             date: "aug 2024 - sep 2024",
             link: "https://refnote.app/",
-            github: "htts://github.com/skarokin/ref-note",
+            github: "https://github.com/skarokin/ref-note",
             techStack: [
                 {
                     tech: "next.js & vercel",
@@ -77,7 +77,7 @@
             description: `generate dependency tree-based grammar checkers for any language, any dataset, and any domain.`,
             date: "mar 2024 - jul 2024",
             link: "https://grammacy.com/",
-            github: "htts://github.com/skarokin/grammaCy",
+            github: "https://github.com/skarokin/grammaCy",
             techStack: [
                 {
                     tech: "python",
@@ -105,7 +105,7 @@
             name: "pycaptcha",
             description: `CAPTCHA system that fetches Google Street View images to generate image-based tests.`,
             date: "jan 2024 - feb 2024",
-            github: "htts://github.com/skarokin/pycaptcha",
+            github: "https://github.com/skarokin/pycaptcha",
             techStack: [
                 {
                     tech: "numpy, opencv, matplotlib",
@@ -129,7 +129,7 @@
             description: `competitive typing platform with real-time leaderboards.`,
             date: "nov 2023 - jan 2024",
             link: "https://steam-link-409216.web.app/",
-            github: "htts://github.com/skarokin/ref-type",
+            github: "https://github.com/skarokin/ref-type",
             techStack: [
                 {
                     tech: "react.js & firebase",
@@ -152,7 +152,7 @@
             name: "MYnote.md",
             description: `electron-based Markdown note-taking app with LaTeX and code block support.`,
             date: "may 2023 - jun 2023",
-            github: "htts://github.com/skarokin/MYnote.md",
+            github: "https://github.com/skarokin/MYnote.md",
             techStack: [
                 {
                     tech: "node.js & electron",
