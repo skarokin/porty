@@ -64,7 +64,7 @@
         {:else}
             <div class="flex flex-col items-end gap-1 max-w-32 sm:max-w-none text-xs text-muted-foreground truncate">
                 <span>now playing</span>
-                <span>loading...</span>
+                <span>nothing lol</span>
             </div>
         {/if}
     </div>
