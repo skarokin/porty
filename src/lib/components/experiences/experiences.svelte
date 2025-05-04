@@ -9,6 +9,7 @@
     type Experience = {
         company: string;
         title: string;
+        hiddenKeywords?: string[];
         date: string;
         logoPath?: string;
     }
@@ -17,12 +18,14 @@
         {
             company: "rutgers",
             title: "cs",
+            hiddenKeywords: ["computer science", "rutgers university", "major", "education", "school"],
             date: "09/22 - 12/25",
             logoPath: rutgers,
         },
         {
             company: "cyberark",
             title: "sre intern",
+            hiddenKeywords: ["site reliability engineer", "site reliability"],
             date: "05/25 - 08/25",
             logoPath: cyberark,
         },
@@ -35,6 +38,7 @@
         {
             company: "acl agency",
             title: "swe intern",
+            hiddenKeywords: ["software engineer", "software engineering"],
             date: "05/24 - 08/24",
         }
     ];
@@ -43,7 +47,7 @@
 {#each experiences as experience, index}
     <Item
         value={`pos=${index}-${experience.company}-${experience.title}`}
-        keywords={["experiences", "experience", "work", "job"]}
+        keywords={["experiences", "experience", "work", "job"].concat(experience.hiddenKeywords || [])}
         class="flex items-center justify-between gap-2 w-full"
     >
         <div class="flex items-center gap-2 truncate max-w-48 sm:max-w-none">

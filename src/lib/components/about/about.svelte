@@ -11,7 +11,7 @@
 
 <Item
     class="flex flex-row gap-2 items-center justify-between"
-    value={'whoami'}
+    value='pos=1-whoami'
     keywords={["about", "sean", "taemin", "kim", "skarokin", "new jersey", "bio", "biography", "now playing", "location"]}
 >
     <div class="flex flex-row gap-2 items-center">

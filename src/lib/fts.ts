@@ -9,7 +9,8 @@ export function customFilter(commandValue: string, search: string, commandKeywor
     let position: number | undefined = undefined;
     let actualValue = commandValue;
 
-    // if starts with pos, then remove it and extract the positional encoding
+    // weirdly we need to encode position for everything even if it's not needed. 
+    // keywords for 'resume' and 'about' section break without this.... wtf why lol
     if (commandValue.startsWith("pos=")) {
         position = parseInt(commandValue[4], 10);
         actualValue = commandValue.substring(5);    // split at 5 not 4 to skip the '-' character

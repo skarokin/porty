@@ -17,7 +17,7 @@
         }
     });
 
-    function handleKeydown(e: KeyboardEvent) {
+    function handleKeydownTheme(e: KeyboardEvent) {
         if (e.key === "l" && (e.ctrlKey || e.metaKey)) {
             e.preventDefault();
             toggleMode();
@@ -26,7 +26,7 @@
     };
 </script>
 
-<svelte:document onkeydown={handleKeydown} />
+<svelte:document onkeydown={handleKeydownTheme} />
 
 <ModeWatcher />
 <div class="h-dvh flex flex-col font-mono overflow-hidden">

@@ -25,11 +25,11 @@
         </span>
     </Item>
 {:else}
-    {#each topTracks as track}
+    {#each topTracks as track, index}
         <LinkItem
             href={track.url}
             target="_blank"
-            value={`${track.title}-${track.artist}`}
+            value={`pos=${index}-${track.title}-${track.artist}`}
             keywords={["spotify", "music", "track", "song", "artist", "album", "listening", "top tracks"]}
             class="flex items-center justify-between gap-2 w-full hover:cursor-pointer"
         >

@@ -39,7 +39,7 @@
         }
     }
 
-    function handleKeydown(e: KeyboardEvent) {
+    function handleKeydownSearch(e: KeyboardEvent) {
         if (document.activeElement === inputRef) {
             return;
         }
@@ -65,7 +65,7 @@
     });
 </script>
 
-<svelte:document onkeydown={handleKeydown} onvisibilitychange={handleVisibilityChange} />
+<svelte:document onkeydown={handleKeydownSearch} onvisibilitychange={handleVisibilityChange} />
 
 <div class="flex flex-col gap-4 justify-center items-center h-full">
     <Command.Root class="max-w-4xl rounded-lg border shadow-md h-full" filter={customFilter} loop={true} vimBindings={false} >

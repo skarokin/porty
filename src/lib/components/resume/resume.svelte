@@ -7,7 +7,8 @@
 <LinkItem
     href={resume}
     target="_blank"
-    value="resume-cv-curriculum-vitae-seankimresume-pdf-download-hire-employment"
+    value="pos=1-resume"
+    keywords={["cv, curriculum vitae, seankimresume, pdf, download, hire, employment"]}
     class="flex items-center justify-between gap-2 w-full cursor-pointer"
 >
     <div class="flex items-center gap-2 truncate max-w-48 sm:max-w-none">

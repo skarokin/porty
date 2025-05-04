@@ -1,53 +1,71 @@
 <script lang=ts>
     import { LinkItem } from "$lib/components/ui/command"
+
     import Phone from "@lucide/svelte/icons/phone";
-    import Mail from "@lucide/svelte/icons/mail";
-    import LinkedIn from "@lucide/svelte/icons/linkedin";
     import SignalZero from "@lucide/svelte/icons/signal-zero";
     import SignalLow from "@lucide/svelte/icons/signal-low";
     import SignalMedium from "@lucide/svelte/icons/signal-medium";
     import SignalHigh from "@lucide/svelte/icons/signal-high";
+    import Signal from "@lucide/svelte/icons/signal";
     import GitHub from "@lucide/svelte/icons/github";
+    import Email from "@lucide/svelte/icons/mail";
+    import Linkedin from "@lucide/svelte/icons/linkedin";
+
+    import DiscordDark from "$lib/assets/discord-dark.svelte";
+    import DiscordLight from "$lib/assets/discord-light.svelte";
+
     import type { Component } from "svelte";
+
+    import { mode } from "mode-watcher";
 
     type Contact = {
         type: string;
         value: string;
         href: string;
         icon: Component;
-        priority: Component;
+        iconLight?: Component;
+        pref: Component;
     }
 
     const contacts: Contact[] = [
         {
+            type: 'discord',
+            value: 'skarokin',
+            href: 'https://discord.com/users/257628157237133313',
+            icon: DiscordDark,
+            iconLight: DiscordLight,
+            pref: Signal,
+        },
+        {
             type: 'email',
             value: 'taemin.kim0327@gmail.com',
             href: 'mailto:taemin.kim0327@gmail.com',
-            icon: Mail,
-            priority: SignalHigh,
+            icon: Email,
+            pref: SignalHigh,
         },
         {
             type: 'linkedin',
             value: 'kimtaemin',
             href: 'https://linkedin.com/in/kimtaemin',
-            icon: LinkedIn,
-            priority: SignalMedium,
+            icon: Linkedin,
+            pref: SignalMedium,
         },
         {
             type: 'phone',
             value: '201-937-7441',
             href: 'tel:2019377441',
             icon: Phone,
-            priority: SignalLow,
+            pref: SignalLow,
         },
         {
             type: 'github',
             value: 'skarokin',
             href: 'https://github.com/skarokin',
             icon: GitHub,
-            priority: SignalZero,
+            pref: SignalZero,
         },
     ];
+    
 </script>
 
 {#each contacts as contact, index}
@@ -59,7 +77,12 @@
         class="flex items-center justify-between gap-2 w-full hover:cursor-pointer"
     >
         <div class="flex items-center gap-2">
-            <svelte:component this={contact.icon} class="size-4 text-muted-foreground" />
+            <svelte:component 
+                this={mode.current === "dark" 
+                ? contact.icon 
+                : (contact.iconLight || contact.icon)} 
+                class="size-4 text-muted-foreground" 
+            />
             <div class="flex items-baseline gap-2 truncate max-w-48 sm:max-w-none">
                 <span>{contact.type}</span>
                 <span class="text-muted-foreground text-xs truncate">/ {contact.value}</span>
@@ -67,7 +90,7 @@
         </div>
         <span class="flex flex-row gap-2 text-muted-foreground text-xs max-w-36 sm:max-w-none truncate">
             pref:
-            <svelte:component this={contact.priority} class="text-amber-500 size-4" />
+            <svelte:component this={contact.pref} class="text-amber-500 size-4" />
         </span>
     </LinkItem>
 {/each}
