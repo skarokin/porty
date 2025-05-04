@@ -1,24 +1,28 @@
 import type { PageServerLoad } from "./$types";
-import { SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET, SPOTIFY_REFRESH_TOKEN } from "$env/static/private";
-import * as SpotifyTypes from "$lib/types/spotify"
+import type { PageLoadProps } from "$lib/types/page";
 import { getAccessToken, currentlyPlaying, getTopTracks } from "$lib/server/spotify";
 
-export const load: PageServerLoad = async (): Promise<{
-	topTracks: SpotifyTypes.TopTrack[];
-	nowPlaying: SpotifyTypes.CurrentlyPlayingTrack | null;
-}> => {
-	
-	if (!SPOTIFY_CLIENT_ID || !SPOTIFY_CLIENT_SECRET || !SPOTIFY_REFRESH_TOKEN) {
-		throw new Error("Spotify credentials are not set in environment variables.");
-	}
+export const load: PageServerLoad = async (): Promise<PageLoadProps> => {
+	try {
+        const accessToken = await getAccessToken();
 
-    const accessToken = await getAccessToken();
+        const [topTracks, nowPlaying] = await Promise.all([
+            getTopTracks(accessToken),
+            currentlyPlaying(accessToken)
+        ]);
 
-    const topTracks = await getTopTracks(accessToken);
-    const nowPlaying = await currentlyPlaying(accessToken);
-	
-    return {
-        topTracks,
-        nowPlaying,
-    };
+        return {
+            topTracks,
+            nowPlaying,
+            type: "success"
+        }
+    } catch (error) {
+        console.error('Failed to fetch Spotify data:', error);
+
+        return {
+            topTracks: [],
+            nowPlaying: null,
+            type: "error"
+        };
+    }
 };

@@ -6,7 +6,7 @@ export const getAccessToken = async (): Promise<string> => {
     const clientID = SPOTIFY_CLIENT_ID;
     const clientSecret = SPOTIFY_CLIENT_SECRET;
     
-    const response = await fetch("https://accounts.spotify.com/api/token", {
+    const res = await fetch("https://accounts.spotify.com/api/token", {
         method: "POST",
         headers: {
             Authorization: `Basic ${Buffer.from(
@@ -20,8 +20,16 @@ export const getAccessToken = async (): Promise<string> => {
         }),
     });
 
-    const accessTokenData = await response.json();
+    if (!res.ok) {
+        throw new Error("Failed to fetch access token");
+    }
+
+    const accessTokenData = await res.json();
     const accessToken = accessTokenData.access_token;
+
+    if (!accessToken) {
+        throw new Error("Failed to fetch access token");
+    }
 
     return accessToken;
 }
@@ -33,20 +41,26 @@ export const currentlyPlaying = async (accessToken: string): Promise<SpotifyType
         },
     });
 
+    // successful response but nothing returned
     if (res.status === 204) {
         return null;
     }
 
+    // actual error with the request
+    if (!res.ok) {
+        throw new Error("Failed to fetch currently playing track");
+    }
+
     const data = await res.json() as SpotifyTypes.CurrentlyPlayingResponse;
 
+    // nothing is playing
     if (data.item === null) {
-        return null;
+        return null; 
     }
 
     const isPlaying = data.is_playing;
     const title = data.item.name;
     const artist = data.item.artists.map((_artist: SpotifyTypes.Artist) => _artist.name).join(", ");
-    const album = data.item.album.name;
     const albumImageURL = data.item.album.images[0].url;
     const songURL = data.item.external_urls.spotify;
 
@@ -66,8 +80,20 @@ export const getTopTracks = async (accessToken: string): Promise<SpotifyTypes.To
         },
     });
 
+    if (!res.ok) {
+        throw new Error("Failed to fetch top tracks");
+    }
+
+    if (res.status === 204) {
+        return [];
+    }
+
     const data = await res.json() as SpotifyTypes.TopTracksResponse;
     const { items } = data;
+
+    if (!items || items.length === 0) {
+        return [];
+    }
 
     const tracks = items.map((track: SpotifyTypes.Track) => ({
         title: track.name,

@@ -6,7 +6,7 @@
     import { Item } from "$lib/components/ui/command";
     import * as Avatar from "$lib/components/ui/avatar/index.js";
 
-    let { nowPlaying } = $props();
+    let { nowPlaying, hasError } = $props();
 </script>
 
 <Item
@@ -58,10 +58,15 @@
                     </div>
                 </a>
             </div>
+        {:else if hasError}
+            <div class="flex flex-col items-end gap-1 max-w-32 sm:max-w-none text-xs text-muted-foreground truncate">
+                <span>bruh r u srs</span>
+                <span>spotify api error</span>
+            </div>
         {:else}
             <div class="flex flex-col items-end gap-1 max-w-32 sm:max-w-none text-xs text-muted-foreground truncate">
                 <span>now playing</span>
-                <span>nothing</span>
+                <span>loading...</span>
             </div>
         {/if}
     </div>

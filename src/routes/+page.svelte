@@ -14,8 +14,9 @@
     let { data } = $props();
     let { topTracks } = data;
 
-    // set this separately so that we can use $state() 
+    // set this separately so that we can use $state() since we poll; might succeed once but fail later
     let nowPlaying = $state(data.nowPlaying || '');
+    let hasError = $state(data.type === "error");
 
     let intervalID: ReturnType<typeof setInterval>;
 
@@ -91,6 +92,7 @@
             <Command.Group heading="whoami">
                 <About
                     nowPlaying={nowPlaying}
+                    hasError={hasError}
                 />
             </Command.Group>
             <Command.Separator />
@@ -113,6 +115,7 @@
             <Command.Group heading="spotify (top 5 tracks)">
                 <Spotify
                     topTracks={topTracks}
+                    hasError={hasError}
                 />
             </Command.Group>
         </Command.List>
