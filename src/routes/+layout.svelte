@@ -29,9 +29,9 @@
 <svelte:document onkeydown={handleKeydown} />
 
 <ModeWatcher />
-<div class="h-screen flex flex-col font-mono">
-	<header class="border-zinc-700 border-b border-dashed w-full">
-		<div class="flex justify-between border-zinc-700 border-none sm:border-x sm:border-dashed mx-auto container p-4">
+<div class="h-dvh flex flex-col font-mono overflow-hidden">
+	<header class="flex-none border-zinc-700 border-b border-dashed w-full">
+		<div class="h-full flex justify-between border-zinc-700 border-none sm:border-x sm:border-dashed mx-auto container p-4">
 			<h1 class="text-xs font-bold">&#123;skarokin&#125;</h1>
             <div class="flex items-center gap-2">
                 <Switch 
@@ -42,21 +42,21 @@
                 />
                 <Label for="theme-switch" class="text-xs">
                     <kbd
-                        class="hidden sm:inline-flex bg-muted text-muted-foreground pointer-events-none h-5 select-none items-center gap-1 rounded border px-1.5 text-[10px]"
+                        class="hidden sm:inline-flex bg-muted text-muted-foreground pointer-events-none h-5 select-none items-center gap-1 rounded border px-1.5 text-xs"
                     >
-                        <span class="text-xs">⌘</span>l
+                        <span>⌘</span><span>l</span>
                     </kbd>
                 </Label>
             </div>
 		</div>
 	</header>
     <main
-        class="flex-1 border-zinc-700 container p-4 w-full border-none sm:border-x sm:border-dashed flex flex-col justify-center"
+        class="flex-1 overflow-auto border-zinc-700 container p-4 w-full border-none sm:border-x sm:border-dashed flex flex-col justify-center"
     >
         {@render children()}
     </main>
-    <footer class="border-zinc-700 border-t border-dashed w-full">
-		<div class="flex flex-row justify-between border-zinc-700 border-none sm:border-x sm:border-dashed mx-auto container p-4">
+    <footer class="flex-none border-zinc-700 border-t border-dashed w-full">
+		<div class="h-full flex flex-row justify-between border-zinc-700 border-none sm:border-x sm:border-dashed mx-auto container p-4">
             <p class="text-xs text-muted-foreground">
         	    &#123;&copy; lil milk&#125;
             </p>

@@ -5,11 +5,16 @@
 
     import { Item } from "$lib/components/ui/command";
     import * as Avatar from "$lib/components/ui/avatar/index.js";
+
+    let { nowPlaying } = $props();
 </script>
 
 <Item
     class="flex flex-row gap-2 items-center justify-between"
-    value="whoami-about-sean-taemin-kim-skarokin-new-jersey-bio-biography"
+    value={nowPlaying && nowPlaying.isPlaying 
+        ? `whoami-${nowPlaying.title}-${nowPlaying.artist}-${nowPlaying.album}` 
+        : 'whoami'}
+    keywords={["about", "sean", "taemin", "kim", "skarokin", "new jersey", "bio", "biography", "now playing", "spotify"]}
 >
     <div class="flex flex-row gap-2 items-center">
         <Avatar.Root class="size-16 sm:size-24 border">
@@ -22,38 +27,42 @@
         <div class="flex flex-col gap-2 items-start">
             <div class="flex flex-col items-start">
                 <p
-                    class="text-base sm:text-lg font-semibold flex flex-row gap-2 items-center"
+                    class="text-sm sm:text-lg font-semibold flex flex-row gap-2 items-baseline"
                 >
                     sean kim
-                    <span class="text-xs sm:text-sm font-normal opacity-50">/ skarokin</span>
+                    <span class="text-xs sm:text-sm font-normal text-muted-foreground">/ skarokin</span>
                 </p>
-                <p class="text-sm font-sans">김태민</p>
+                <p class="text-xs sm:text-sm font-sans">김태민</p>
             </div>
-            <div class="flex flex-row gap-1 items-center text-sm">
-                <House size="14" />
+            <div class="flex flex-row gap-1 items-center text-xs sm:text-sm text-muted-foreground">
+                <House size="4" />
                 new jersey
             </div>
         </div>
     </div>
-    <div class="text-xs text-muted-foreground flex flex-col sm:flex-row gap-1">
-        <div class="flex items-center gap-1">
-            <span class="sm:hidden">•</span>
-            <span>svelte</span>
-            <span class="hidden sm:inline">•</span>
-        </div>
-        <div class="flex items-center gap-1">
-            <span class="sm:hidden">•</span>
-            <span>typescript</span>
-            <span class="hidden sm:inline">•</span>
-        </div>
-        <div class="flex items-center gap-1">
-            <span class="sm:hidden">•</span>
-            <span>go</span>
-            <span class="hidden sm:inline">•</span>
-        </div>
-        <div class="flex items-center gap-1">
-            <span class="sm:hidden">•</span>
-            <span>aws</span>
-        </div>
+    <div class="text-xs">
+        {#if nowPlaying && nowPlaying.isPlaying}
+            <div class="flex flex-col items-start gap-1">
+                <span class="text-muted-foreground text-xs">now playing</span>
+                <a href={nowPlaying.songURL} target="_blank" rel="noopener noreferrer" class="flex items-center gap-1 hover:underline">
+                    <Avatar.Root class="size-8 rounded-sm border">
+                        <Avatar.Image
+                            src={nowPlaying.albumImageURL}
+                            alt={nowPlaying.album}
+                        />
+                        <Avatar.Fallback>♪</Avatar.Fallback>
+                    </Avatar.Root>
+                    <div class="flex flex-col max-w-16 sm:max-w-none truncate">
+                        <span class="truncate">{nowPlaying.title}</span>
+                        <span class="text-muted-foreground truncate">{nowPlaying.artist}</span>
+                    </div>
+                </a>
+            </div>
+        {:else}
+            <div class="flex flex-col items-end gap-1 max-w-32 sm:max-w-none text-xs text-muted-foreground truncate">
+                <span>now playing</span>
+                <span>nothing</span>
+            </div>
+        {/if}
     </div>
 </Item>

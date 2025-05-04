@@ -12,13 +12,13 @@
     }: CommandPrimitive.InputProps = $props();
 </script>
 
-<div class="flex items-center border-b px-3" data-command-input-wrapper="">
+<div class="z-10 flex items-center border-b px-3 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60" data-command-input-wrapper="">
     <div class="pr-3 mr-3 border-r h-full flex items-center">
         <Search class="sm:hidden size-4 text-muted-foreground" />
         <kbd
-            class="hidden sm:inline-flex bg-muted text-muted-foreground pointer-events-none h-5 select-none items-center gap-1 rounded border px-1.5 text-[10px]"
+            class="hidden sm:inline-flex bg-muted text-muted-foreground pointer-events-none h-5 select-none items-center gap-1 rounded border px-1.5 text-xs"
         >
-            <span class="text-xs">⌘</span>k
+            <span>⌘</span><span>k</span>
         </kbd>
     </div>
     <CommandPrimitive.Input
@@ -32,15 +32,15 @@
     />
     <div class="pl-3 h-full flex items-center">
         <kbd
-            class="hidden sm:inline-flex bg-muted text-muted-foreground pointer-events-none h-5 select-none items-center gap-1 rounded border px-1.5 text-[10px] mr-2"
+            class="hidden sm:inline-flex bg-muted text-muted-foreground pointer-events-none h-5 select-none items-center gap-1 rounded border px-1.5 text-xs mr-2"
         >
             <span>↑</span><span>↓</span>
         </kbd>
         <kbd
-            class="hidden sm:inline-flex bg-muted text-muted-foreground pointer-events-none h-5 select-none items-center gap-1 rounded border px-1.5 text-[10px]"
+            class="hidden sm:inline-flex bg-muted text-muted-foreground pointer-events-none h-5 select-none items-center gap-1 rounded border px-1.5 text-xs"
         >
             <ExternalLink class="size-3 text-muted-foreground" />
-            <span class="text-xs">enter</span>
+            <span>enter</span>
         </kbd>
     </div>
 </div>

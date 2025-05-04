@@ -7,16 +7,15 @@
 <LinkItem
     href={resume}
     target="_blank"
-    value="resume"
-    keywords={["resume", "cv", "curriculum vitae", "SeanKimResume", "pdf", "Sean Kim"]}
+    value="resume-cv-curriculum-vitae-seankimresume-pdf-download-hire-employment"
     class="flex items-center justify-between gap-2 w-full cursor-pointer"
 >
-        <div class="flex items-center gap-2">
+    <div class="flex items-center gap-2 truncate max-w-48 sm:max-w-none">
         <FileText class="size-4 opacity-50" />
-        <div>
+        <div class="flex flex-row items-baseline gap-2">
             <span>SeanKimResume</span>
             <span class="text-muted-foreground text-xs">/ pdf</span>
         </div>
     </div>
-    <span class="text-muted-foreground text-xs">latest - 04/30/2025</span>
+    <span class="text-muted-foreground text-xs truncate max-w-36 sm:max-w-none">latest - 04/30/2025</span>
 </LinkItem>

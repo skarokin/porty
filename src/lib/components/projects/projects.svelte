@@ -4,7 +4,6 @@
     import Link from "@lucide/svelte/icons/link";
     import GitHub from "@lucide/svelte/icons/github";
     import { Separator } from "$lib/components/ui/separator";
-    import { Avatar } from "$lib/components/ui/avatar";
 
     type TechDetail = {
         tech: string;
@@ -27,7 +26,7 @@
             description: `your win condition in the tech career game. connect with recruiters, find opportunities as soon as they drop, 
              access powerful application management tools and data-driven insights, share your journey with friends, review company data, 
              and get hired-faster.`,
-            date: "jan 2025 - now",
+            date: "01/25 - today",
             link: "https://copium.dev/",
             github: "https://github.com/copium-dev/copium",
             techStack: [
@@ -41,7 +40,7 @@
         {
             name: "ref:note",
             description: `student-focused note sharing platform with real-time collaboration, leveraging horizontally-scaling websocket servers.`,
-            date: "aug 2024 - sep 2024",
+            date: "08/24 - 09/24",
             link: "https://refnote.app/",
             github: "https://github.com/skarokin/ref-note",
             techStack: [
@@ -75,7 +74,7 @@
         {
             name: "grammaCy",
             description: `generate dependency tree-based grammar checkers for any language, any dataset, and any domain.`,
-            date: "mar 2024 - jul 2024",
+            date: "03/24 - 07/24",
             link: "https://grammacy.com/",
             github: "https://github.com/skarokin/grammaCy",
             techStack: [
@@ -104,7 +103,7 @@
         {
             name: "pycaptcha",
             description: `CAPTCHA system that fetches Google Street View images to generate image-based tests.`,
-            date: "jan 2024 - feb 2024",
+            date: "01/24 - 02/24",
             github: "https://github.com/skarokin/pycaptcha",
             techStack: [
                 {
@@ -127,7 +126,7 @@
         {
             name: "ref:type",
             description: `competitive typing platform with real-time leaderboards.`,
-            date: "nov 2023 - jan 2024",
+            date: "11/23 - 01/24",
             link: "https://steam-link-409216.web.app/",
             github: "https://github.com/skarokin/ref-type",
             techStack: [
@@ -151,7 +150,7 @@
         {
             name: "MYnote.md",
             description: `electron-based Markdown note-taking app with LaTeX and code block support.`,
-            date: "may 2023 - jun 2023",
+            date: "05/23 - 06/23",
             github: "https://github.com/skarokin/MYnote.md",
             techStack: [
                 {
@@ -184,13 +183,16 @@
         <Dialog.Root>
             <Dialog.Trigger>
                 <Item
-                    value={`projects-${project.name}`}
-                    keywords={[]}
+                    value={`${project.name}`}
+                    keywords={["projects", "project"]}
                     class="flex items-center justify-between gap-2 w-full hover:cursor-pointer"
                 >
-                    <div class="flex items-center items-center gap-2">
-                        {project.name}
-                        <span class="text-muted-foreground text-xs">/</span>
+                    <!-- THIS SPECIFICALLY SHOULD BE ITEMS-CENTER NOT BASELINE -->
+                    <div class="flex items-center gap-2">
+                        <div class="flex items-center gap-2 truncate max-w-48 sm:max-w-none">
+                            {project.name}
+                            <span class="text-muted-foreground text-xs">/</span>
+                        </div>
 
                         {#if project.link}
                             <a
@@ -216,7 +218,7 @@
                             </a>
                         {/if}
                     </div>
-                    <p class="text-xs text-muted-foreground">{project.date}</p>
+                    <p class="text-xs text-muted-foreground truncate max-w-36 sm:max-w-none">{project.date}</p>
                 </Item>
             </Dialog.Trigger>
             <Dialog.Content class="flex flex-col gap-4">

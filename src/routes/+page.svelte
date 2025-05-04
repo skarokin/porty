@@ -4,12 +4,38 @@
     import { About } from "$lib/components/about";
     import { Projects } from "$lib/components/projects";
     import { Resume } from "$lib/components/resume";
+    import { Spotify } from "$lib/components/spotify";
     import * as Command from "$lib/components/ui/command/index.js";
     import { computeCommandScore } from "bits-ui";
+    import { onDestroy } from "svelte";
 
     import { onMount } from "svelte";
+    
+    let { data } = $props();
+    let { topTracks } = data;
+
+    // set this separately so that we can use $state() 
+    let nowPlaying = $state(data.nowPlaying || '');
+
+    let intervalID: ReturnType<typeof setInterval>;
 
     let inputRef: HTMLInputElement | null = null;
+
+    async function refreshNowPlaying() {
+        const res = await fetch("now-playing");
+        const updatedNowPlaying = await res.json();
+        nowPlaying = updatedNowPlaying;
+    }
+
+    // only refresh now playing when user is currently viewing the page
+    function handleVisibilityChange() {
+        if (document.visibilityState === "visible") {
+            refreshNowPlaying();
+            intervalID = setInterval(refreshNowPlaying, 30 * 1000);
+        } else {
+            clearInterval(intervalID);
+        }
+    }
 
     function handleKeydown(e: KeyboardEvent) {
         if (document.activeElement === inputRef) {
@@ -23,8 +49,8 @@
     };
 
     function customFilter(commandValue: string, search: string, commandKeywords?: string[]): number {
-        // for some reason, 'copium' comes up when searching 'resume'. so give it a score of 0
-        if (search.toLowerCase() === "resume") {
+        // copium.dev comes up when searching resume or cv. just penalize it
+        if (search.toLowerCase() === "resume" || search.toLowerCase() === "cv") {
             if (commandValue.includes("copium.dev")) {
                 return 0
             }
@@ -33,27 +59,39 @@
         return computeCommandScore(commandValue, search, commandKeywords);
     }
 
-
     onMount(() => {
         inputRef = document.getElementById("inputref") as HTMLInputElement;
+        
+        // initial setup based on current visibility
+        if (document.visibilityState === 'visible') {
+            refreshNowPlaying();
+            intervalID = setInterval(refreshNowPlaying, 60000);
+        }
+    });
+
+    onDestroy(() => {
+        clearInterval(intervalID);
     });
 </script>
 
-<svelte:document onkeydown={handleKeydown} />
+<svelte:document onkeydown={handleKeydown} onvisibilitychange={handleVisibilityChange} />
 
 <div class="flex flex-col gap-4 justify-center items-center h-full">
-    <Command.Root class="max-w-4xl rounded-lg border shadow-md" filter={customFilter} loop={true} vimBindings={false} >
+    <Command.Root class="relative max-w-4xl rounded-lg border shadow-md h-full" filter={customFilter} loop={true} vimBindings={false} >
         <Command.Input
             placeholder="search for stuff about me..."
             id="inputref"
             autofocus
         />
-        <Command.List class="max-h-full">
+        <!-- absolute to allow the list to go under the input for frosted glass effect -->
+        <Command.List class="max-h-full absolute inset-0 pt-[2.80rem]">
             <Command.Empty>
                 no results found baka ૮₍ ˃ ⤙ ˂ ₎ა
             </Command.Empty>
-            <Command.Group heading="whoami" >
-                <About />
+            <Command.Group heading="whoami">
+                <About
+                    nowPlaying={nowPlaying}
+                />
             </Command.Group>
             <Command.Separator />
             <Command.Group heading="contacts">
@@ -70,6 +108,12 @@
             <Command.Separator />
             <Command.Group heading="resume">
                 <Resume />
+            </Command.Group>
+            <Command.Separator />
+            <Command.Group heading="spotify (top 5 tracks)">
+                <Spotify
+                    topTracks={topTracks}
+                />
             </Command.Group>
         </Command.List>
     </Command.Root>

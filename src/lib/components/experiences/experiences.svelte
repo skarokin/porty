@@ -1,46 +1,69 @@
 <script lang="ts">
     import { Item } from "$lib/components/ui/command"
+    import * as Avatar from "$lib/components/ui/avatar/index.js";
+
+    import rutgers from "$lib/assets/rutgers.png";
+    import cyberark from "$lib/assets/cyberark.png";
+    import copium from "$lib/assets/copium.png";
 
     type Experience = {
         company: string;
         title: string;
         date: string;
+        logoPath?: string;
     }
 
-    const experiences = [
+    const experiences: Experience[] = [
         {
             company: "rutgers",
             title: "cs",
-            date: "sep 2022 - dec 2025",
+            date: "09/22 - 12/25",
+            logoPath: rutgers,
         },
         {
             company: "cyberark",
             title: "sre intern",
-            date: "may 2025 - aug 2025",
+            date: "05/25 - 08/25",
+            logoPath: cyberark,
         },
         {
             company: "copium.dev",
             title: "founder",
-            date: "jan 2025 - now",
+            date: "01/25 - today",
+            logoPath: copium,
         },
         {
             company: "acl agency",
             title: "swe intern",
-            date: "may 2024 - aug 2024",
+            date: "05/24 - 08/24",
         }
     ];
 </script>
 
 {#each experiences as experience}
     <Item
-        value={`experiences-${experience.company}-${experience.title}`}
+        value={`${experience.company}-${experience.title}`}
+        keywords={["experiences", "experience", "work", "job", "internship"]}
         class="flex items-center justify-between gap-2 w-full"
     >
-        <!-- <svelte:component this={contact.icon} class="size-4 opacity-50" /> -->
-        <div>
-            <span>{experience.company}</span>
-            <span class="text-muted-foreground text-xs">/ {experience.title}</span>
+        <div class="flex items-center gap-2 truncate max-w-48 sm:max-w-none">
+            <Avatar.Root class="size-4 rounded-none">
+                {#if experience.logoPath}
+                    <Avatar.Image
+                        src={experience.logoPath}
+                        alt={experience.company}
+                    />
+                {:else}
+                    <Avatar.Fallback class="text-xs bg-muted rounded-full">
+                        {experience.company[0].toUpperCase()}
+                    </Avatar.Fallback>
+                {/if}
+            </Avatar.Root>
+            <div class="flex items-baseline gap-2 truncate">
+                <span>{experience.company}</span>
+                <span class="text-muted-foreground text-xs truncate">/ {experience.title}</span>
+            </div>
         </div>
-        <p class="text-xs text-muted-foreground">{experience.date}</p>
+        <p class="text-xs text-muted-foreground max-w-36 sm:max-w-none truncate">{experience.date}</p>
     </Item>
 {/each}
