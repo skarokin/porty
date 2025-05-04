@@ -178,12 +178,12 @@
     }
 </script>
 
-{#each projects as project (project.name)}
+{#each projects as project, index (project.name)}
     <div class="flex flex-col">
         <Dialog.Root>
             <Dialog.Trigger>
                 <Item
-                    value={`${project.name}`}
+                    value={`pos=${index}-${project.name}`}
                     keywords={["projects", "project"]}
                     class="flex items-center justify-between gap-2 w-full hover:cursor-pointer"
                 >

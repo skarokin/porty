@@ -50,12 +50,12 @@
     ];
 </script>
 
-{#each contacts as contact}
+{#each contacts as contact, index}
     <LinkItem
         href={contact.href}
         target="_blank"
-        value={`${contact.type}-${contact.value}`}
-        keywords={["contacts", "contact", "call", "speak", "message", "talk", "text", "connect", "reach", "social", "network"]}
+        value={`pos=${index}-${contact.type}-${contact.value}`}
+        keywords={["contacts", "contact", "call", "speak", "message", "talk", "text", "connect", "reach", "social"]}
         class="flex items-center justify-between gap-2 w-full hover:cursor-pointer"
     >
         <div class="flex items-center gap-2">

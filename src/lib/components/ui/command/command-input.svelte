@@ -12,7 +12,7 @@
     }: CommandPrimitive.InputProps = $props();
 </script>
 
-<div class="z-10 flex items-center border-b px-3 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60" data-command-input-wrapper="">
+<div class="flex items-center border-b px-3" data-command-input-wrapper="">
     <div class="pr-3 mr-3 border-r h-full flex items-center">
         <Search class="sm:hidden size-4 text-muted-foreground" />
         <kbd

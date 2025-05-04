@@ -6,7 +6,9 @@
 		ref = $bindable(null),
 		class: className,
 		...restProps
-	}: CommandPrimitive.LinkItemProps = $props();
+	}: CommandPrimitive.LinkItemProps & {
+		position?: number;    // to encode position of item in the list, preserves order when doing FTS
+	} = $props();
 </script>
 
 <CommandPrimitive.LinkItem

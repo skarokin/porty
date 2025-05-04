@@ -32,7 +32,9 @@
 <div class="h-dvh flex flex-col font-mono overflow-hidden">
 	<header class="flex-none border-zinc-700 border-b border-dashed w-full">
 		<div class="h-full flex justify-between border-zinc-700 border-none sm:border-x sm:border-dashed mx-auto container p-4">
-			<h1 class="text-xs font-bold text-amber-500">&#123;skarokin&#125;</h1>
+			<h1 class="text-xs font-bold">
+                &#123;skarokin&#125;
+            </h1>
             <div class="flex items-center gap-2">
                 <Switch 
                     id="theme-switch"

@@ -11,10 +11,8 @@
 
 <Item
     class="flex flex-row gap-2 items-center justify-between"
-    value={nowPlaying && nowPlaying.isPlaying 
-        ? `whoami-${nowPlaying.title}-${nowPlaying.artist}-${nowPlaying.album}` 
-        : 'whoami'}
-    keywords={["about", "sean", "taemin", "kim", "skarokin", "new jersey", "bio", "biography", "now playing", "spotify"]}
+    value={'whoami'}
+    keywords={["about", "sean", "taemin", "kim", "skarokin", "new jersey", "bio", "biography", "now playing", "location"]}
 >
     <div class="flex flex-row gap-2 items-center">
         <Avatar.Root class="size-16 sm:size-24 border">

@@ -40,10 +40,10 @@
     ];
 </script>
 
-{#each experiences as experience}
+{#each experiences as experience, index}
     <Item
-        value={`${experience.company}-${experience.title}`}
-        keywords={["experiences", "experience", "work", "job", "internship"]}
+        value={`pos=${index}-${experience.company}-${experience.title}`}
+        keywords={["experiences", "experience", "work", "job"]}
         class="flex items-center justify-between gap-2 w-full"
     >
         <div class="flex items-center gap-2 truncate max-w-48 sm:max-w-none">

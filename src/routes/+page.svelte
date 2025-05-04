@@ -5,11 +5,12 @@
     import { Projects } from "$lib/components/projects";
     import { Resume } from "$lib/components/resume";
     import { Spotify } from "$lib/components/spotify";
-    import * as Command from "$lib/components/ui/command/index.js";
-    import { computeCommandScore } from "bits-ui";
-    import { onDestroy } from "svelte";
 
-    import { onMount } from "svelte";
+    import * as Command from "$lib/components/ui/command";
+
+    import { customFilter } from "$lib/fts";
+
+    import { onDestroy, onMount } from "svelte";
     
     let { data } = $props();
     let { topTracks } = data;
@@ -49,17 +50,6 @@
         }
     };
 
-    function customFilter(commandValue: string, search: string, commandKeywords?: string[]): number {
-        // copium.dev comes up when searching resume or cv. just penalize it
-        if (search.toLowerCase() === "resume" || search.toLowerCase() === "cv") {
-            if (commandValue.includes("copium.dev")) {
-                return 0
-            }
-        }
-        
-        return computeCommandScore(commandValue, search, commandKeywords);
-    }
-
     onMount(() => {
         inputRef = document.getElementById("inputref") as HTMLInputElement;
         
@@ -78,14 +68,14 @@
 <svelte:document onkeydown={handleKeydown} onvisibilitychange={handleVisibilityChange} />
 
 <div class="flex flex-col gap-4 justify-center items-center h-full">
-    <Command.Root class="relative max-w-4xl rounded-lg border shadow-md h-full" filter={customFilter} loop={true} vimBindings={false} >
+    <Command.Root class="max-w-4xl rounded-lg border shadow-md h-full" filter={customFilter} loop={true} vimBindings={false} >
         <Command.Input
             placeholder="search for stuff about me..."
             id="inputref"
             autofocus
         />
         <!-- absolute to allow the list to go under the input for frosted glass effect -->
-        <Command.List class="max-h-full absolute inset-0 pt-[2.80rem]">
+        <Command.List class="max-h-full">
             <Command.Empty>
                 no results found baka ૮₍ ˃ ⤙ ˂ ₎ა
             </Command.Empty>
