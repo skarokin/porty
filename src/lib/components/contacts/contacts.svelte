@@ -16,8 +16,6 @@
 
     import type { Component } from "svelte";
 
-    import { mode } from "mode-watcher";
-
     type Contact = {
         type: string;
         value: string;
@@ -73,16 +71,21 @@
         href={contact.href}
         target="_blank"
         value={`pos=${index}-${contact.type}-${contact.value}`}
-        keywords={["contacts", "contact", "call", "speak", "message", "talk", "text", "connect", "reach", "social"]}
+        keywords={["contacts", "contact", "call", "speak", "message", "connect", "reach", "social"]}
         class="flex items-center justify-between gap-2 w-full hover:cursor-pointer"
     >
         <div class="flex items-center gap-2">
+            {#if contact.iconLight}
+                <svelte:component 
+                    this={contact.iconLight}
+                    class="size-4" 
+                />
+            {/if}
             <svelte:component 
-                this={mode.current === "dark" 
-                ? contact.icon 
-                : (contact.iconLight || contact.icon)} 
-                class="size-4 text-muted-foreground" 
+                this={contact.icon}
+                class="block size-4 text-muted-foreground"
             />
+
             <div class="flex items-baseline gap-2 truncate max-w-48 sm:max-w-none">
                 <span>{contact.type}</span>
                 <span class="text-muted-foreground text-xs truncate">/ {contact.value}</span>

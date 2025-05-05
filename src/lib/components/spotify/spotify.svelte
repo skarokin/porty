@@ -26,10 +26,11 @@
     </Item>
 {:else}
     {#each topTracks as track, index}
+        <!-- dont give value of title/artist/album since it will infect search results -->
         <LinkItem
             href={track.url}
             target="_blank"
-            value={`pos=${index}-${track.title}-${track.artist}`}
+            value={`pos=${index}`}
             keywords={["spotify", "music", "track", "song", "artist", "album", "listening", "top tracks"]}
             class="flex items-center justify-between gap-2 w-full hover:cursor-pointer"
         >

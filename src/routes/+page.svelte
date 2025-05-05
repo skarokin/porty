@@ -5,6 +5,7 @@
     import { Projects } from "$lib/components/projects";
     import { Resume } from "$lib/components/resume";
     import { Spotify } from "$lib/components/spotify";
+    import { TechStack } from "$lib/components/tech-stack";
 
     import * as Command from "$lib/components/ui/command";
 
@@ -88,6 +89,10 @@
             <Command.Separator />
             <Command.Group heading="contacts">
                 <Contacts />
+            </Command.Group>
+            <Command.Separator />
+            <Command.Group heading="tech stack">
+                <TechStack />
             </Command.Group>
             <Command.Separator />
             <Command.Group heading="experiences">

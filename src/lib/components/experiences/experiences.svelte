@@ -47,11 +47,12 @@
 {#each experiences as experience, index}
     <Item
         value={`pos=${index}-${experience.company}-${experience.title}`}
-        keywords={["experiences", "experience", "work", "job"].concat(experience.hiddenKeywords || [])}
+        keywords={["career", "experiences", "experience", "work", "job"].concat(experience.hiddenKeywords || [])}
         class="flex items-center justify-between gap-2 w-full"
     >
         <div class="flex items-center gap-2 truncate max-w-48 sm:max-w-none">
-            <Avatar.Root class="size-4 rounded-none">
+            <!-- since these are all local images, no need to wait for loading -->
+            <Avatar.Root class="size-4 rounded-none" loadingStatus={experience.logoPath ? "loaded" : "error"}>
                 {#if experience.logoPath}
                     <Avatar.Image
                         src={experience.logoPath}

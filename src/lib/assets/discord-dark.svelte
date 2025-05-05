@@ -2,6 +2,7 @@
     id="Discord-Logo"
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 126.644 96"
+    class="dark:block hidden"
     ><defs
         ><style>
             .cls-1 {
