@@ -1,7 +1,16 @@
 import { SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET, SPOTIFY_REFRESH_TOKEN } from "$env/static/private";
 import * as SpotifyTypes from "$lib/types/spotify"
 
+function logEnvironmentInfo() {
+    console.log("Environment check:", {
+      clientIdExists: !!SPOTIFY_CLIENT_ID,
+      clientSecretExists: !!SPOTIFY_CLIENT_SECRET,
+      refreshTokenExists: !!SPOTIFY_REFRESH_TOKEN
+    });
+  }
+
 export const getAccessToken = async (): Promise<string> => {
+    logEnvironmentInfo(); // Log the environment variables for debugging
     const refresh_token = SPOTIFY_REFRESH_TOKEN;
     const clientID = SPOTIFY_CLIENT_ID;
     const clientSecret = SPOTIFY_CLIENT_SECRET;
@@ -9,9 +18,7 @@ export const getAccessToken = async (): Promise<string> => {
     const res = await fetch("https://accounts.spotify.com/api/token", {
         method: "POST",
         headers: {
-            Authorization: `Basic ${Buffer.from(
-                `${clientID}:${clientSecret}`
-            ).toString("base64")}`,
+            Authorization: `Basic ${btoa(`${clientID}:${clientSecret}`)}`,
             "Content-Type": "application/x-www-form-urlencoded",
         },
         body: new URLSearchParams({
