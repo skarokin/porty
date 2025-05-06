@@ -8,7 +8,7 @@
     import Postgres from "$lib/assets/postgres.svelte";
     import AWS from "$lib/assets/aws.svelte";
     import Kafka from "$lib/assets/kafka.svelte";
-    import Cloudflare from "$lib/assets/cloudflare.png";
+    import Cloudflare from "$lib/assets/cloudflare.svelte";
 
     import type { Component } from "svelte";
 
@@ -46,7 +46,7 @@
         {
             name: "cloudflare",
             purpose: "vercel bills were crazy",
-            logoPath: Cloudflare,
+            logo: Cloudflare,
             started: "04/25",
             hiddenKeywords: ["cloudflare", "vercel", "hosting", "cdn"]
         },
