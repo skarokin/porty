@@ -12,7 +12,7 @@
 <Item
     class="flex flex-row gap-2 items-center justify-between"
     value='pos=1-whoami'
-    keywords={["about", "sean", "taemin", "kim", "skarokin", "new jersey", "bio", "biography", "now playing", "location"]}
+    keywords={["about", "sean", "taemin", "kim", "skarokin", "new jersey", "bio", "biography", "location"]}
 >
     <div class="flex flex-row gap-2 items-center">
         <Avatar.Root class="size-16 sm:size-24 border" loadingStatus="loaded">
