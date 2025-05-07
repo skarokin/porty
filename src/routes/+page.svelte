@@ -75,7 +75,6 @@
             id="inputref"
             autofocus
         />
-        <!-- absolute to allow the list to go under the input for frosted glass effect -->
         <Command.List class="max-h-full">
             <Command.Empty>
                 no results found baka ૮₍ ˃ ⤙ ˂ ₎ა

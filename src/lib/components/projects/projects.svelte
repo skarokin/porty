@@ -51,7 +51,7 @@
                 },
                 {
                     tech: "go & firestore",
-                    purpose: "REST API",
+                    purpose: "rest api & crud",
                     results: "front-facing REST API for CRUD and granular note sharing."
                 },
                 {
@@ -84,8 +84,8 @@
                     results: "injects real-world grammar errors via inflection into datasets by analyzing dependency trees, POS tags, and morphological features."
                 },
                 {
-                    tech: "Flask",
-                    purpose: "REST API",
+                    tech: "flask",
+                    purpose: "rest api",
                     results: "easy API development to serve our fully-featured english grammar and spell checker."
                 },
                 {
@@ -95,7 +95,7 @@
                 },
                 {
                     tech: "sveltekit & firebase",
-                    purpose: "documentation & API Reference",
+                    purpose: "documentation & api reference",
                     results: "interactive API reference, extensive integration guides, detailed documentation, and devblog.",
                 }
             ]
@@ -142,7 +142,7 @@
                 },
                 {
                     tech: "google cloud sql",
-                    purpose: "Data Storage",
+                    purpose: "db",
                     results: "persistent data storage for user data."
                 }
             ]
