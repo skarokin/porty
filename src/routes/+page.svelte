@@ -6,23 +6,52 @@
     import { Resume } from "$lib/components/resume";
     import { Spotify } from "$lib/components/spotify";
     import { TechStack } from "$lib/components/tech-stack";
-
+    import { ProjectDetails } from "$lib/components/project-details";
+    import type { Project } from "$lib/components/projects";
     import * as Command from "$lib/components/ui/command";
+
+	import { Command as CommandPrimitive } from "bits-ui";
 
     import { customFilter } from "$lib/fts";
 
     import { onDestroy, onMount } from "svelte";
-    
+
     let { data } = $props();
     let { topTracks } = data;
 
+    const defaultProject: Project = {
+        name: "",
+        description: "",
+        date: "",
+        link: "",
+        github: "",
+        techStack: [],
+    };
+
+    let viewState = $state<{
+        inputValue: string;
+        prevInputValue: string;
+        commandInputKey: number;
+        projectSelected: boolean;
+        selectedProject: Project;
+        selectedProjectIndex: number;
+    }>({
+        inputValue: "",
+        prevInputValue: "",
+        commandInputKey: 0,
+        projectSelected: false,
+        selectedProject: defaultProject,
+        selectedProjectIndex: 0
+    });
+
     // set this separately so that we can use $state() since we poll; might succeed once but fail later
-    let nowPlaying = $state(data.nowPlaying || '');
+    let nowPlaying = $state(data.nowPlaying || "");
     let hasError = $state(data.type === "error");
 
     let intervalID: ReturnType<typeof setInterval>;
-
-    let inputRef: HTMLInputElement | null = null;
+    let inputRef: HTMLInputElement | null = $state(null);
+    let commandListElementRef: HTMLDivElement | null = $state(null);
+    let commandRootPrimitiveRef: CommandPrimitive.Root | undefined = $state(undefined);
 
     async function refreshNowPlaying() {
         const res = await fetch("now-playing");
@@ -41,23 +70,41 @@
     }
 
     function handleKeydownSearch(e: KeyboardEvent) {
-        if (document.activeElement === inputRef) {
-            return;
-        }
-
         if (e.key === "k" && (e.ctrlKey || e.metaKey)) {
             e.preventDefault();
             inputRef?.focus();
         }
-    };
+    }
+
+    function saveViewStateAndSelectProject(project: Project) {
+        viewState.selectedProject = project;
+        viewState.projectSelected = true;
+        viewState.prevInputValue = viewState.inputValue;
+        viewState.inputValue = "";  // you can search inside a project detail so clear the input
+
+        const items = commandRootPrimitiveRef?.getValidItems();
+        if (!items) return;
+
+        viewState.selectedProjectIndex = items.findIndex((item: HTMLElement) => item.hasAttribute('data-selected'));
+    }
+
+    async function closeProjectDetails() {
+        viewState.projectSelected = false;
+        viewState.selectedProject = defaultProject;
+
+        viewState.inputValue = viewState.prevInputValue;
+
+        // wait for DOM to update before updating selected index. without this, doesnt work
+        requestAnimationFrame(() => {
+            commandRootPrimitiveRef?.updateSelectedToIndex(viewState.selectedProjectIndex);
+        });
+    }
 
     onMount(() => {
-        inputRef = document.getElementById("inputref") as HTMLInputElement;
-        
         // initial setup based on current visibility
-        if (document.visibilityState === 'visible') {
+        if (document.visibilityState === "visible") {
             refreshNowPlaying();
-            intervalID = setInterval(refreshNowPlaying, 60000);
+            intervalID = setInterval(refreshNowPlaying, 30000);
         }
     });
 
@@ -66,52 +113,76 @@
     });
 </script>
 
-<svelte:document onkeydown={handleKeydownSearch} onvisibilitychange={handleVisibilityChange} />
+<svelte:document
+    onkeydown={handleKeydownSearch}
+    onvisibilitychange={handleVisibilityChange}
+/>
 
 <div class="flex flex-col gap-4 justify-center items-center h-full">
-    <Command.Root class="max-w-4xl rounded-lg border shadow-md h-full" filter={customFilter} loop={true} vimBindings={false} >
+    <Command.Root
+        class="max-w-4xl rounded-lg border shadow-md h-full"
+        filter={customFilter}
+        loop={true}
+        vimBindings={false}
+        bind:commandPrimitiveRef={commandRootPrimitiveRef}
+    >
+        <!-- value state is only updated on a keyboard input. we want it to also be updated if viewState.inputValue changes -->
         <Command.Input
             placeholder="search for stuff about me..."
-            id="inputref"
+            bind:ref={inputRef}
+            bind:value={viewState.inputValue}
             autofocus
         />
-        <Command.List class="max-h-full">
-            <Command.Empty>
-                no results found baka ૮₍ ˃ ⤙ ˂ ₎ა
-            </Command.Empty>
-            <Command.Group heading="whoami">
-                <About
-                    nowPlaying={nowPlaying}
-                    hasError={hasError}
+        <Command.List class="max-h-full" bind:ref={commandListElementRef}>
+            {#if viewState.projectSelected}
+                <ProjectDetails
+                    project={viewState.selectedProject}
+                    onClose={closeProjectDetails}
+                    onEscPress={(e: KeyboardEvent) => {
+                        if (e.key === "Escape") {
+                            closeProjectDetails();
+                        }
+                    }}
                 />
-            </Command.Group>
-            <Command.Separator />
-            <Command.Group heading="contacts">
-                <Contacts />
-            </Command.Group>
-            <Command.Separator />
-            <Command.Group heading="tech stack">
-                <TechStack />
-            </Command.Group>
-            <Command.Separator />
-            <Command.Group heading="experiences">
-                <Experiences />
-            </Command.Group>
-            <Command.Separator />
-            <Command.Group heading="projects">
-                <Projects />
-            </Command.Group>
-            <Command.Separator />
-            <Command.Group heading="resume">
-                <Resume />
-            </Command.Group>
-            <Command.Separator />
-            <Command.Group heading="spotify (top 5 tracks)">
-                <Spotify
-                    topTracks={topTracks}
-                    hasError={hasError}
-                />
-            </Command.Group>
+            {:else}
+                <Command.Empty>no results found baka ૮₍ ˃ ⤙ ˂ ₎ა</Command.Empty>
+                <Command.Group heading="whoami">
+                    <About
+                        nowPlaying={nowPlaying}
+                        hasError={hasError}
+                    />
+                </Command.Group>
+                <Command.Separator />
+                <Command.Group heading="contacts">
+                    <Contacts />
+                </Command.Group>
+                <Command.Separator />
+                <Command.Group heading="tech stack">
+                    <TechStack />
+                </Command.Group>
+                <Command.Separator />
+                <Command.Group heading="experiences">
+                    <Experiences />
+                </Command.Group>
+                <Command.Separator />
+                <Command.Group heading="projects">
+                    <Projects
+                        bind:selectedProject={viewState.selectedProject}
+                        saveViewStateAndSelectProject={(project) => saveViewStateAndSelectProject(project)}
+                    />
+                </Command.Group>
+                <Command.Separator />
+                <Command.Group heading="resume">
+                    <Resume />
+                </Command.Group>
+                <Command.Separator />
+                <Command.Group heading="spotify (top 5 tracks)">
+                    <Spotify
+                        topTracks={topTracks}
+                        hasError={hasError}
+                    />
+                </Command.Group>
+            {/if}
         </Command.List>
     </Command.Root>
 </div>

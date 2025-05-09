@@ -27,7 +27,7 @@
             purpose: "literally everything",
             logoPath: gopherDance,
             started: "05/24",
-            hiddenKeywords: ["golang", "programming language"],
+            hiddenKeywords: ["golang", "programming language", "backend", "server", "api"]
         },
         {
             name: "typescript",
@@ -38,7 +38,7 @@
         },   
         {
             name: "sveltekit",
-            purpose: "next is bad",
+            purpose: "the future",
             logo: Svelte,
             started: "05/24",
             hiddenKeywords: ["framework", "frontend", "react", "vue", "angular", "nextjs", "next"]
@@ -88,7 +88,7 @@
                         alt={tech.name}
                     />
                 {:else if tech.logo}
-                    <svelte:component this={tech.logo} class="size-4" />
+                    <tech.logo class="size-4" />
                 {:else}
                     <Avatar.Fallback class="text-xs bg-muted rounded-full">
                         {tech.name[0].toUpperCase()}

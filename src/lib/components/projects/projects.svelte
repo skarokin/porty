@@ -1,17 +1,15 @@
 <script lang="ts">
-    import * as Dialog from "$lib/components/ui/dialog";
     import { Item } from "$lib/components/ui/command";
     import Link from "@lucide/svelte/icons/link";
     import GitHub from "@lucide/svelte/icons/github";
-    import { Separator } from "$lib/components/ui/separator";
 
-    type TechDetail = {
+    export type TechDetail = {
         tech: string;
         purpose: string;
         results: string;
     };
 
-    type Project = {
+    export type Project = {
         name: string;
         description: string;
         date: string;
@@ -19,6 +17,14 @@
         github: string;
         techStack: TechDetail[];
     };
+
+    let {
+        selectedProject = $bindable(),
+        saveViewStateAndSelectProject,
+    } = $props<{
+        selectedProject: Project;
+        saveViewStateAndSelectProject: (project: Project) => void;
+    }>();
 
     const projects: Project[] = [
         {
@@ -34,8 +40,8 @@
                     tech: "tech stack is a secret for now :)",
                     purpose: "i wonder what it's all for...",
                     results: "we'll see soon enough!",
-                }
-            ]
+                },
+            ],
         },
         {
             name: "ref:note",
@@ -47,29 +53,34 @@
                 {
                     tech: "next.js & vercel",
                     purpose: "frontend development",
-                    results: "combination of CSR and SSR, API routes for authentication, and dynamic routing."
+                    results:
+                        "combination of CSR and SSR, API routes for authentication, and dynamic routing.",
                 },
                 {
                     tech: "go & firestore",
                     purpose: "rest api & crud",
-                    results: "front-facing REST API for CRUD and granular note sharing."
+                    results:
+                        "front-facing REST API for CRUD and granular note sharing.",
                 },
                 {
                     tech: "node.js & websocket",
                     purpose: "real-time",
-                    results: "horizontally scalable WebSocket servers for real-time collaboration."
+                    results:
+                        "horizontally scalable WebSocket servers for real-time collaboration.",
                 },
                 {
                     tech: "redis & redis pub/sub",
                     purpose: "caching & syncing",
-                    results: "note content caching and eventually-consistent architecture between instances with CRDTs."
+                    results:
+                        "note content caching and eventually-consistent architecture between instances with CRDTs.",
                 },
                 {
                     tech: "gcp & docker",
                     purpose: "deployment",
-                    results: "containerized, scalable, and fault-tolerant deployment."
-                }
-            ]
+                    results:
+                        "containerized, scalable, and fault-tolerant deployment.",
+                },
+            ],
         },
         {
             name: "grammaCy",
@@ -81,24 +92,28 @@
                 {
                     tech: "python",
                     purpose: "augmentation pipeline",
-                    results: "injects real-world grammar errors via inflection into datasets by analyzing dependency trees, POS tags, and morphological features."
+                    results:
+                        "injects real-world grammar errors via inflection into datasets by analyzing dependency trees, POS tags, and morphological features.",
                 },
                 {
                     tech: "flask",
                     purpose: "rest api",
-                    results: "easy API development to serve our fully-featured english grammar and spell checker."
+                    results:
+                        "easy API development to serve our fully-featured english grammar and spell checker.",
                 },
                 {
                     tech: "aws & docker & nginx",
                     purpose: "deployment",
-                    results: "fault-tolerant and HTTPS-secured API calls for quick, accurate, and interpretable grammar and spell checking.",
+                    results:
+                        "fault-tolerant and HTTPS-secured API calls for quick, accurate, and interpretable grammar and spell checking.",
                 },
                 {
                     tech: "sveltekit & firebase",
                     purpose: "documentation & api reference",
-                    results: "interactive API reference, extensive integration guides, detailed documentation, and devblog.",
-                }
-            ]
+                    results:
+                        "interactive API reference, extensive integration guides, detailed documentation, and devblog.",
+                },
+            ],
         },
         {
             name: "pycaptcha",
@@ -109,19 +124,22 @@
                 {
                     tech: "numpy, opencv, matplotlib",
                     purpose: "image augmentation",
-                    results: "augmentation pipeline for more robust and diverse image-based CAPTCHAs."
+                    results:
+                        "augmentation pipeline for more robust and diverse image-based CAPTCHAs.",
                 },
                 {
                     tech: "YOLOv4",
                     purpose: "object detection",
-                    results: "detect objects for grid-based object selection CAPTCHAs."
+                    results:
+                        "detect objects for grid-based object selection CAPTCHAs.",
                 },
                 {
                     tech: "pandas",
                     purpose: "data preprocessing",
-                    results: "process and filter images before test generation for higher quality CAPTCHAs."
-                }
-            ]
+                    results:
+                        "process and filter images before test generation for higher quality CAPTCHAs.",
+                },
+            ],
         },
         {
             name: "ref:type",
@@ -133,19 +151,19 @@
                 {
                     tech: "react.js & firebase",
                     purpose: "frontend development",
-                    results: "sstate management and real-time updates."
+                    results: "sstate management and real-time updates.",
                 },
                 {
                     tech: "node.js & firebase cloud functions",
                     purpose: "backend development",
-                    results: "real-time leaderboards and user data."
+                    results: "real-time leaderboards and user data.",
                 },
                 {
                     tech: "google cloud sql",
                     purpose: "db",
-                    results: "persistent data storage for user data."
-                }
-            ]
+                    results: "persistent data storage for user data.",
+                },
+            ],
         },
         {
             name: "MYnote.md",
@@ -156,19 +174,21 @@
                 {
                     tech: "node.js & electron",
                     purpose: "desktop app development",
-                    results: "cross-platform desktop app with native file system access."
+                    results:
+                        "cross-platform desktop app with native file system access.",
                 },
                 {
                     tech: "markdown.it",
                     purpose: "markdown parsing",
-                    results: "parse and render markdown with LaTeX and code block support."
+                    results:
+                        "parse and render markdown with LaTeX and code block support.",
                 },
                 {
                     tech: "codemirror",
                     purpose: "note editing",
-                    results: "syntax highlighting and code block editing."
-                }
-            ]
+                    results: "syntax highlighting and code block editing.",
+                },
+            ],
         },
     ];
 
@@ -179,63 +199,51 @@
 </script>
 
 {#each projects as project, index (project.name)}
-    <div class="flex flex-col">
-        <Dialog.Root>
-            <Dialog.Trigger>
-                <Item
-                    value={`pos=${index}-${project.name}`}
-                    keywords={["projects", "project"]}
-                    class="flex items-center justify-between gap-2 w-full hover:cursor-pointer"
+    <Item
+        value={`pos=${index}-${project.name}`}
+        keywords={["projects", "project"]}
+        class="flex items-center justify-between gap-2 w-full hover:cursor-pointer"
+        onSelect={() => {
+            saveViewStateAndSelectProject(project); 
+        }}
+    >
+        <!-- THIS SPECIFICALLY SHOULD BE ITEMS-CENTER NOT BASELINE -->
+        <div class="flex items-center gap-2">
+            <div
+                class="flex items-center gap-2 truncate max-w-48 sm:max-w-none"
+            >
+                {project.name}
+                <span class="text-muted-foreground text-xs">/</span>
+            </div>
+
+            {#if project.link}
+                <a
+                    href={project.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="text-muted-foreground hover:text-primary"
+                    onclick={stopPropagation}
                 >
-                    <!-- THIS SPECIFICALLY SHOULD BE ITEMS-CENTER NOT BASELINE -->
-                    <div class="flex items-center gap-2">
-                        <div class="flex items-center gap-2 truncate max-w-48 sm:max-w-none">
-                            {project.name}
-                            <span class="text-muted-foreground text-xs">/</span>
-                        </div>
+                    <Link class="size-4" />
+                </a>
+            {/if}
 
-                        {#if project.link}
-                            <a
-                                href={project.link}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                class="text-muted-foreground hover:text-primary"
-                                onclick={stopPropagation}
-                            >
-                                <svelte:component this={Link} class="size-4" />
-                            </a>
-                        {/if}
-
-                        {#if project.github}
-                            <a
-                                href={project.github}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                class="text-muted-foreground hover:text-primary"
-                                onclick={stopPropagation}
-                            >
-                                <svelte:component this={GitHub} class="size-4" />
-                            </a>
-                        {/if}
-                    </div>
-                    <p class="text-xs text-muted-foreground truncate max-w-36 sm:max-w-none">{project.date}</p>
-                </Item>
-            </Dialog.Trigger>
-            <Dialog.Content class="flex flex-col gap-4">
-                <h1 class="text-lg font-semibold">{project.name}</h1>
-                <p class="text-sm text-muted-foreground">{project.description}</p>
-                <Separator orientation="horizontal" />
-                    <div class="flex flex-col gap-2">
-                        {#each project.techStack as tech (tech.tech)}
-                            <div class="flex flex-col gap-2"> 
-                                <p class="text-sm font-semibold">{tech.tech}
-                                    <span class="text-xs text-muted-foreground">/ {tech.purpose}</span>
-                                </p>
-                                <p class="text-xs text-muted-foreground">{tech.results}</p>
-                            </div>
-                        {/each}
-                    </div>
-            </Dialog.Content>
-        </Dialog.Root>
-    </div>
+            {#if project.github}
+                <a
+                    href={project.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="text-muted-foreground hover:text-primary"
+                    onclick={stopPropagation}
+                >
+                    <GitHub class="size-4" />
+                </a>
+            {/if}
+        </div>
+        <p
+            class="text-xs text-muted-foreground truncate max-w-36 sm:max-w-none"
+        >
+            {project.date}
+        </p>
+    </Item>
 {/each}

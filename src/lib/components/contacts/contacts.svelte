@@ -70,21 +70,17 @@
     <LinkItem
         href={contact.href}
         target="_blank"
+        rel="noopener noreferrer"
         value={`pos=${index}-${contact.type}-${contact.value}`}
         keywords={["contacts", "contact", "call", "speak", "message", "connect", "reach", "social"]}
         class="flex items-center justify-between gap-2 w-full hover:cursor-pointer"
     >
         <div class="flex items-center gap-2">
             {#if contact.iconLight}
-                <svelte:component 
-                    this={contact.iconLight}
-                    class="size-4" 
-                />
+                <!-- if curious, hiding this in dark mode is done inside the component, not here -->
+                <contact.iconLight class="size-4" />
             {/if}
-            <svelte:component 
-                this={contact.icon}
-                class="block size-4 text-muted-foreground"
-            />
+            <contact.icon class="block size-4 text-muted-foreground" />
 
             <div class="flex items-baseline gap-2 truncate max-w-48 sm:max-w-none">
                 <span>{contact.type}</span>
@@ -93,7 +89,7 @@
         </div>
         <span class="flex flex-row gap-2 text-muted-foreground text-xs max-w-36 sm:max-w-none truncate">
             pref:
-            <svelte:component this={contact.pref} class="text-amber-500 size-4" />
+            <contact.pref class="text-amber-500 size-4" />
         </span>
     </LinkItem>
 {/each}
