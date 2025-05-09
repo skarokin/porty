@@ -88,7 +88,7 @@
                         alt={tech.name}
                     />
                 {:else if tech.logo}
-                    <svelte:component this={tech.logo} class="size-4" />
+                    <tech.logo class="size-4" />
                 {:else}
                     <Avatar.Fallback class="text-xs bg-muted rounded-full">
                         {tech.name[0].toUpperCase()}

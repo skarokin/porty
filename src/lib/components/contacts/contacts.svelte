@@ -76,13 +76,11 @@
     >
         <div class="flex items-center gap-2">
             {#if contact.iconLight}
-                <svelte:component 
-                    this={contact.iconLight}
+                <contact.iconLight
                     class="size-4" 
                 />
             {/if}
-            <svelte:component 
-                this={contact.icon}
+            <contact.icon
                 class="block size-4 text-muted-foreground"
             />
 
@@ -93,7 +91,7 @@
         </div>
         <span class="flex flex-row gap-2 text-muted-foreground text-xs max-w-36 sm:max-w-none truncate">
             pref:
-            <svelte:component this={contact.pref} class="text-amber-500 size-4" />
+            <contact.pref class="text-amber-500 size-4" />
         </span>
     </LinkItem>
 {/each}

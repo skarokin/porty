@@ -202,7 +202,7 @@
                                 class="text-muted-foreground hover:text-primary"
                                 onclick={stopPropagation}
                             >
-                                <svelte:component this={Link} class="size-4" />
+                                <Link class="size-4" />
                             </a>
                         {/if}
 
@@ -214,7 +214,7 @@
                                 class="text-muted-foreground hover:text-primary"
                                 onclick={stopPropagation}
                             >
-                                <svelte:component this={GitHub} class="size-4" />
+                                <GitHub class="size-4" />
                             </a>
                         {/if}
                     </div>
