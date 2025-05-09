@@ -97,6 +97,8 @@
         // wait for DOM to update before updating selected index. without this, doesnt work
         requestAnimationFrame(() => {
             commandRootPrimitiveRef?.updateSelectedToIndex(viewState.selectedProjectIndex);
+
+            console.log(commandRootPrimitiveRef?.getValidItems());
         });
     }
 
