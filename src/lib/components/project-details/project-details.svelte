@@ -1,7 +1,7 @@
 <script lang="ts">
     import { List, Item, LinkItem, Group } from "$lib/components/ui/command";
 
-    import type { Project } from "$lib/components/projects";
+    import type { Project, TechDetail } from "$lib/components/projects";
     import GitHub from "@lucide/svelte/icons/github";
     import Link from "@lucide/svelte/icons/link";
     import ChevronLeft from "@lucide/svelte/icons/chevron-left";
@@ -24,13 +24,33 @@
         <Item
             value="description"
             keywords={["description", "details", "info", "about"]}
-            disabled={true}
+            class="pointer-events-none"
         >
             {project.description}
         </Item>
     </Group>
 
-    <Group heading={"links"}>
+    <Group heading="tech stack">
+        {#each <TechDetail[]> project.techStack as tech}
+            <Item
+                value={tech.tech}
+                keywords={["tech stack", "technology", "stack", "tools"]}
+                class="flex items-center justify-between gap-2 w-full"
+            >
+                <div class="flex flex-col items-baseline gap-2 truncate">
+                    <div class="flex items-baseline gap-2 truncate">
+                        <span>{tech.tech}</span>
+                        <span class="text-muted-foreground text-xs truncate">/ {tech.purpose}</span>
+                    </div>
+                    <p class="text-xs text-muted-foreground text-wrap">
+                        {tech.results}
+                    </p>
+                </div>
+            </Item>
+        {/each}
+    </Group>
+
+    <Group heading="links">
         {#if project.link}
             <LinkItem
                 href={project.link}
@@ -80,10 +100,10 @@
         {/if}
     </Group>
 
-    <Group heading={"back"}>
+    <Group heading="back">
         <Item
             value="back"
-            keywords={["close", "exit", "back", "return"]}
+            keywords={["close", "exit", "return"]}
             class="group flex items-center justify-between gap-2 w-full hover:cursor-pointer"
             onSelect={onClose}
         >

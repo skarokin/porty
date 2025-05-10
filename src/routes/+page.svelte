@@ -40,7 +40,7 @@
     let intervalID: ReturnType<typeof setInterval>;
     let inputRef: HTMLInputElement | null = $state(null);
     let commandListElementRef: HTMLDivElement | null = $state(null);
-    let commandRootPrimitiveRef: CommandPrimitive.Root | undefined = $state(undefined);
+    let commandRootPrimitiveRef: CommandPrimitive.Root | null = $state(null);
 
     async function refreshNowPlaying() {
         const res = await fetch("now-playing");
@@ -111,7 +111,7 @@
         filter={customFilter}
         loop={true}
         vimBindings={false}
-        bind:commandPrimitiveRef={commandRootPrimitiveRef}
+        bind:primitiveRef={commandRootPrimitiveRef}
     >
         <!-- value state is only updated on a keyboard input. we want it to also be updated if viewState.inputValue changes -->
         <Command.Input

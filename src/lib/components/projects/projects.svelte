@@ -52,19 +52,19 @@
                     tech: "next.js & vercel",
                     purpose: "frontend development",
                     results:
-                        "combination of CSR and SSR, API routes for authentication, and dynamic routing.",
+                        "combination of csr and ssr, api routes for authentication, and dynamic routing.",
                 },
                 {
                     tech: "go & firestore",
                     purpose: "rest api & crud",
                     results:
-                        "front-facing REST API for CRUD and granular note sharing.",
+                        "front-facing rest api for crud and granular note sharing.",
                 },
                 {
                     tech: "node.js & websocket",
                     purpose: "real-time",
                     results:
-                        "horizontally scalable WebSocket servers for real-time collaboration.",
+                        "horizontally scalable websocket servers for real-time collaboration.",
                 },
                 {
                     tech: "redis & redis pub/sub",
@@ -91,25 +91,25 @@
                     tech: "python",
                     purpose: "augmentation pipeline",
                     results:
-                        "injects real-world grammar errors via inflection into datasets by analyzing dependency trees, POS tags, and morphological features.",
+                        "injects real-world grammar errors via inflection into datasets by analyzing dependency trees, pos tags, and morphological features.",
                 },
                 {
                     tech: "flask",
                     purpose: "rest api",
                     results:
-                        "easy API development to serve our fully-featured english grammar and spell checker.",
+                        "easy api development to serve our fully-featured english grammar and spell checker.",
                 },
                 {
                     tech: "aws & docker & nginx",
                     purpose: "deployment",
                     results:
-                        "fault-tolerant and HTTPS-secured API calls for quick, accurate, and interpretable grammar and spell checking.",
+                        "fault-tolerant and https-secured api calls for quick, accurate, and interpretable grammar and spell checking.",
                 },
                 {
                     tech: "sveltekit & firebase",
                     purpose: "documentation & api reference",
                     results:
-                        "interactive API reference, extensive integration guides, detailed documentation, and devblog.",
+                        "interactive api reference, extensive integration guides, detailed documentation, and devblog.",
                 },
             ],
         },
@@ -149,7 +149,7 @@
                 {
                     tech: "react.js & firebase",
                     purpose: "frontend development",
-                    results: "sstate management and real-time updates.",
+                    results: "state management and real-time updates.",
                 },
                 {
                     tech: "node.js & firebase cloud functions",
@@ -179,7 +179,7 @@
                     tech: "markdown.it",
                     purpose: "markdown parsing",
                     results:
-                        "parse and render markdown with LaTeX and code block support.",
+                        "parse and render markdown with latex and code block support.",
                 },
                 {
                     tech: "codemirror",
@@ -191,9 +191,7 @@
     ];
 
     // prevents dialog from opening when clicking on github/link icons
-    function stopPropagation(e: MouseEvent) {
-        e.stopPropagation();
-    }
+
 </script>
 
 {#each projects as project, index (project.name)}
@@ -201,7 +199,7 @@
         value={`pos=${index}-${project.name}`}
         keywords={["projects", "project"]}
         class="flex items-center justify-between gap-2 w-full hover:cursor-pointer"
-        onSelect={() => { saveViewStateAndSelectProject(project) }}
+        onSelect={() => saveViewStateAndSelectProject(project)}
     >
         <!-- THIS SPECIFICALLY SHOULD BE ITEMS-CENTER NOT BASELINE -->
         <div class="flex items-center gap-2">
@@ -218,7 +216,7 @@
                     target="_blank"
                     rel="noopener noreferrer"
                     class="text-muted-foreground hover:text-primary"
-                    onclick={stopPropagation}
+         
                 >
                     <Link class="size-4" />
                 </a>
@@ -230,7 +228,7 @@
                     target="_blank"
                     rel="noopener noreferrer"
                     class="text-muted-foreground hover:text-primary"
-                    onclick={stopPropagation}
+                    
                 >
                     <GitHub class="size-4" />
                 </a>
