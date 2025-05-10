@@ -11,7 +11,7 @@
         onClose,
         onEscPress
     } = $props<{
-        project: Project;
+        project: Project | null;
         onClose: () => void;
         onEscPress: (e: KeyboardEvent) => void;
     }>();

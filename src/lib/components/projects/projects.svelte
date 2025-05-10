@@ -19,10 +19,8 @@
     };
 
     let {
-        selectedProject = $bindable(),
         saveViewStateAndSelectProject,
     } = $props<{
-        selectedProject: Project;
         saveViewStateAndSelectProject: (project: Project) => void;
     }>();
 
@@ -203,9 +201,7 @@
         value={`pos=${index}-${project.name}`}
         keywords={["projects", "project"]}
         class="flex items-center justify-between gap-2 w-full hover:cursor-pointer"
-        onSelect={() => {
-            saveViewStateAndSelectProject(project); 
-        }}
+        onSelect={() => { saveViewStateAndSelectProject(project) }}
     >
         <!-- THIS SPECIFICALLY SHOULD BE ITEMS-CENTER NOT BASELINE -->
         <div class="flex items-center gap-2">

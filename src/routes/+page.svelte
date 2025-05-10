@@ -19,30 +19,19 @@
     let { data } = $props();
     let { topTracks } = data;
 
-    const defaultProject: Project = {
-        name: "",
-        description: "",
-        date: "",
-        link: "",
-        github: "",
-        techStack: [],
-    };
-
     let viewState = $state<{
         inputValue: string;
         prevInputValue: string;
-        commandInputKey: number;
         projectSelected: boolean;
-        selectedProject: Project;
         selectedProjectIndex: number;
     }>({
         inputValue: "",
         prevInputValue: "",
-        commandInputKey: 0,
         projectSelected: false,
-        selectedProject: defaultProject,
-        selectedProjectIndex: 0
+        selectedProjectIndex: 0,
     });
+
+    let selectedProject: Project | null = $state(null);
 
     // set this separately so that we can use $state() since we poll; might succeed once but fail later
     let nowPlaying = $state(data.nowPlaying || "");
@@ -77,7 +66,7 @@
     }
 
     function saveViewStateAndSelectProject(project: Project) {
-        viewState.selectedProject = project;
+        selectedProject = project;
         viewState.projectSelected = true;
         viewState.prevInputValue = viewState.inputValue;
         viewState.inputValue = "";  // you can search inside a project detail so clear the input
@@ -90,15 +79,11 @@
 
     async function closeProjectDetails() {
         viewState.projectSelected = false;
-        viewState.selectedProject = defaultProject;
-
         viewState.inputValue = viewState.prevInputValue;
 
-        // wait for DOM to update before updating selected index. without this, doesnt work
+        // wait for DOM to update before updating selected index
         requestAnimationFrame(() => {
             commandRootPrimitiveRef?.updateSelectedToIndex(viewState.selectedProjectIndex);
-
-            console.log(commandRootPrimitiveRef?.getValidItems());
         });
     }
 
@@ -138,7 +123,7 @@
         <Command.List class="max-h-full" bind:ref={commandListElementRef}>
             {#if viewState.projectSelected}
                 <ProjectDetails
-                    project={viewState.selectedProject}
+                    project={selectedProject}
                     onClose={closeProjectDetails}
                     onEscPress={(e: KeyboardEvent) => {
                         if (e.key === "Escape") {
@@ -169,8 +154,7 @@
                 <Command.Separator />
                 <Command.Group heading="projects">
                     <Projects
-                        bind:selectedProject={viewState.selectedProject}
-                        saveViewStateAndSelectProject={(project) => saveViewStateAndSelectProject(project)}
+                        saveViewStateAndSelectProject={saveViewStateAndSelectProject}
                     />
                 </Command.Group>
                 <Command.Separator />
