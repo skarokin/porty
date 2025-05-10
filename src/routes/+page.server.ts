@@ -5,9 +5,8 @@ import { getAccessToken, getTopTracks, currentlyPlaying } from "$lib/server/spot
 export const load: PageServerLoad = async (): Promise<PageLoadProps> => {
 	try {
         const accessToken = await getAccessToken();
-        const topTracks = await getTopTracks(accessToken);
-        const [nowPlaying] = await Promise.all([
-            // getTopTracks(accessToken),
+        const [topTracks, nowPlaying] = await Promise.all([
+            getTopTracks(accessToken),
             currentlyPlaying(accessToken)
         ]);
 
