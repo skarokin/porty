@@ -70,19 +70,17 @@
     <LinkItem
         href={contact.href}
         target="_blank"
+        rel="noopener noreferrer"
         value={`pos=${index}-${contact.type}-${contact.value}`}
         keywords={["contacts", "contact", "call", "speak", "message", "connect", "reach", "social"]}
         class="flex items-center justify-between gap-2 w-full hover:cursor-pointer"
     >
         <div class="flex items-center gap-2">
             {#if contact.iconLight}
-                <contact.iconLight
-                    class="size-4" 
-                />
+                <!-- if curious, hiding this in dark mode is done inside the component, not here -->
+                <contact.iconLight class="size-4" />
             {/if}
-            <contact.icon
-                class="block size-4 text-muted-foreground"
-            />
+            <contact.icon class="block size-4 text-muted-foreground" />
 
             <div class="flex items-baseline gap-2 truncate max-w-48 sm:max-w-none">
                 <span>{contact.type}</span>

@@ -27,7 +27,7 @@
             purpose: "literally everything",
             logoPath: gopherDance,
             started: "05/24",
-            hiddenKeywords: ["golang", "programming language"],
+            hiddenKeywords: ["golang", "programming language", "backend", "server", "api"]
         },
         {
             name: "typescript",
@@ -38,7 +38,7 @@
         },   
         {
             name: "sveltekit",
-            purpose: "next is bad",
+            purpose: "the future",
             logo: Svelte,
             started: "05/24",
             hiddenKeywords: ["framework", "frontend", "react", "vue", "angular", "nextjs", "next"]
@@ -77,7 +77,7 @@
 {#each techStack as tech, index}
     <Item
         value={`pos=${index}-${tech.name}`}
-        keywords={["technology", "technologies", "tech", "tech stack", "stack"].concat(tech.hiddenKeywords || [])}
+        keywords={["technology", "technologies", "tech stack",].concat(tech.hiddenKeywords || [])}
         class="flex items-center justify-between gap-2 w-full"
     >
         <div class="flex items-center gap-2 truncate max-w-48 sm:max-w-none">

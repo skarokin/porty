@@ -5,9 +5,12 @@
 	let {
 		value = $bindable(""),
 		ref = $bindable(null),
+		primitiveRef = $bindable(null),
 		class: className,
 		...restProps
-	}: CommandPrimitive.RootProps = $props();
+	}: CommandPrimitive.RootProps & { 
+		primitiveRef?: CommandPrimitive.Root | null
+	} = $props();
 </script>
 
 <CommandPrimitive.Root
@@ -17,5 +20,6 @@
 	)}
 	bind:ref
 	bind:value
+	bind:this={primitiveRef}
 	{...restProps}
 />
