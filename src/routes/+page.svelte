@@ -115,7 +115,7 @@
     >
         <!-- value state is only updated on a keyboard input. we want it to also be updated if viewState.inputValue changes -->
         <Command.Input
-            placeholder="search for stuff about me..."
+            placeholder={viewState.projectSelected ? `search for stuff about ${selectedProject?.name}...` : "search for stuff about me..."}
             bind:ref={inputRef}
             bind:value={viewState.inputValue}
             autofocus

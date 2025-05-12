@@ -191,7 +191,9 @@
     ];
 
     // prevents dialog from opening when clicking on github/link icons
-
+    function stopPropagation(e: MouseEvent) {
+        e.stopPropagation();
+    }
 </script>
 
 {#each projects as project, index (project.name)}
@@ -216,7 +218,7 @@
                     target="_blank"
                     rel="noopener noreferrer"
                     class="text-muted-foreground hover:text-primary"
-         
+                    onclick={stopPropagation}
                 >
                     <Link class="size-4" />
                 </a>
@@ -228,7 +230,7 @@
                     target="_blank"
                     rel="noopener noreferrer"
                     class="text-muted-foreground hover:text-primary"
-                    
+                    onclick={stopPropagation}
                 >
                     <GitHub class="size-4" />
                 </a>
