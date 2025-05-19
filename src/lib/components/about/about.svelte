@@ -1,7 +1,7 @@
 <script>
-    import sean from "$lib/assets/IMG_3707.jpg";
+    import sean from "$lib/assets/IMG_3774.jpg";
 
-    import House from "@lucide/svelte/icons/house";
+    import MapPin from "@lucide/svelte/icons/map-pin";
 
     import { Item } from "$lib/components/ui/command";
     import * as Avatar from "$lib/components/ui/avatar/index.js";
@@ -24,16 +24,14 @@
         </Avatar.Root>
         <div class="flex flex-col gap-2 items-start">
             <div class="flex flex-col items-start">
-                <p
-                    class="text-sm sm:text-lg font-semibold flex flex-row gap-2 items-baseline"
-                >
-                    sean kim
-                    <span class="text-xs sm:text-sm font-normal text-muted-foreground">/ skarokin</span>
-                </p>
+                <div class="text-sm sm:text-base flex items-baseline gap-2 truncate max-w-48 sm:max-w-none">
+                    <span>sean kim</span>
+                    <span class="text-muted-foreground text-xs truncate">/ skarokin</span>
+                </div>
                 <p class="text-xs sm:text-sm font-sans">김태민</p>
             </div>
-            <div class="flex flex-row gap-1 items-center text-xs sm:text-sm text-muted-foreground">
-                <House size="4" />
+            <div class="flex flex-row gap-1 items-center text-xs text-muted-foreground">
+                <MapPin />
                 new jersey
             </div>
         </div>

@@ -5,6 +5,7 @@
     import { Label } from "$lib/components/ui/label";
     import { onMount } from "svelte";
     import { browser } from "$app/environment";
+
     let { children } = $props();
 
     let themeLoaded = $state(false);

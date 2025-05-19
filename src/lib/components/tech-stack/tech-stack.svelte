@@ -44,13 +44,6 @@
             hiddenKeywords: ["framework", "frontend", "react", "vue", "angular", "nextjs", "next"]
         },
         {
-            name: "cloudflare",
-            purpose: "vercel bills were crazy",
-            logo: Cloudflare,
-            started: "04/25",
-            hiddenKeywords: ["cloudflare", "vercel", "hosting", "cdn"]
-        },
-        {
             name: "postgres",
             purpose: "tried to love nosql",
             logo: Postgres,
@@ -58,18 +51,18 @@
             hiddenKeywords: ["database", "sql", "nosql", "mongodb", "mysql", "db", "postgresql"]
         },
         {
+            name: "cloudflare",
+            purpose: "vercel bills were crazy",
+            logo: Cloudflare,
+            started: "04/25",
+            hiddenKeywords: ["cloudflare", "vercel", "hosting", "cdn"]
+        },
+        {
             name: "aws",
-            purpose: "but i love gcp",
+            purpose: "wallet prefers gcp",
             logo: AWS,
             started: "11/23",
             hiddenKeywords: ["cloud", "aws", "amazon", "azure", "cloudflare", "google", "gcp"] 
-        },
-        {
-            name: "kafka",
-            purpose: "flow like water",
-            logo: Kafka,
-            started: "05/25",
-            hiddenKeywords: ["streaming", "kafka", "pubsub", "message queue", "queue", "rabbitmq"]
         },
     ];
 </script>

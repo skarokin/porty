@@ -38,7 +38,7 @@
                 class="flex items-center justify-between gap-2 w-full"
             >
                 <div class="flex flex-col items-baseline gap-2 truncate">
-                    <div class="flex items-baseline gap-2 truncate">
+                    <div class="flex items-baseline w-full gap-2 truncate">
                         <span>{tech.tech}</span>
                         <span class="text-muted-foreground text-xs truncate">/ {tech.purpose}</span>
                     </div>
@@ -102,8 +102,8 @@
 
     <Group heading="back">
         <Item
-            value="back"
-            keywords={["close", "exit", "return"]}
+            value="exit"
+            keywords={["back", "close", "exit", "return", "home"]}
             class="group flex items-center justify-between gap-2 w-full hover:cursor-pointer"
             onSelect={onClose}
         >

@@ -15,6 +15,7 @@
     import { customFilter } from "$lib/fts";
 
     import { onDestroy, onMount } from "svelte";
+    import { fly } from "svelte/transition";
 
     let { data } = $props();
     let { topTracks } = data;
@@ -122,52 +123,56 @@
         />
         <Command.List class="max-h-full" bind:ref={commandListElementRef}>
             {#if viewState.projectSelected}
-                <ProjectDetails
-                    project={selectedProject}
-                    onClose={closeProjectDetails}
-                    onEscPress={(e: KeyboardEvent) => {
-                        if (e.key === "Escape") {
-                            closeProjectDetails();
-                        }
-                    }}
-                />
+                <div in:fly={{ x: 150, duration: 200 }}>
+                    <ProjectDetails
+                        project={selectedProject}
+                        onClose={closeProjectDetails}
+                        onEscPress={(e: KeyboardEvent) => {
+                            if (e.key === "Escape") {
+                                closeProjectDetails();
+                            }
+                        }}
+                    />
+                </div>
             {:else}
-                <Command.Empty>no results found baka ૮₍ ˃ ⤙ ˂ ₎ა</Command.Empty>
-                <Command.Group heading="whoami">
-                    <About
-                        nowPlaying={nowPlaying}
-                        hasError={hasError}
-                    />
-                </Command.Group>
-                <Command.Separator />
-                <Command.Group heading="contacts">
-                    <Contacts />
-                </Command.Group>
-                <Command.Separator />
-                <Command.Group heading="tech stack">
-                    <TechStack />
-                </Command.Group>
-                <Command.Separator />
-                <Command.Group heading="experiences">
-                    <Experiences />
-                </Command.Group>
-                <Command.Separator />
-                <Command.Group heading="projects">
-                    <Projects
-                        saveViewStateAndSelectProject={saveViewStateAndSelectProject}
-                    />
-                </Command.Group>
-                <Command.Separator />
-                <Command.Group heading="resume">
-                    <Resume />
-                </Command.Group>
-                <Command.Separator />
-                <Command.Group heading="spotify (top 5 tracks)">
-                    <Spotify
-                        topTracks={topTracks}
-                        hasError={hasError}
-                    />
-                </Command.Group>
+                <div in:fly={{ x: -150, duration: 200 }}>
+                    <Command.Empty>no results found baka ૮₍ ˃ ⤙ ˂ ₎ა</Command.Empty>
+                    <Command.Group heading="whoami">
+                        <About
+                            nowPlaying={nowPlaying}
+                            hasError={hasError}
+                        />
+                    </Command.Group>
+                    <Command.Separator />
+                    <Command.Group heading="contacts">
+                        <Contacts />
+                    </Command.Group>
+                    <Command.Separator />
+                    <Command.Group heading="tech stack">
+                        <TechStack />
+                    </Command.Group>
+                    <Command.Separator />
+                    <Command.Group heading="experiences">
+                        <Experiences />
+                    </Command.Group>
+                    <Command.Separator />
+                    <Command.Group heading="projects">
+                        <Projects
+                            saveViewStateAndSelectProject={saveViewStateAndSelectProject}
+                        />
+                    </Command.Group>
+                    <Command.Separator />
+                    <Command.Group heading="resume">
+                        <Resume />
+                    </Command.Group>
+                    <Command.Separator />
+                    <Command.Group heading="spotify (top 5 tracks)">
+                        <Spotify
+                            topTracks={topTracks}
+                            hasError={hasError}
+                        />
+                    </Command.Group>
+                </div>
             {/if}
         </Command.List>
     </Command.Root>
