@@ -7,6 +7,7 @@
     import { Spotify } from "$lib/components/spotify";
     import { TechStack } from "$lib/components/tech-stack";
     import { ProjectDetails } from "$lib/components/project-details";
+    import { RecentPic } from "$lib/components/recent-pic";
     import type { Project } from "$lib/components/projects";
     import * as Command from "$lib/components/ui/command";
 
@@ -144,6 +145,9 @@
                         />
                     </Command.Group>
                     <Command.Separator />
+                    <Command.Group heading="recent pic">
+                        <RecentPic />
+                    </Command.Group>
                     <Command.Group heading="contacts">
                         <Contacts />
                     </Command.Group>

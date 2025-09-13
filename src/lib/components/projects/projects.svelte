@@ -30,15 +30,45 @@
             description: `your win condition in the tech career game. connect with recruiters, find opportunities as soon as they drop, 
              access powerful application management tools and data-driven insights, share your journey with friends, review company data, 
              and get hired-faster.`,
-            date: "01/25 - today",
+            date: "01/25 - 06/25",
             link: "https://copium.dev/",
             github: "https://github.com/copium-dev/copium",
             techStack: [
                 {
-                    tech: "tech stack is a secret for now :)",
-                    purpose: "i wonder what it's all for...",
-                    results: "we'll see soon enough!",
+                    tech: "sveltekit & cloudflare",
+                    purpose: "frontend development",
+                    results: "cool ui, great ux, easy dev, and fast.",
                 },
+                {
+                    tech: "algolia",
+                    purpose: "search engine",
+                    results: "real-time search and filtering on internship postings or user's tracked applications."
+                },
+                {
+                    tech: "go & firestore",
+                    purpose: "rest api & storage",
+                    results: "front-facing rest api for authentication, algolia searching, and data analytics."
+                },
+                {
+                    tech: "gcp pub/sub",
+                    purpose: "messaging",
+                    results: "decoupled and fault-tolerant algolia indexing and bigquery analytics with compensating transactions and retries for eventual consistency."
+                },
+                {
+                    tech: "bigquery & cqrs",
+                    purpose: "real-time analytics",
+                    results: "personalized insights by tracking monthly trends, leveraging a denormalized schema and CQRS for fast queries."
+                },
+                {
+                    tech: "docker & gcp",
+                    purpose: "deployment",
+                    results: "containerized, scalable, and fault-tolerant deployment across VM instances and cloud run services."
+                },
+                {
+                    tech: "python",
+                    purpose: "data scraping",
+                    results: "scheduled tech internship posting scraping for focused and fresh data on a compute engine instance."
+                }
             ],
         },
         {

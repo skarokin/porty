@@ -1,5 +1,5 @@
 <script>
-    import sean from "$lib/assets/IMG_3774.jpg";
+    import sean from "$lib/assets/sean1.jpg";
 
     import MapPin from "@lucide/svelte/icons/map-pin";
 
@@ -20,7 +20,7 @@
                 src={sean}
                 alt="Sean Kim"
             />
-            <Avatar.Fallback>lil milk</Avatar.Fallback>
+            <Avatar.Fallback>skim</Avatar.Fallback>
         </Avatar.Root>
         <div class="flex flex-col gap-2 items-start">
             <div class="flex flex-col items-start">
@@ -61,8 +61,8 @@
             </div>
         {:else}
             <div class="flex flex-col items-end gap-1 max-w-32 sm:max-w-none text-xs text-muted-foreground truncate">
-                <span>now playing</span>
-                <span>nothing lol</span>
+                <span>now playing...</span>
+                <span>nothing</span>
             </div>
         {/if}
     </div>

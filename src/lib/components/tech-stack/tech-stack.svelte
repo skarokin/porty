@@ -7,8 +7,9 @@
     import Svelte from "$lib/assets/svelte.svelte";
     import Postgres from "$lib/assets/postgres.svelte";
     import AWS from "$lib/assets/aws.svelte";
-    import Kafka from "$lib/assets/kafka.svelte";
     import Cloudflare from "$lib/assets/cloudflare.svelte";
+    import Terraform from "$lib/assets/terraform.svelte";
+    import Jenkins from "$lib/assets/jenkins.svelte";
 
     import type { Component } from "svelte";
 
@@ -24,21 +25,21 @@
     const techStack: Tech[] = [ 
         {
             name: "go",
-            purpose: "literally everything",
+            purpose: "almost everything",
             logoPath: gopherDance,
             started: "05/24",
             hiddenKeywords: ["golang", "programming language", "backend", "server", "api"]
         },
         {
             name: "typescript",
-            purpose: "ts pmo 🥀💔",
+            purpose: "frontend & some backend",
             logo: Typescript,
             started: "03/25",
             hiddenKeywords: ["typescript", "programming language", "ts", "js", "javascript"],
         },   
         {
             name: "sveltekit",
-            purpose: "the future",
+            purpose: "frontend framework",
             logo: Svelte,
             started: "05/24",
             hiddenKeywords: ["framework", "frontend", "react", "vue", "angular", "nextjs", "next"]
@@ -59,11 +60,25 @@
         },
         {
             name: "aws",
-            purpose: "wallet prefers gcp",
+            purpose: "for the job but i like gcp",
             logo: AWS,
             started: "11/23",
             hiddenKeywords: ["cloud", "aws", "amazon", "azure", "cloudflare", "google", "gcp"] 
         },
+        {
+            name: "terraform",
+            purpose: "i work in SRE",
+            logo: Terraform,
+            started: "05/25",
+            hiddenKeywords: ["infrastructure as code", "iac", "sre", "devops", "kubernetes", "k8s"]
+        },
+        {
+            name: "jenkins",
+            purpose: "i work in SRE",
+            logo: Jenkins,
+            started: "05/25",
+            hiddenKeywords: ["ci", "cd", "cicd", "sre", "devops", "kubernetes", "k8s"]
+        }
     ];
 </script>
 

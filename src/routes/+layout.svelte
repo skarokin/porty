@@ -61,7 +61,7 @@
     <footer class="flex-none border-zinc-700 border-t border-dashed w-full">
 		<div class="h-full flex flex-row justify-between border-zinc-700 border-none sm:border-x sm:border-dashed mx-auto container p-4">
             <p class="text-xs text-muted-foreground">
-        	    &#123;&copy; lil milk&#125;
+        	    &#123;&copy; skim&#125;
             </p>
             <a 
                 class="text-xs text-muted-foreground hover:underline"
@@ -69,7 +69,7 @@
                 target="_blank"
                 rel="noopener noreferrer"
             >
-                &#123;gyatthub repo&#125;
+                &#123;git repo&#125;
             </a>
         </div>
     </footer>

@@ -1,0 +1,1 @@
+export { default as RecentPic } from './recent-pic.svelte';
