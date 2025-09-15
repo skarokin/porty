@@ -11,7 +11,7 @@
     keywords={["recent", "photo", "picture", "image", "latest", "camera", "photography"]}
 >
     <div class="w-full">
-        <Avatar.Root class="w-full h-48 sm:h-96 rounded-lg border" loadingStatus="loaded">
+        <Avatar.Root class="w-full h-48 sm:h-96 rounded-lg" loadingStatus="loaded">
             <Avatar.Image
                 src={recentPic}
                 alt="Recent photo"

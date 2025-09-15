@@ -148,6 +148,7 @@
                     <Command.Group heading="recent pic">
                         <RecentPic />
                     </Command.Group>
+                    <Command.Separator />
                     <Command.Group heading="contacts">
                         <Contacts />
                     </Command.Group>
