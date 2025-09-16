@@ -34,7 +34,7 @@
             keywords={["spotify", "music", "track", "song", "artist", "album", "listening", "top tracks"]}
             class="flex items-center justify-between gap-2 w-full hover:cursor-pointer"
         >
-            <div class="flex items-center justify-between gap-2 max-w-36 sm:max-w-none truncate">
+            <div class="flex items-center gap-2 min-w-0 flex-1">
                 <Avatar.Root class="size-4">
                     <Avatar.Image
                         src={track.coverImage.url}

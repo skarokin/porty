@@ -75,19 +75,19 @@
         keywords={["contacts", "contact", "call", "speak", "message", "connect", "reach", "social"]}
         class="flex items-center justify-between gap-2 w-full hover:cursor-pointer"
     >
-        <div class="flex items-center gap-2">
+        <div class="flex items-center gap-2 min-w-0 flex-1">
             {#if contact.iconLight}
                 <!-- if curious, hiding this in dark mode is done inside the component, not here -->
                 <contact.iconLight class="size-4" />
             {/if}
             <contact.icon class="block size-4 text-muted-foreground" />
 
-            <div class="flex items-baseline gap-2 truncate max-w-48 sm:max-w-none">
+            <div class="flex items-baseline gap-2 min-w-0">
                 <span>{contact.type}</span>
                 <span class="text-muted-foreground text-xs truncate">/ {contact.value}</span>
             </div>
         </div>
-        <span class="flex flex-row gap-2 text-muted-foreground text-xs max-w-36 sm:max-w-none truncate">
+        <span class="flex flex-row items-center gap-2 text-muted-foreground text-xs">
             pref:
             <contact.pref class="text-amber-500 size-4" />
         </span>

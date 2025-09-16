@@ -32,7 +32,7 @@
         {
             company: "copium.dev",
             title: "founder",
-            date: "01/25 - today",
+            date: "01/25 - 06/25",
             logoPath: copium,
         },
         {
@@ -50,7 +50,7 @@
         keywords={["career", "experiences", "experience", "work", "job"].concat(experience.hiddenKeywords || [])}
         class="flex items-center justify-between gap-2 w-full"
     >
-        <div class="flex items-center gap-2 truncate max-w-48 sm:max-w-none">
+        <div class="flex items-center gap-2 min-w-0 flex-1">
             <!-- since these are all local images, no need to wait for loading -->
             <Avatar.Root class="size-4 rounded-none" loadingStatus={experience.logoPath ? "loaded" : "error"}>
                 {#if experience.logoPath}

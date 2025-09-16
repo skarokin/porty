@@ -32,14 +32,14 @@
         },
         {
             name: "typescript",
-            purpose: "frontend & some backend",
+            purpose: "need types",
             logo: Typescript,
             started: "03/25",
             hiddenKeywords: ["typescript", "programming language", "ts", "js", "javascript"],
         },   
         {
             name: "sveltekit",
-            purpose: "frontend framework",
+            purpose: "best framework",
             logo: Svelte,
             started: "05/24",
             hiddenKeywords: ["framework", "frontend", "react", "vue", "angular", "nextjs", "next"]
@@ -88,8 +88,8 @@
         keywords={["technology", "technologies", "tech stack",].concat(tech.hiddenKeywords || [])}
         class="flex items-center justify-between gap-2 w-full"
     >
-        <div class="flex items-center gap-2 truncate max-w-48 sm:max-w-none">
-            <Avatar.Root class="size-4 rounded-none" loadingStatus={tech.logoPath ? "loaded" : "error"}>
+        <div class="flex items-center gap-2 min-w-0 flex-1">
+            <Avatar.Root class="size-4 rounded-none flex-shrink-0" loadingStatus={tech.logoPath ? "loaded" : "error"}>
                 {#if tech.logoPath}
                     <Avatar.Image
                         src={tech.logoPath}
@@ -103,11 +103,11 @@
                     </Avatar.Fallback>
                 {/if}
             </Avatar.Root>
-            <div class="flex items-baseline gap-2 truncate">
-                <span>{tech.name}</span>
+            <div class="flex items-baseline gap-2 min-w-0">
+                <span class="flex-shrink-0">{tech.name}</span>
                 <span class="text-muted-foreground text-xs truncate">/ {tech.purpose}</span>
             </div>
         </div>
-        <p class="text-xs text-muted-foreground max-w-36 sm:max-w-none truncate">since {tech.started}</p>
+        <p class="text-xs text-muted-foreground flex-shrink-0">since {tech.started}</p>
     </Item>
 {/each}

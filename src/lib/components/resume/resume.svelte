@@ -11,7 +11,7 @@
     keywords={["cv, curriculum vitae, seankimresume, pdf, download, hire, employment"]}
     class="flex items-center justify-between gap-2 w-full cursor-pointer"
 >
-    <div class="flex items-center gap-2 truncate max-w-48 sm:max-w-none">
+    <div class="flex items-center gap-2 min-w-0 flex-1">
         <FileText class="size-4 opacity-50" />
         <div class="flex flex-row items-baseline gap-2">
             <span>SeanKimResume</span>
