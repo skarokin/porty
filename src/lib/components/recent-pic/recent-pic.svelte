@@ -10,14 +10,12 @@
     value='pos=2-recent-pic'
     keywords={["recent", "photo", "picture", "image", "latest", "camera", "photography"]}
 >
-    <div class="w-full">
-        <Avatar.Root class="w-full h-48 sm:h-96 rounded-lg" loadingStatus="loaded">
-            <Avatar.Image
-                src={recentPic}
-                alt="Recent photo"
-                class="object-contain w-full h-full"
-            />
-            <Avatar.Fallback class="rounded-lg w-full h-full flex items-center justify-center">📸</Avatar.Fallback>
-        </Avatar.Root>
-    </div>
+    <Avatar.Root class="aspect-square w-auto rounded-md h-48 sm:h-96 overflow-hidden" loadingStatus="loaded">
+        <Avatar.Image
+            src={recentPic}
+            alt="Recent photo"
+            class="object-cover w-full h-full"
+        />
+        <Avatar.Fallback class="rounded-md w-full h-full flex items-center justify-center">📸</Avatar.Fallback>
+    </Avatar.Root>
 </Item>

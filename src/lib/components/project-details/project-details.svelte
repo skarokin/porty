@@ -37,7 +37,7 @@
                 keywords={["tech stack", "technology", "stack", "tools"]}
                 class="flex items-center justify-between gap-2 w-full"
             >
-                <div class="flex flex-col items-baseline gap-2 truncate">
+                <div class="flex flex-col gap-2 min-w-0 flex-1">
                     <div class="flex items-baseline w-full gap-2 truncate">
                         <span>{tech.tech}</span>
                         <span class="text-muted-foreground text-xs truncate">/ {tech.purpose}</span>
@@ -60,16 +60,14 @@
                 rel="noopener noreferrer"
                 class="flex items-center justify-between gap-2 w-full hover:cursor-pointer"
             >
-                <div class="flex items-center gap-2">
+                <div class="flex items-center gap-2 flex-shrink-0">
                     <Link class="size-4" />
-                    <div class="flex items-baseline gap-2 truncate">
+                    <div class="flex items-baseline gap-2">
                         <span>visit</span>
                         <span class="text-muted-foreground text-xs truncate">/ site</span>
                     </div>
                 </div>
-                <p
-                    class="text-xs text-muted-foreground max-w-36 sm:max-w-none truncate"
-                >
+                <p class="text-xs text-muted-foreground min-w-0 truncate">
                     {project.link}
                 </p>
             </LinkItem>
@@ -84,16 +82,14 @@
                 rel="noopener noreferrer"
                 class="flex items-center justify-between gap-2 w-full hover:cursor-pointer"
             >
-                <div class="flex items-center gap-2">
+                <div class="flex items-baseline gap-2 flex-shrink-0">
                     <GitHub class="size-4" />
-                    <div class="flex items-baseline gap-2 truncate">
+                    <div class="flex items-center gap-2">
                         <span>src</span>
                         <span class="text-muted-foreground text-xs truncate">/ github</span>
                     </div>
                 </div>
-                <p
-                    class="text-xs text-muted-foreground max-w-36 sm:max-w-none truncate"
-                >
+                <p class="text-xs text-muted-foreground min-w-0 truncate">
                     {project.github}
                 </p>
             </LinkItem>

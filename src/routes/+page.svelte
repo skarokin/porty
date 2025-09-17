@@ -124,7 +124,7 @@
         />
         <Command.List class="max-h-full" bind:ref={commandListElementRef}>
             {#if viewState.projectSelected}
-                <div in:fly={{ x: 150, duration: 200 }}>
+                <div in:fly={{ x: 150, duration: 200 }} style="will-change: transform">
                     <ProjectDetails
                         project={selectedProject}
                         onClose={closeProjectDetails}
@@ -136,7 +136,7 @@
                     />
                 </div>
             {:else}
-                <div in:fly={{ x: -150, duration: 200 }}>
+                <div in:fly={{ x: -150, duration: 200 }} style="will-change: transform">
                     <Command.Empty>no results found baka ૮₍ ˃ ⤙ ˂ ₎ა</Command.Empty>
                     <Command.Group heading="whoami">
                         <About
