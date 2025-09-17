@@ -5,7 +5,7 @@
     import { Label } from "$lib/components/ui/label";
     import { onMount } from "svelte";
     import { browser } from "$app/environment";
-    import { blur, scale } from "svelte/transition";
+    import { blur, fade } from "svelte/transition";
     import { sineInOut, cubicInOut } from "svelte/easing";
 
     let { children } = $props();
@@ -26,7 +26,7 @@
 
                 setTimeout(() => {
                     contentReady = true;
-                }, 500);
+                }, 700);
             }, 100);
         }
     });
@@ -100,23 +100,6 @@
                 </div>
             {/if}
         </main>
-        <!-- must be defined outside of main to prevent scaling with the main content's in:scale effect -->
-        {#if !contentReady}
-            <div class="absolute inset-0 flex items-center justify-center transform-none">
-                <div
-                    class="text-sm font-mono text-muted-foreground"
-                    out:blur={{ duration: 200, easing: cubicInOut }}
-                >
-                    <span class="text-purple-400">import</span> <span class="text-emerald-400">"github.com/skarokin/porty"</span><br/>
-                    <br/>
-                    <span class="text-purple-400">func</span> <span class="text-blue-400">main</span>() &#123;
-                    <br/>
-                    &nbsp;&nbsp;porty.<span class="text-blue-400">Serve</span>(<span class="text-emerald-400">":8080"</span>)
-                    <br/>
-                    &#125;
-                </div>
-            </div>
-        {/if}
         <footer
             class="flex-none border-zinc-700 border-t border-dashed w-full"
             in:scaleX={{ duration: 300, start: 0.1, easing: sineInOut }}
@@ -135,5 +118,24 @@
                 </a>
             </div>
         </footer>
+    {/if}
+    {#if !contentReady && layoutLoaded}
+        <div 
+            class="absolute inset-0 flex items-center justify-center"
+            in:fade={{ duration: 200, easing: cubicInOut, delay: 100 }}
+            out:fade={{ duration: 200, easing: cubicInOut }}
+        >
+            <div
+                class="text-sm font-mono text-muted-foreground"
+            >
+                <span class="text-purple-400">import</span> <span class="text-emerald-400">"github.com/skarokin/porty"</span><br/>
+                <br/>
+                <span class="text-purple-400">func</span> <span class="text-blue-400">main</span>() &#123;
+                <br/>
+                &nbsp;&nbsp;porty.<span class="text-blue-400">Serve</span>(<span class="text-emerald-400">":8080"</span>)
+                <br/>
+                &#125;
+            </div>
+        </div>
     {/if}
 </div>
