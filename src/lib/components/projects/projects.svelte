@@ -2,6 +2,7 @@
     import { Item } from "$lib/components/ui/command";
     import Link from "@lucide/svelte/icons/link";
     import GitHub from "@lucide/svelte/icons/github";
+    import ChevronRight from "@lucide/svelte/icons/chevron-right";
 
     export type TechDetail = {
         tech: string;
@@ -230,7 +231,7 @@
     <Item
         value={`pos=${index}-${project.name}`}
         keywords={["projects", "project"]}
-        class="flex items-center justify-between gap-2 w-full hover:cursor-pointer"
+        class="group flex items-center justify-between gap-2 w-full hover:cursor-pointer"
         onSelect={() => saveViewStateAndSelectProject(project)}
     >
         <!-- THIS SPECIFICALLY SHOULD BE ITEMS-CENTER NOT BASELINE -->
@@ -267,9 +268,10 @@
             {/if}
         </div>
         <p
-            class="text-xs text-muted-foreground truncate max-w-36 sm:max-w-none"
+            class="flex flex-row items-center gap-2 text-muted-foreground text-xs"
         >
             {project.date}
+            <span class="text-amber-500 transition-transform group-hover:translate-x-1 group-hover:scale-110">»</span>
         </p>
     </Item>
 {/each}
