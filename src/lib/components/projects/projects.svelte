@@ -271,7 +271,7 @@
             class="flex flex-row items-center gap-2 text-muted-foreground text-xs"
         >
             {project.date}
-            <span class="text-amber-500 transition-transform group-hover:translate-x-1 group-hover:scale-110">»</span>
+            <ChevronRight class="size-4 text-amber-500 transition-transform group-hover:translate-x-1 group-hover:scale-110"/>
         </p>
     </Item>
 {/each}
