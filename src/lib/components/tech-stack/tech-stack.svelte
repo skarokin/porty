@@ -32,7 +32,7 @@
         },
         {
             name: "typescript",
-            purpose: "need types",
+            purpose: "every js thing",
             logo: Typescript,
             started: "03/25",
             hiddenKeywords: ["typescript", "programming language", "ts", "js", "javascript"],
@@ -46,21 +46,21 @@
         },
         {
             name: "postgres",
-            purpose: "tried to love nosql",
+            purpose: "do not like nosql",
             logo: Postgres,
             started: "03/25",
             hiddenKeywords: ["database", "sql", "nosql", "mongodb", "mysql", "db", "postgresql"]
         },
         {
             name: "cloudflare",
-            purpose: "vercel bills were crazy",
+            purpose: "hosting and cdn",
             logo: Cloudflare,
             started: "04/25",
             hiddenKeywords: ["cloudflare", "vercel", "hosting", "cdn"]
         },
         {
             name: "aws",
-            purpose: "for the job but i like gcp",
+            purpose: "a lot of gcp too",
             logo: AWS,
             started: "11/23",
             hiddenKeywords: ["cloud", "aws", "amazon", "azure", "cloudflare", "google", "gcp"] 

@@ -27,6 +27,56 @@
 
     const projects: Project[] = [
         {
+            name: "sixsevenlabs",
+            description: `high-scale data augmentation for NLP tasks. generates realistic, diverse grammar errors via dependency tree analysis and inflection.
+             connects to your S3 bucket and runs massively parallel jobs.`,
+            date: "09/25 - present",
+            link: "https://sixsevenlabs.com/",
+            github: "https://github.com/sixsevenlabs/sixsevenlabs",
+            techStack: [
+                {
+                    tech: "next.js & vercel",
+                    purpose: "frontend development",
+                    results: "idk just a cool frontend"
+                },
+                {
+                    tech: "go & lambda",
+                    purpose: "non-ml lambdas",
+                    results: "good performance and easy concurrency for non-ml tasks"
+                },
+                {
+                    tech: "python & spacy & lambda",
+                    purpose: "ml lambdas",
+                    results: "perform augmentations"
+                },
+                {
+                    tech: "step functions",
+                    purpose: "orchestration",
+                    results: "run massively parallel workflows with distributed map state"
+                },
+                {
+                    tech: "sqs & kinesis",
+                    purpose: "messaging",
+                    results: "job queueing and usage metric streaming"
+                },
+                {
+                    tech: "postgres",
+                    purpose: "db",
+                    results: "user, job, billing data"
+                },
+                {
+                    tech: "stripe",
+                    purpose: "payments",
+                    results: "bill users based on usage"
+                },
+                {
+                    tech: "terraform",
+                    purpose: "complex infra needs iac",
+                    results: "easy infra management"
+                }
+            ]
+        },
+        {
             name: "copium.dev",
             description: `your win condition in the tech career game. connect with recruiters, find opportunities as soon as they drop, 
              access powerful application management tools and data-driven insights, share your journey with friends, review company data, 
