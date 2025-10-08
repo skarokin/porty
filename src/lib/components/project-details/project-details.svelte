@@ -38,7 +38,7 @@
                 class="flex items-center justify-between gap-2 w-full"
             >
                 <div class="flex flex-col gap-2 min-w-0 flex-1">
-                    <div class="flex items-baseline w-full gap-2 truncate">
+                    <div class="flex items-center w-full gap-2 truncate">
                         <span>{tech.tech}</span>
                         <span class="text-muted-foreground text-xs truncate">/ {tech.purpose}</span>
                     </div>
@@ -62,7 +62,7 @@
             >
                 <div class="flex items-center gap-2 flex-shrink-0">
                     <Link class="size-4" />
-                    <div class="flex items-baseline gap-2">
+                    <div class="flex items-center gap-2">
                         <span>visit</span>
                         <span class="text-muted-foreground text-xs truncate">/ site</span>
                     </div>
@@ -105,7 +105,7 @@
         >
             <div class="flex items-center gap-2">
                 <ChevronLeft class="size-4 text-amber-500 transition-transform group-hover:-translate-x-1 group-hover:scale-110" />
-                <div class="flex items-baseline gap-2 truncate">
+                <div class="flex items-center gap-2 truncate">
                     <span>back</span>
                     <span class="text-muted-foreground text-xs truncate"
                         >/ to home</span

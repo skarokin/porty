@@ -64,7 +64,7 @@
                     </Avatar.Fallback>
                 {/if}
             </Avatar.Root>
-            <div class="flex items-baseline gap-2 truncate">
+            <div class="flex items-center gap-2 truncate">
                 <span>{experience.company}</span>
                 <span class="text-muted-foreground text-xs truncate">/ {experience.title}</span>
             </div>

@@ -14,26 +14,13 @@
 	import { Command as CommandPrimitive } from "bits-ui";
 
     import { customFilter } from "$lib/fts";
+    import { viewState, selectedProject } from "$lib/stores/viewState";
 
     import { onDestroy, onMount } from "svelte";
     import { fly } from "svelte/transition";
 
     let { data } = $props();
     let { topTracks } = data;
-
-    let viewState = $state<{
-        inputValue: string;
-        prevInputValue: string;
-        projectSelected: boolean;
-        selectedProjectIndex: number;
-    }>({
-        inputValue: "",
-        prevInputValue: "",
-        projectSelected: false,
-        selectedProjectIndex: 0,
-    });
-
-    let selectedProject: Project | null = $state(null);
 
     // set this separately so that we can use $state() since we poll; might succeed once but fail later
     let nowPlaying = $state(data.nowPlaying || "");
@@ -68,24 +55,33 @@
     }
 
     function saveViewStateAndSelectProject(project: Project) {
-        selectedProject = project;
-        viewState.projectSelected = true;
-        viewState.prevInputValue = viewState.inputValue;
-        viewState.inputValue = "";  // you can search inside a project detail so clear the input
+        selectedProject.set(project);
+        viewState.update(state => ({
+            ...state,
+            projectSelected: true,
+            prevInputValue: state.inputValue,
+            inputValue: ""      // you can search inside a project detail so clear the input
+        }));  
 
         const items = commandRootPrimitiveRef?.getValidItems();
         if (!items) return;
 
-        viewState.selectedProjectIndex = items.findIndex((item: HTMLElement) => item.hasAttribute('data-selected'));
+        viewState.update(state => ({
+            ...state,
+            selectedProjectIndex: items.findIndex((item: HTMLElement) => item.hasAttribute('data-selected'))
+        }));
     }
 
     async function closeProjectDetails() {
-        viewState.projectSelected = false;
-        viewState.inputValue = viewState.prevInputValue;
+        viewState.update(state => ({
+            ...state,
+            projectSelected: false,
+            inputValue: state.prevInputValue
+        }));
 
         // wait for DOM to update before updating selected index
         requestAnimationFrame(() => {
-            commandRootPrimitiveRef?.updateSelectedToIndex(viewState.selectedProjectIndex);
+            commandRootPrimitiveRef?.updateSelectedToIndex($viewState.selectedProjectIndex);
         });
     }
 
@@ -117,16 +113,16 @@
     >
         <!-- value state is only updated on a keyboard input. we want it to also be updated if viewState.inputValue changes -->
         <Command.Input
-            placeholder={viewState.projectSelected ? `search for stuff about ${selectedProject?.name}...` : "search for stuff about me..."}
+            placeholder={$viewState.projectSelected ? `search for stuff about ${$selectedProject?.name}...` : "search for stuff about me..."}
             bind:ref={inputRef}
-            bind:value={viewState.inputValue}
+            bind:value={$viewState.inputValue}
             autofocus
         />
         <Command.List class="max-h-full" bind:ref={commandListElementRef}>
-            {#if viewState.projectSelected}
+            {#if $viewState.projectSelected}
                 <div in:fly={{ x: 150, duration: 200 }} style="will-change: transform">
                     <ProjectDetails
-                        project={selectedProject}
+                        project={$selectedProject}
                         onClose={closeProjectDetails}
                         onEscPress={(e: KeyboardEvent) => {
                             if (e.key === "Escape") {

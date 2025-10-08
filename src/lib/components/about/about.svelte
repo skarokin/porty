@@ -24,7 +24,7 @@
         </Avatar.Root>
         <div class="flex flex-col gap-2 items-start">
             <div class="flex flex-col items-start">
-                <div class="text-sm sm:text-base flex items-baseline gap-2 truncate max-w-48 sm:max-w-none">
+                <div class="text-sm sm:text-base flex items-center gap-2 truncate max-w-48 sm:max-w-none">
                     <span>sean kim</span>
                     <span class="text-muted-foreground text-xs truncate">/ skarokin</span>
                 </div>
@@ -36,7 +36,7 @@
             </div>
         </div>
     </div>
-    <div class="text-xs">
+    <div class="text-xs self-start mt-1">
         {#if nowPlaying && nowPlaying.isPlaying}
             <div class="flex flex-col items-start gap-1">
                 <span class="text-muted-foreground text-xs">now playing</span>
@@ -61,7 +61,7 @@
             </div>
         {:else}
             <div class="flex flex-col items-end gap-1 max-w-32 sm:max-w-none text-xs text-muted-foreground truncate">
-                <span>now playing...</span>
+                <span>now playing</span>
                 <span>nothing</span>
             </div>
         {/if}

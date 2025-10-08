@@ -7,7 +7,8 @@
     import { browser } from "$app/environment";
     import { blur, fade } from "svelte/transition";
     import { sineInOut, cubicInOut } from "svelte/easing";
-
+    import { resetViewState } from "$lib/stores/viewState";
+    
     let { children } = $props();
 
     let themeLoaded = $state(false);
@@ -45,7 +46,13 @@
             easing: cubicInOut,
             css: (t: any) => `transform:scaleX(${t}); transform-origin: center;`
         }
-    } 
+    }
+
+    function handleNameClick(e: MouseEvent) {
+        // reset view state when clicking on name
+        e.preventDefault();
+        resetViewState();
+    }
 </script>
 
 <svelte:document onkeydown={handleKeydownTheme} />
@@ -58,7 +65,7 @@
             in:scaleX={{ duration: 300, start: 0.1, easing: sineInOut }}
         >
             <div class="h-full flex items-center justify-between border-zinc-700 border-none sm:border-x sm:border-dashed mx-auto container p-4">
-                <a class="text-xs font-bold hover:underline" href="/">
+                <a class="text-xs font-bold hover:underline" onclick={handleNameClick} href="/">
                     &#123;skarokin&#125;
                 </a>
                 <div class="flex items-center gap-2">

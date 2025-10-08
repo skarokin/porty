@@ -42,7 +42,7 @@
                     />
                     <Avatar.Fallback>♪</Avatar.Fallback>
                 </Avatar.Root>
-                <div class="flex flex-row gap-2 items-baseline truncate">
+                <div class="flex flex-row gap-2 items-center truncate">
                     <span>{track.title}</span>
                     <span class="text-muted-foreground text-xs truncate">/ {track.artist}</span>
                 </div>

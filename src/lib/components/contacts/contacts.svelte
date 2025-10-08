@@ -82,7 +82,7 @@
             {/if}
             <contact.icon class="block size-4 text-muted-foreground" />
 
-            <div class="flex items-baseline gap-2 min-w-0">
+            <div class="flex items-center gap-2 min-w-0">
                 <span>{contact.type}</span>
                 <span class="text-muted-foreground text-xs truncate">/ {contact.value}</span>
             </div>
