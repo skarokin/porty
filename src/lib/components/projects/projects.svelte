@@ -30,7 +30,7 @@
             name: "sixsevenlabs",
             description: `high-scale data augmentation for NLP tasks. generates realistic, diverse grammar errors via dependency tree analysis and inflection.
              connects to your S3 bucket and runs massively parallel jobs.`,
-            date: "09/25 - present",
+            date: "09/25 - today",
             link: "https://sixsevenlabs.com/",
             github: "https://github.com/sixsevenlabs/sixsevenlabs",
             techStack: [

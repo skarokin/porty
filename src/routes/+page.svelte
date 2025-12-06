@@ -141,8 +141,12 @@
                         />
                     </Command.Group>
                     <Command.Separator />
-                    <Command.Group heading="recent pic">
-                        <RecentPic />
+                    <Command.Group heading="experiences">
+                        <Experiences />
+                    </Command.Group>
+                    <Command.Separator />
+                    <Command.Group heading="resume">
+                        <Resume />
                     </Command.Group>
                     <Command.Separator />
                     <Command.Group heading="contacts">
@@ -153,18 +157,10 @@
                         <TechStack />
                     </Command.Group>
                     <Command.Separator />
-                    <Command.Group heading="experiences">
-                        <Experiences />
-                    </Command.Group>
-                    <Command.Separator />
                     <Command.Group heading="projects">
                         <Projects
                             saveViewStateAndSelectProject={saveViewStateAndSelectProject}
                         />
-                    </Command.Group>
-                    <Command.Separator />
-                    <Command.Group heading="resume">
-                        <Resume />
                     </Command.Group>
                     <Command.Separator />
                     <Command.Group heading="spotify (top 5 tracks)">

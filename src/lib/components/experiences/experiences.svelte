@@ -4,7 +4,9 @@
 
     import rutgers from "$lib/assets/rutgers.png";
     import cyberark from "$lib/assets/cyberark.png";
-    import copium from "$lib/assets/copium.png";
+    import panw from "$lib/assets/panw.svelte";
+    
+    import type { Component } from "svelte";
 
     type Experience = {
         company: string;
@@ -12,9 +14,17 @@
         hiddenKeywords?: string[];
         date: string;
         logoPath?: string;
+        logoComponent?: Component;
     }
 
     const experiences: Experience[] = [
+        {
+            "company": "palo alto networks",
+            "title": "sre",
+            "hiddenKeywords": ["site reliability engineer", "site reliability", "palo alto", "networks", "panw"],
+            "date": "02/26 - today",
+            "logoComponent": panw,
+        },
         {
             company: "rutgers",
             title: "cs",
@@ -25,15 +35,9 @@
         {
             company: "cyberark",
             title: "sre intern",
-            hiddenKeywords: ["site reliability engineer", "site reliability"],
+            hiddenKeywords: ["site reliability engineer", "site reliability", "cyberark"],
             date: "05/25 - 08/25",
             logoPath: cyberark,
-        },
-        {
-            company: "copium.dev",
-            title: "founder",
-            date: "01/25 - 06/25",
-            logoPath: copium,
         },
         {
             company: "acl agency",
@@ -58,6 +62,8 @@
                         src={experience.logoPath}
                         alt={experience.company}
                     />
+                {:else if experience.logoComponent}
+                    <experience.logoComponent class="block size-4 text-muted-foreground" />
                 {:else}
                     <Avatar.Fallback class="text-xs bg-muted rounded-full">
                         {experience.company[0].toUpperCase()}
