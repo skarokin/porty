@@ -15,7 +15,6 @@
 
     type Tech = {
         name: string;
-        purpose: string;
         logoPath?: string;  // for non-svg
         logo?: Component;   
         started: string;
@@ -25,56 +24,48 @@
     const techStack: Tech[] = [ 
         {
             name: "go",
-            purpose: "almost everything",
             logoPath: gopherDance,
             started: "05/24",
             hiddenKeywords: ["golang", "programming language", "backend", "server", "api"]
         },
         {
             name: "typescript",
-            purpose: "every js thing",
             logo: Typescript,
             started: "03/25",
             hiddenKeywords: ["typescript", "programming language", "ts", "js", "javascript"],
         },   
         {
             name: "sveltekit",
-            purpose: "best framework",
             logo: Svelte,
             started: "05/24",
             hiddenKeywords: ["framework", "frontend", "react", "vue", "angular", "nextjs", "next"]
         },
         {
             name: "postgres",
-            purpose: "do not like nosql",
             logo: Postgres,
             started: "03/25",
             hiddenKeywords: ["database", "sql", "nosql", "mongodb", "mysql", "db", "postgresql"]
         },
         {
             name: "cloudflare",
-            purpose: "hosting and cdn",
             logo: Cloudflare,
             started: "04/25",
             hiddenKeywords: ["cloudflare", "vercel", "hosting", "cdn"]
         },
         {
             name: "aws",
-            purpose: "a lot of gcp too",
             logo: AWS,
             started: "11/23",
             hiddenKeywords: ["cloud", "aws", "amazon", "azure", "cloudflare", "google", "gcp"] 
         },
         {
             name: "terraform",
-            purpose: "i work in SRE",
             logo: Terraform,
             started: "05/25",
             hiddenKeywords: ["infrastructure as code", "iac", "sre", "devops", "kubernetes", "k8s"]
         },
         {
             name: "jenkins",
-            purpose: "i work in SRE",
             logo: Jenkins,
             started: "05/25",
             hiddenKeywords: ["ci", "cd", "cicd", "sre", "devops", "kubernetes", "k8s"]
@@ -105,7 +96,7 @@
             </Avatar.Root>
             <div class="flex items-baseline gap-2 min-w-0">
                 <span class="flex-shrink-0">{tech.name}</span>
-                <span class="text-muted-foreground text-xs truncate">/ {tech.purpose}</span>
+                <!-- <span class="text-muted-foreground text-xs truncate">/ {tech.purpose}</span> -->
             </div>
         </div>
         <p class="text-xs text-muted-foreground flex-shrink-0">since {tech.started}</p>

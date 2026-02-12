@@ -20,7 +20,7 @@
     const experiences: Experience[] = [
         {
             "company": "palo alto networks",
-            "title": "sre",
+            "title": "associate sre",
             "hiddenKeywords": ["site reliability engineer", "site reliability", "palo alto", "networks", "panw"],
             "date": "02/26 - today",
             "logoComponent": panw,
