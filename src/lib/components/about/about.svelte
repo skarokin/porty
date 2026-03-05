@@ -1,69 +1,60 @@
 <script>
     import sean from "$lib/assets/sean1.jpg";
-
     import MapPin from "@lucide/svelte/icons/map-pin";
-
-    import { Item } from "$lib/components/ui/command";
     import * as Avatar from "$lib/components/ui/avatar/index.js";
 
-    let { nowPlaying, hasError } = $props();
+    let { nowPlaying = null, hasError = false } = $props();
 </script>
 
-<Item
-    class="flex flex-row gap-2 items-center justify-between"
-    value='pos=1-whoami'
-    keywords={["about", "sean", "taemin", "kim", "skarokin", "new jersey", "bio", "biography", "location"]}
->
-    <div class="flex flex-row gap-2 items-center">
-        <Avatar.Root class="size-16 sm:size-24 border" loadingStatus="loaded">
-            <Avatar.Image
-                src={sean}
-                alt="Sean Kim"
-            />
-            <Avatar.Fallback>skim</Avatar.Fallback>
-        </Avatar.Root>
-        <div class="flex flex-col gap-2 items-start">
-            <div class="flex flex-col items-start">
-                <div class="text-sm sm:text-base flex items-center gap-2 truncate max-w-48 sm:max-w-none">
-                    <span>sean kim</span>
-                    <span class="text-muted-foreground text-xs truncate">/ skarokin</span>
+<div class="panel h-full">
+    <div class="panel-header">
+        <span class="panel-title">whoami</span>
+        <span class="text-[10px] text-muted-foreground">sre / ai agents</span>
+    </div>
+    <div class="panel-body">
+        <div class="flex items-start gap-4">
+            <Avatar.Root class="size-16 sm:size-20 rounded-md border border-border/50 flex-shrink-0" loadingStatus="loaded">
+                <Avatar.Image src={sean} alt="Sean Kim" />
+                <Avatar.Fallback>skim</Avatar.Fallback>
+            </Avatar.Root>
+            <div class="flex flex-col gap-2 min-w-0">
+                <div class="flex flex-col">
+                    <div class="flex items-center gap-2">
+                        <span class="text-sm font-semibold">sean kim</span>
+                        <span class="text-muted-foreground text-xs">/ skarokin</span>
+                    </div>
+                    <p class="text-xs font-sans text-muted-foreground">김태민</p>
                 </div>
-                <p class="text-xs sm:text-sm font-sans">김태민</p>
-            </div>
-            <div class="flex flex-row gap-1 items-center text-xs text-muted-foreground">
-                <MapPin />
-                new jersey
+                <div class="flex items-center gap-1 text-xs text-muted-foreground">
+                    <MapPin class="size-3" />
+                    new jersey
+                </div>
+                <div class="flex items-center gap-2 text-[10px] text-muted-foreground/60">
+                    <span class="inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
+                    available
+                </div>
             </div>
         </div>
-    </div>
-    <div class="text-xs self-start mt-1">
-        {#if nowPlaying && nowPlaying.isPlaying}
-            <div class="flex flex-col items-start gap-1">
-                <span class="text-muted-foreground text-xs">now playing</span>
-                <a href={nowPlaying.songURL} target="_blank" rel="noopener noreferrer" class="flex items-center gap-1 hover:underline">
-                    <Avatar.Root class="size-8 rounded-sm border">
-                        <Avatar.Image
-                            src={nowPlaying.albumImageURL}
-                            alt={nowPlaying.album}
-                        />
-                        <Avatar.Fallback>♪</Avatar.Fallback>
-                    </Avatar.Root>
-                    <div class="flex flex-col max-w-16 sm:max-w-none truncate">
-                        <span class="truncate">{nowPlaying.title}</span>
-                        <span class="text-muted-foreground truncate">{nowPlaying.artist}</span>
+        <!-- inline now-playing for mobile, hidden on lg (shown in its own panel) -->
+        <div class="mt-3 pt-3 border-t border-[hsl(var(--panel-border))] lg:hidden">
+            {#if nowPlaying && nowPlaying.isPlaying}
+                <a href={nowPlaying.songURL} target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 hover:opacity-80 transition-opacity">
+                    <img src={nowPlaying.albumImageURL} alt={nowPlaying.album} class="size-8 rounded" />
+                    <div class="flex flex-col min-w-0">
+                        <span class="text-[11px] truncate">{nowPlaying.title}</span>
+                        <span class="text-[10px] text-muted-foreground truncate">{nowPlaying.artist}</span>
                     </div>
+                    <span class="flex items-end gap-px h-3 ml-auto">
+                        <span class="w-0.5 bg-emerald-400 rounded-full animate-eq-1"></span>
+                        <span class="w-0.5 bg-emerald-400 rounded-full animate-eq-2"></span>
+                        <span class="w-0.5 bg-emerald-400 rounded-full animate-eq-3"></span>
+                    </span>
                 </a>
-            </div>
-        {:else if hasError}
-            <div class="flex flex-col items-end gap-1 max-w-32 sm:max-w-none text-xs text-muted-foreground truncate">
-                <span>bruh r u srs</span>
-                <span>spotify api error</span>
-            </div>
-        {:else}
-            <div class="flex flex-col items-end gap-1 max-w-32 sm:max-w-none text-xs text-muted-foreground truncate">
-                <span>now playing</span>
-                <span>nothing</span>
-            </div>
-        {/if}
+            {:else if hasError}
+                <p class="text-[10px] text-muted-foreground">bruh spotify api error</p>
+            {:else}
+                <p class="text-[10px] text-muted-foreground">not listening rn</p>
+            {/if}
+        </div>
     </div>
-</Item>
+</div>

@@ -67,7 +67,8 @@ const config: Config = {
 				sm: "calc(var(--radius) - 4px)"
 			},
 			fontFamily: {
-				sans: [...fontFamily.sans]
+				sans: [...fontFamily.sans],
+				mono: ["'JetBrains Mono'", ...fontFamily.mono]
 			},
 			keyframes: {
 				"accordion-down": {
@@ -87,6 +88,9 @@ const config: Config = {
         		"accordion-down": "accordion-down 0.2s ease-out",
         		"accordion-up": "accordion-up 0.2s ease-out",
        			"caret-blink": "caret-blink 1.25s ease-out infinite",
+				"eq-1": "eq 0.6s ease-in-out infinite",
+				"eq-2": "eq 0.8s ease-in-out infinite 0.2s",
+				"eq-3": "eq 0.5s ease-in-out infinite 0.4s",
       		},
 		},
 	},

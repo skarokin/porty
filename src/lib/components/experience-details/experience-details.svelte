@@ -53,7 +53,7 @@
             onSelect={onClose}
         >
             <div class="flex items-center gap-2">
-                <ChevronLeft class="size-4 text-amber-500 transition-transform group-hover:-translate-x-1 group-hover:scale-110" />
+                <ChevronLeft class="size-4 text-emerald-400 transition-transform group-hover:-translate-x-1 group-hover:scale-110" />
                 <div class="flex items-center gap-2 truncate">
                     <span>back</span>
                     <span class="text-muted-foreground text-xs truncate"

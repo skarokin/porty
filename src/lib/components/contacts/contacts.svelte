@@ -1,6 +1,4 @@
 <script lang=ts>
-    import { LinkItem } from "$lib/components/ui/command"
-
     import Phone from "@lucide/svelte/icons/phone";
     import SignalZero from "@lucide/svelte/icons/signal-zero";
     import SignalLow from "@lucide/svelte/icons/signal-low";
@@ -66,30 +64,31 @@
     
 </script>
 
-{#each contacts as contact, index}
-    <LinkItem
-        href={contact.href}
-        target="_blank"
-        rel="noopener noreferrer"
-        value={`pos=${index}-${contact.type}-${contact.value}`}
-        keywords={["contacts", "contact", "call", "speak", "message", "connect", "reach", "social"]}
-        class="flex items-center justify-between gap-2 w-full hover:cursor-pointer"
-    >
-        <div class="flex items-center gap-2 min-w-0 flex-1">
-            {#if contact.iconLight}
-                <!-- if curious, hiding this in dark mode is done inside the component, not here -->
-                <contact.iconLight class="size-4" />
-            {/if}
-            <contact.icon class="block size-4 text-muted-foreground" />
-
-            <div class="flex items-center gap-2 min-w-0">
-                <span>{contact.type}</span>
-                <span class="text-muted-foreground text-xs truncate">/ {contact.value}</span>
-            </div>
-        </div>
-        <span class="flex flex-row items-center gap-2 text-muted-foreground text-xs">
-            pref:
-            <contact.pref class="text-amber-500 size-4" />
-        </span>
-    </LinkItem>
-{/each}
+<div class="panel h-full">
+    <div class="panel-header">
+        <span class="panel-title">contacts</span>
+        <span class="text-[10px] text-muted-foreground">pref ↓</span>
+    </div>
+    <div class="divide-y divide-[hsl(var(--panel-border))]">
+        {#each contacts as contact}
+            <a
+                href={contact.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="flex items-center justify-between gap-2 w-full px-3 py-2 row-hover"
+            >
+                <div class="flex items-center gap-2.5 min-w-0 flex-1">
+                    {#if contact.iconLight}
+                        <span class="inline-flex items-center justify-center size-4 flex-shrink-0 overflow-hidden"><contact.iconLight class="w-4 h-4" /></span>
+                    {/if}
+                    <span class="inline-flex items-center justify-center size-4 flex-shrink-0 overflow-hidden"><contact.icon class="block w-4 h-4 text-muted-foreground" /></span>
+                    <div class="flex items-center gap-2 min-w-0">
+                        <span class="text-sm">{contact.type}</span>
+                        <span class="text-muted-foreground text-xs truncate hidden sm:inline">/ {contact.value}</span>
+                    </div>
+                </div>
+                <contact.pref class="text-emerald-400 size-4 flex-shrink-0" />
+            </a>
+        {/each}
+    </div>
+</div>

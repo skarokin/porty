@@ -1,55 +1,33 @@
 <script lang="ts">
-    import { Item, LinkItem } from "$lib/components/ui/command";
-    import * as Avatar from "$lib/components/ui/avatar/index.js";
-
     let { topTracks, hasError } = $props();
 </script>
 
-{#if hasError}
-    <Item
-        value="spotify-error"
-        keywords={["spotify", "error", "music", "track"]}
-        class="flex items-center justify-between gap-2 w-full"
-    >
-        <div class="flex items-center justify-between gap-2 max-w-36 sm:max-w-none">
-            <Avatar.Root class="size-4">
-                <Avatar.Fallback>♪</Avatar.Fallback>
-            </Avatar.Root>
-            <div class="flex flex-row gap-2 items-baseline truncate">
-                <span>are u srs</span>
-                <span class="text-muted-foreground text-xs truncate">/ right neow bro</span>
-            </div>
+<div class="panel h-full">
+    <div class="panel-header">
+        <span class="panel-title">top tracks</span>
+        <span class="text-[10px] text-muted-foreground">spotify</span>
+    </div>
+    {#if hasError}
+        <div class="panel-body">
+            <p class="text-xs text-muted-foreground">spotiy api error... bruh</p>
         </div>
-        <span class="text-muted-foreground text-xs truncate max-w-36 sm:max-w-none">
-            spotiy api error... bruh
-        </span>
-    </Item>
-{:else}
-    {#each topTracks as track, index}
-        <!-- dont give value of title/artist/album since it will infect search results -->
-        <LinkItem
-            href={track.url}
-            target="_blank"
-            value={`pos=${index}`}
-            keywords={["spotify", "music", "track", "song", "artist", "album", "listening", "top tracks"]}
-            class="flex items-center justify-between gap-2 w-full hover:cursor-pointer"
-        >
-            <div class="flex items-center gap-2 min-w-0 flex-1">
-                <Avatar.Root class="size-4">
-                    <Avatar.Image
-                        src={track.coverImage.url}
-                        alt={track.title}
-                    />
-                    <Avatar.Fallback>♪</Avatar.Fallback>
-                </Avatar.Root>
-                <div class="flex flex-row gap-2 items-center truncate">
-                    <span>{track.title}</span>
-                    <span class="text-muted-foreground text-xs truncate">/ {track.artist}</span>
-                </div>
-            </div>
-            <span class="text-muted-foreground text-xs truncate max-w-36 sm:max-w-none">
-                {track.albumName}
-            </span>
-        </LinkItem>
-    {/each}
-{/if}
+    {:else}
+        <div class="divide-y divide-[hsl(var(--panel-border))]">
+            {#each topTracks as track, index}
+                <a
+                    href={track.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="flex items-center gap-2.5 px-3 py-1.5 row-hover"
+                >
+                    <span class="text-[10px] text-muted-foreground/50 w-3 text-right flex-shrink-0">{index + 1}</span>
+                    <img src={track.coverImage.url} alt={track.title} class="size-6 rounded flex-shrink-0" />
+                    <div class="flex flex-col min-w-0 flex-1">
+                        <span class="text-xs truncate">{track.title}</span>
+                        <span class="text-[10px] text-muted-foreground truncate">{track.artist}</span>
+                    </div>
+                </a>
+            {/each}
+        </div>
+    {/if}
+</div>

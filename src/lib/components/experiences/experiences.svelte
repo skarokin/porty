@@ -1,5 +1,4 @@
 <script lang="ts">
-    import { Item } from "$lib/components/ui/command"
     import * as Avatar from "$lib/components/ui/avatar/index.js";
     import ChevronRight from "@lucide/svelte/icons/chevron-right";
 
@@ -20,9 +19,9 @@
     }
 
     let {
-        saveViewStateAndSelectExperience,
+        onSelect,
     } = $props<{
-        saveViewStateAndSelectExperience: (experience: Experience) => void;
+        onSelect: (experience: Experience) => void;
     }>();
 
     const experiences: Experience[] = [
@@ -84,37 +83,39 @@
     ];
 </script>
 
-{#each experiences as experience, index}
-    <Item
-        value={`pos=${index}-${experience.company}-${experience.title}`}
-        keywords={["career", "experiences", "experience", "work", "job"].concat(experience.hiddenKeywords || [])}
-        class="group flex items-center justify-between gap-2 w-full hover:cursor-pointer"
-        onSelect={() => saveViewStateAndSelectExperience(experience)}
-    >
-        <div class="flex items-center gap-2 min-w-0 flex-1">
-            <!-- since these are all local images, no need to wait for loading -->
-            <Avatar.Root class="size-4 rounded-none" loadingStatus={experience.logoPath ? "loaded" : "error"}>
-                {#if experience.logoPath}
-                    <Avatar.Image
-                        src={experience.logoPath}
-                        alt={experience.company}
-                    />
-                {:else if experience.logoComponent}
-                    <experience.logoComponent class="block size-4 text-muted-foreground" />
-                {:else}
-                    <Avatar.Fallback class="text-xs bg-muted rounded-full">
-                        {experience.company[0].toUpperCase()}
-                    </Avatar.Fallback>
-                {/if}
-            </Avatar.Root>
-            <div class="flex items-center gap-2 truncate">
-                <span>{experience.company}</span>
-                <span class="text-muted-foreground text-xs truncate">/ {experience.title}</span>
-            </div>
-        </div>
-        <p class="flex flex-row items-center gap-2 text-xs text-muted-foreground max-w-36 sm:max-w-none truncate">
-            {experience.date}
-            <ChevronRight class="size-4 text-amber-500 transition-transform group-hover:translate-x-1 group-hover:scale-110"/>
-        </p>
-    </Item>
-{/each}
+<div class="panel h-full">
+    <div class="panel-header">
+        <span class="panel-title">experiences</span>
+        <span class="text-[10px] text-muted-foreground">{experiences.length} entries</span>
+    </div>
+    <div class="divide-y divide-[hsl(var(--panel-border))]">
+        {#each experiences as experience}
+            <button
+                class="flex items-center justify-between gap-2 w-full px-3 py-2.5 text-left row-hover group cursor-pointer"
+                onclick={() => onSelect(experience)}
+            >
+                <div class="flex items-center gap-2.5 min-w-0 flex-1">
+                    <Avatar.Root class="size-5 rounded-none flex-shrink-0" loadingStatus={experience.logoPath ? "loaded" : "error"}>
+                        {#if experience.logoPath}
+                            <Avatar.Image src={experience.logoPath} alt={experience.company} />
+                        {:else if experience.logoComponent}
+                            <experience.logoComponent class="block size-5 text-muted-foreground" />
+                        {:else}
+                            <Avatar.Fallback class="text-[10px] bg-muted rounded-full size-5">
+                                {experience.company[0].toUpperCase()}
+                            </Avatar.Fallback>
+                        {/if}
+                    </Avatar.Root>
+                    <div class="flex items-center gap-2 min-w-0 truncate">
+                        <span class="text-sm">{experience.company}</span>
+                        <span class="text-muted-foreground text-xs truncate">/ {experience.title}</span>
+                    </div>
+                </div>
+                <div class="flex items-center gap-2 flex-shrink-0">
+                    <span class="text-[11px] text-muted-foreground hidden sm:inline">{experience.date}</span>
+                    <ChevronRight class="size-3.5 text-emerald-400 transition-transform group-hover:translate-x-0.5" />
+                </div>
+            </button>
+        {/each}
+    </div>
+</div>

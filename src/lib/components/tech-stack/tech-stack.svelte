@@ -1,5 +1,4 @@
 <script lang="ts">
-    import { Item } from "$lib/components/ui/command"
     import * as Avatar from "$lib/components/ui/avatar/index.js";
 
     import gopherDance from "$lib/assets/gopher-dance.gif";
@@ -15,7 +14,7 @@
 
     type Tech = {
         name: string;
-        logoPath?: string;  // for non-svg
+        logoPath?: string;
         logo?: Component;   
         started: string;
         hiddenKeywords?: string[];
@@ -71,34 +70,48 @@
             hiddenKeywords: ["ci", "cd", "cicd", "sre", "devops", "kubernetes", "k8s"]
         }
     ];
+
+    function monthsSince(dateStr: string): string {
+        const [month, year] = dateStr.split('/').map(Number);
+        const start = new Date(2000 + year, month - 1);
+        const now = new Date();
+        const months = (now.getFullYear() - start.getFullYear()) * 12 + now.getMonth() - start.getMonth();
+        if (months >= 12) {
+            const y = Math.floor(months / 12);
+            const m = months % 12;
+            return m > 0 ? `${y}y ${m}m` : `${y}y`;
+        }
+        return `${months}m`;
+    }
 </script>
 
-{#each techStack as tech, index}
-    <Item
-        value={`pos=${index}-${tech.name}`}
-        keywords={["technology", "technologies", "tech stack",].concat(tech.hiddenKeywords || [])}
-        class="flex items-center justify-between gap-2 w-full"
-    >
-        <div class="flex items-center gap-2 min-w-0 flex-1">
-            <Avatar.Root class="size-4 rounded-none flex-shrink-0" loadingStatus={tech.logoPath ? "loaded" : "error"}>
+<div class="panel h-full">
+    <div class="panel-header">
+        <span class="panel-title">tech stack</span>
+        <span class="text-[10px] text-muted-foreground">{techStack.length} technologies</span>
+    </div>
+    <div class="panel-body grid grid-cols-2 gap-2">
+        {#each techStack as tech}
+            <div class="flex items-center gap-2 rounded px-2 py-1.5 bg-muted/20 hover:bg-muted/40 transition-colors">
                 {#if tech.logoPath}
-                    <Avatar.Image
-                        src={tech.logoPath}
-                        alt={tech.name}
-                    />
+                    <Avatar.Root class="size-4 rounded-none flex-shrink-0" loadingStatus="loaded">
+                        <Avatar.Image src={tech.logoPath} alt={tech.name} />
+                        <Avatar.Fallback class="text-[10px] bg-muted rounded-full size-4">
+                            {tech.name[0].toUpperCase()}
+                        </Avatar.Fallback>
+                    </Avatar.Root>
                 {:else if tech.logo}
-                    <tech.logo class="size-4" />
+                    <span class="inline-flex items-center justify-center size-4 flex-shrink-0 overflow-hidden"><tech.logo class="size-4 w-4 h-4 max-w-4 max-h-4" /></span>
                 {:else}
-                    <Avatar.Fallback class="text-xs bg-muted rounded-full">
+                    <span class="size-4 flex-shrink-0 bg-muted rounded-full text-[10px] flex items-center justify-center">
                         {tech.name[0].toUpperCase()}
-                    </Avatar.Fallback>
+                    </span>
                 {/if}
-            </Avatar.Root>
-            <div class="flex items-baseline gap-2 min-w-0">
-                <span class="flex-shrink-0">{tech.name}</span>
-                <!-- <span class="text-muted-foreground text-xs truncate">/ {tech.purpose}</span> -->
+                <div class="flex flex-col min-w-0">
+                    <span class="text-xs">{tech.name}</span>
+                    <span class="text-[10px] text-muted-foreground">{monthsSince(tech.started)}</span>
+                </div>
             </div>
-        </div>
-        <p class="text-xs text-muted-foreground flex-shrink-0">since {tech.started}</p>
-    </Item>
-{/each}
+        {/each}
+    </div>
+</div>

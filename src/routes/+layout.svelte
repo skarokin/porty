@@ -5,30 +5,20 @@
     import { Label } from "$lib/components/ui/label";
     import { onMount } from "svelte";
     import { browser } from "$app/environment";
-    import { blur, fade } from "svelte/transition";
-    import { sineInOut, cubicInOut } from "svelte/easing";
-    import { resetViewState } from "$lib/stores/viewState";
+    import { fade } from "svelte/transition";
+    import { cubicInOut } from "svelte/easing";
     
     let { children } = $props();
 
     let themeLoaded = $state(false);
     let checked = $state(false);
-
-    let layoutLoaded = $state(false);
-    let contentReady = $state(false);
+    let ready = $state(false);
 
     onMount(() => {
         if (browser) {
             checked = mode.current === "dark";
             themeLoaded = true;
-
-            setTimeout(() => {
-                layoutLoaded = true;
-
-                setTimeout(() => {
-                    contentReady = true;
-                }, 700);
-            }, 100);
+            setTimeout(() => { ready = true; }, 100);
         }
     });
 
@@ -39,36 +29,34 @@
             checked = !checked;
         }
     };
-
-    function scaleX(node: any, options: any) {
-        return {
-            duration: options.duration,
-            easing: cubicInOut,
-            css: (t: any) => `transform:scaleX(${t}); transform-origin: center;`
-        }
-    }
-
-    function handleNameClick(e: MouseEvent) {
-        // reset view state when clicking on name
-        e.preventDefault();
-        resetViewState();
-    }
 </script>
 
 <svelte:document onkeydown={handleKeydownTheme} />
 
 <ModeWatcher />
-<div class="h-dvh flex flex-col font-mono overflow-hidden">
-    {#if layoutLoaded}
+<div class="h-dvh flex flex-col overflow-hidden">
+    {#if ready}
         <header
-            class="flex-none border-zinc-700 border-b border-dashed w-full"
-            in:scaleX={{ duration: 300, start: 0.1, easing: sineInOut }}
+            class="flex-none border-b w-full bg-card/80 backdrop-blur-sm z-10"
+            in:fade={{ duration: 300, easing: cubicInOut }}
         >
-            <div class="h-full flex items-center justify-between border-zinc-700 border-none sm:border-x sm:border-dashed mx-auto container p-4">
-                <a class="text-xs font-bold hover:underline" onclick={handleNameClick} href="/">
-                    &#123;skarokin&#125;
-                </a>
-                <div class="flex items-center gap-2">
+            <div class="flex items-center justify-between mx-auto max-w-7xl px-4 py-2">
+                <div class="flex items-center gap-4">
+                    <a class="text-xs font-bold hover:text-primary transition-colors flex items-center gap-2" href="/">
+                        <span class="relative flex h-2 w-2">
+                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                        </span>
+                        skarokin / dashboard
+                    </a>
+                    <span class="hidden sm:inline text-border">│</span>
+                    <span class="hidden sm:inline-flex text-[10px] text-muted-foreground tracking-wider">SRE · AI AGENTS · INFRA</span>
+                </div>
+                <div class="flex items-center gap-3">
+                    <span class="hidden sm:inline-flex items-center gap-1.5 text-[10px] text-muted-foreground">
+                        <span class="inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
+                        us-east-1
+                    </span>
                     <Switch 
                         id="theme-switch"
                         onclick={toggleMode}
@@ -76,9 +64,7 @@
                         loaded={themeLoaded}
                     />
                     <Label for="theme-switch" class="text-xs">
-                        <kbd
-                            class="hidden sm:inline-flex bg-muted text-muted-foreground pointer-events-none h-5 select-none items-center gap-1 rounded border px-1.5 text-xs"
-                        >
+                        <kbd class="hidden sm:inline-flex bg-muted text-muted-foreground pointer-events-none h-5 select-none items-center gap-1 rounded border px-1.5 text-[10px]">
                             <span>⌘</span><span>l</span>
                         </kbd>
                     </Label>
@@ -86,63 +72,33 @@
             </div>
         </header>
         <main
-            class="flex-1 border-zinc-700 container p-4 w-full border-none sm:border-x sm:border-dashed flex flex-col justify-center"
-            class:overflow-auto={contentReady}
-            class:overflow-hidden={!contentReady}
-            in:scaleX={{ duration: 300, start: 0.1, easing: sineInOut }}
+            class="flex-1 overflow-auto z-10"
+            in:fade={{ duration: 300, easing: cubicInOut, delay: 100 }}
         >
-            {#if contentReady}
-                <!--  in:blur delay overlaps with out:blur of loading state for smooth transition --> 
-                <div
-                    class="w-full h-full"
-                    in:blur={{ duration: 200, easing: cubicInOut, delay: 100 }}
-                >
-                    {@render children()}
-                </div>
-
-            {:else}
-                <!-- preload all children to avoid flicker -->
-                <div class="fixed invisible pointer-events-none">
-                    {@render children()}
-                </div>
-            {/if}
+            {@render children()}
         </main>
         <footer
-            class="flex-none border-zinc-700 border-t border-dashed w-full"
-            in:scaleX={{ duration: 300, start: 0.1, easing: sineInOut }}
+            class="flex-none border-t w-full bg-card/80 backdrop-blur-sm z-10"
+            in:fade={{ duration: 300, easing: cubicInOut }}
         >
-            <div class="h-full flex flex-row items-center justify-between border-zinc-700 border-none sm:border-x sm:border-dashed mx-auto container p-4">
-                <p class="text-xs text-muted-foreground">
-                    &#123;&copy; skim&#125;
-                </p>
-                <a 
-                    class="text-xs text-muted-foreground hover:underline"
-                    href="https://github.com/skarokin/porty"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    &#123;git repo&#125;
-                </a>
+            <div class="flex items-center justify-between mx-auto max-w-7xl px-4 py-1.5">
+                <div class="flex items-center gap-3">
+                    <p class="text-[10px] text-muted-foreground">&copy; skim</p>
+                    <span class="hidden sm:inline text-border">│</span>
+                    <span class="hidden sm:inline text-[10px] text-muted-foreground">svelte · go · ts</span>
+                </div>
+                <div class="flex items-center gap-3">
+                    <span class="hidden sm:inline-flex items-center gap-1 text-[10px] text-emerald-500/60">
+                        <span class="inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                        all systems operational
+                    </span>
+                    <span class="hidden sm:inline text-border">│</span>
+                    <a class="text-[10px] text-muted-foreground hover:text-primary transition-colors"
+                        href="https://github.com/skarokin/porty" target="_blank" rel="noopener noreferrer">
+                        src
+                    </a>
+                </div>
             </div>
         </footer>
-    {/if}
-    {#if !contentReady && layoutLoaded}
-        <div 
-            class="absolute inset-0 flex items-center justify-center"
-            in:fade={{ duration: 200, easing: cubicInOut, delay: 100 }}
-            out:fade={{ duration: 200, easing: cubicInOut }}
-        >
-            <div
-                class="text-sm font-mono text-muted-foreground"
-            >
-                <span class="text-purple-400">import</span> <span class="text-emerald-400">"github.com/skarokin/porty"</span><br/>
-                <br/>
-                <span class="text-purple-400">func</span> <span class="text-blue-400">main</span>() &#123;
-                <br/>
-                &nbsp;&nbsp;porty.<span class="text-blue-400">Serve</span>(<span class="text-emerald-400">":8080"</span>)
-                <br/>
-                &#125;
-            </div>
-        </div>
     {/if}
 </div>

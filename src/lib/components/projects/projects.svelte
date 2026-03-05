@@ -1,5 +1,4 @@
 <script lang="ts">
-    import { Item } from "$lib/components/ui/command";
     import Link from "@lucide/svelte/icons/link";
     import GitHub from "@lucide/svelte/icons/github";
     import ChevronRight from "@lucide/svelte/icons/chevron-right";
@@ -20,9 +19,9 @@
     };
 
     let {
-        saveViewStateAndSelectProject,
+        onSelect,
     } = $props<{
-        saveViewStateAndSelectProject: (project: Project) => void;
+        onSelect: (project: Project) => void;
     }>();
 
     const projects: Project[] = [
@@ -34,46 +33,14 @@
             link: "https://sixsevenlabs.com/",
             github: "https://github.com/sixsevenlabs/sixsevenlabs",
             techStack: [
-                {
-                    tech: "next.js & vercel",
-                    purpose: "frontend development",
-                    results: "idk just a cool frontend"
-                },
-                {
-                    tech: "go & lambda",
-                    purpose: "non-ml lambdas",
-                    results: "good performance and easy concurrency for non-ml tasks"
-                },
-                {
-                    tech: "python & spacy & lambda",
-                    purpose: "ml lambdas",
-                    results: "perform augmentations"
-                },
-                {
-                    tech: "step functions",
-                    purpose: "orchestration",
-                    results: "run massively parallel workflows with distributed map state"
-                },
-                {
-                    tech: "sqs & kinesis",
-                    purpose: "messaging",
-                    results: "job queueing and usage metric streaming"
-                },
-                {
-                    tech: "postgres",
-                    purpose: "db",
-                    results: "user, job, billing data"
-                },
-                {
-                    tech: "stripe",
-                    purpose: "payments",
-                    results: "bill users based on usage"
-                },
-                {
-                    tech: "terraform",
-                    purpose: "complex infra needs iac",
-                    results: "easy infra management"
-                }
+                { tech: "next.js & vercel", purpose: "frontend development", results: "idk just a cool frontend" },
+                { tech: "go & lambda", purpose: "non-ml lambdas", results: "good performance and easy concurrency for non-ml tasks" },
+                { tech: "python & spacy & lambda", purpose: "ml lambdas", results: "perform augmentations" },
+                { tech: "step functions", purpose: "orchestration", results: "run massively parallel workflows with distributed map state" },
+                { tech: "sqs & kinesis", purpose: "messaging", results: "job queueing and usage metric streaming" },
+                { tech: "postgres", purpose: "db", results: "user, job, billing data" },
+                { tech: "stripe", purpose: "payments", results: "bill users based on usage" },
+                { tech: "terraform", purpose: "complex infra needs iac", results: "easy infra management" }
             ]
         },
         {
@@ -85,41 +52,13 @@
             link: "https://copium.dev/",
             github: "https://github.com/copium-dev/copium",
             techStack: [
-                {
-                    tech: "sveltekit & cloudflare",
-                    purpose: "frontend development",
-                    results: "cool ui, great ux, easy dev, and fast.",
-                },
-                {
-                    tech: "algolia",
-                    purpose: "search engine",
-                    results: "real-time search and filtering on internship postings or user's tracked applications."
-                },
-                {
-                    tech: "go & firestore",
-                    purpose: "rest api & storage",
-                    results: "front-facing rest api for authentication, algolia searching, and data analytics."
-                },
-                {
-                    tech: "gcp pub/sub",
-                    purpose: "messaging",
-                    results: "decoupled and fault-tolerant algolia indexing and bigquery analytics with compensating transactions and retries for eventual consistency."
-                },
-                {
-                    tech: "bigquery & cqrs",
-                    purpose: "real-time analytics",
-                    results: "personalized insights by tracking monthly trends, leveraging a denormalized schema and CQRS for fast queries."
-                },
-                {
-                    tech: "docker & gcp",
-                    purpose: "deployment",
-                    results: "containerized, scalable, and fault-tolerant deployment across VM instances and cloud run services."
-                },
-                {
-                    tech: "python",
-                    purpose: "data scraping",
-                    results: "scheduled tech internship posting scraping for focused and fresh data on a compute engine instance."
-                }
+                { tech: "sveltekit & cloudflare", purpose: "frontend development", results: "cool ui, great ux, easy dev, and fast." },
+                { tech: "algolia", purpose: "search engine", results: "real-time search and filtering on internship postings or user's tracked applications." },
+                { tech: "go & firestore", purpose: "rest api & storage", results: "front-facing rest api for authentication, algolia searching, and data analytics." },
+                { tech: "gcp pub/sub", purpose: "messaging", results: "decoupled and fault-tolerant algolia indexing and bigquery analytics with compensating transactions and retries for eventual consistency." },
+                { tech: "bigquery & cqrs", purpose: "real-time analytics", results: "personalized insights by tracking monthly trends, leveraging a denormalized schema and CQRS for fast queries." },
+                { tech: "docker & gcp", purpose: "deployment", results: "containerized, scalable, and fault-tolerant deployment across VM instances and cloud run services." },
+                { tech: "python", purpose: "data scraping", results: "scheduled tech internship posting scraping for focused and fresh data on a compute engine instance." }
             ],
         },
         {
@@ -129,36 +68,11 @@
             link: "https://refnote.app/",
             github: "https://github.com/skarokin/ref-note",
             techStack: [
-                {
-                    tech: "next.js & vercel",
-                    purpose: "frontend development",
-                    results:
-                        "combination of csr and ssr, api routes for authentication, and dynamic routing.",
-                },
-                {
-                    tech: "go & firestore",
-                    purpose: "rest api & crud",
-                    results:
-                        "front-facing rest api for crud and granular note sharing.",
-                },
-                {
-                    tech: "node.js & websocket",
-                    purpose: "real-time",
-                    results:
-                        "horizontally scalable websocket servers for real-time collaboration.",
-                },
-                {
-                    tech: "redis & redis pub/sub",
-                    purpose: "caching & syncing",
-                    results:
-                        "note content caching and eventually-consistent architecture between instances with CRDTs.",
-                },
-                {
-                    tech: "gcp & docker",
-                    purpose: "deployment",
-                    results:
-                        "containerized, scalable, and fault-tolerant deployment.",
-                },
+                { tech: "next.js & vercel", purpose: "frontend development", results: "combination of csr and ssr, api routes for authentication, and dynamic routing." },
+                { tech: "go & firestore", purpose: "rest api & crud", results: "front-facing rest api for crud and granular note sharing." },
+                { tech: "node.js & websocket", purpose: "real-time", results: "horizontally scalable websocket servers for real-time collaboration." },
+                { tech: "redis & redis pub/sub", purpose: "caching & syncing", results: "note content caching and eventually-consistent architecture between instances with CRDTs." },
+                { tech: "gcp & docker", purpose: "deployment", results: "containerized, scalable, and fault-tolerant deployment." },
             ],
         },
         {
@@ -168,30 +82,10 @@
             link: "https://grammacy.com/",
             github: "https://github.com/skarokin/grammaCy",
             techStack: [
-                {
-                    tech: "python",
-                    purpose: "augmentation pipeline",
-                    results:
-                        "injects real-world grammar errors via inflection into datasets by analyzing dependency trees, pos tags, and morphological features.",
-                },
-                {
-                    tech: "flask",
-                    purpose: "rest api",
-                    results:
-                        "easy api development to serve our fully-featured english grammar and spell checker.",
-                },
-                {
-                    tech: "aws & docker & nginx",
-                    purpose: "deployment",
-                    results:
-                        "fault-tolerant and https-secured api calls for quick, accurate, and interpretable grammar and spell checking.",
-                },
-                {
-                    tech: "sveltekit & firebase",
-                    purpose: "documentation & api reference",
-                    results:
-                        "interactive api reference, extensive integration guides, detailed documentation, and devblog.",
-                },
+                { tech: "python", purpose: "augmentation pipeline", results: "injects real-world grammar errors via inflection into datasets by analyzing dependency trees, pos tags, and morphological features." },
+                { tech: "flask", purpose: "rest api", results: "easy api development to serve our fully-featured english grammar and spell checker." },
+                { tech: "aws & docker & nginx", purpose: "deployment", results: "fault-tolerant and https-secured api calls for quick, accurate, and interpretable grammar and spell checking." },
+                { tech: "sveltekit & firebase", purpose: "documentation & api reference", results: "interactive api reference, extensive integration guides, detailed documentation, and devblog." },
             ],
         },
         {
@@ -200,24 +94,9 @@
             date: "01/24 - 02/24",
             github: "https://github.com/skarokin/pycaptcha",
             techStack: [
-                {
-                    tech: "numpy, opencv, matplotlib",
-                    purpose: "image augmentation",
-                    results:
-                        "augmentation pipeline for more robust and diverse image-based CAPTCHAs.",
-                },
-                {
-                    tech: "YOLOv4",
-                    purpose: "object detection",
-                    results:
-                        "detect objects for grid-based object selection CAPTCHAs.",
-                },
-                {
-                    tech: "pandas",
-                    purpose: "data preprocessing",
-                    results:
-                        "process and filter images before test generation for higher quality CAPTCHAs.",
-                },
+                { tech: "numpy, opencv, matplotlib", purpose: "image augmentation", results: "augmentation pipeline for more robust and diverse image-based CAPTCHAs." },
+                { tech: "YOLOv4", purpose: "object detection", results: "detect objects for grid-based object selection CAPTCHAs." },
+                { tech: "pandas", purpose: "data preprocessing", results: "process and filter images before test generation for higher quality CAPTCHAs." },
             ],
         },
         {
@@ -227,21 +106,9 @@
             link: "https://steam-link-409216.web.app/",
             github: "https://github.com/skarokin/ref-type",
             techStack: [
-                {
-                    tech: "react.js & firebase",
-                    purpose: "frontend development",
-                    results: "state management and real-time updates.",
-                },
-                {
-                    tech: "node.js & firebase cloud functions",
-                    purpose: "backend development",
-                    results: "real-time leaderboards and user data.",
-                },
-                {
-                    tech: "google cloud sql",
-                    purpose: "db",
-                    results: "persistent data storage for user data.",
-                },
+                { tech: "react.js & firebase", purpose: "frontend development", results: "state management and real-time updates." },
+                { tech: "node.js & firebase cloud functions", purpose: "backend development", results: "real-time leaderboards and user data." },
+                { tech: "google cloud sql", purpose: "db", results: "persistent data storage for user data." },
             ],
         },
         {
@@ -250,78 +117,59 @@
             date: "05/23 - 06/23",
             github: "https://github.com/skarokin/MYnote.md",
             techStack: [
-                {
-                    tech: "node.js & electron",
-                    purpose: "desktop app development",
-                    results:
-                        "cross-platform desktop app with native file system access.",
-                },
-                {
-                    tech: "markdown.it",
-                    purpose: "markdown parsing",
-                    results:
-                        "parse and render markdown with latex and code block support.",
-                },
-                {
-                    tech: "codemirror",
-                    purpose: "note editing",
-                    results: "syntax highlighting and code block editing.",
-                },
+                { tech: "node.js & electron", purpose: "desktop app development", results: "cross-platform desktop app with native file system access." },
+                { tech: "markdown.it", purpose: "markdown parsing", results: "parse and render markdown with latex and code block support." },
+                { tech: "codemirror", purpose: "note editing", results: "syntax highlighting and code block editing." },
             ],
         },
     ];
 
-    // prevents dialog from opening when clicking on github/link icons
     function stopPropagation(e: MouseEvent) {
         e.stopPropagation();
     }
 </script>
 
-{#each projects as project, index (project.name)}
-    <Item
-        value={`pos=${index}-${project.name}`}
-        keywords={["projects", "project"]}
-        class="group flex items-center justify-between gap-2 w-full hover:cursor-pointer"
-        onSelect={() => saveViewStateAndSelectProject(project)}
-    >
-        <!-- THIS SPECIFICALLY SHOULD BE ITEMS-CENTER NOT BASELINE -->
-        <div class="flex items-center gap-2">
-            <div
-                class="flex items-center gap-2 truncate max-w-48 sm:max-w-none"
+<div class="panel h-full">
+    <div class="panel-header">
+        <span class="panel-title">projects</span>
+        <span class="text-[10px] text-muted-foreground">{projects.length} repos</span>
+    </div>
+    <div class="divide-y divide-[hsl(var(--panel-border))]">
+        {#each projects as project (project.name)}
+            <button
+                class="flex items-center justify-between gap-2 w-full px-3 py-2 text-left row-hover group cursor-pointer"
+                onclick={() => onSelect(project)}
             >
-                {project.name}
-                <span class="text-muted-foreground text-xs">/</span>
-            </div>
-
-            {#if project.link}
-                <a
-                    href={project.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="text-muted-foreground hover:text-primary"
-                    onclick={stopPropagation}
-                >
-                    <Link class="size-4" />
-                </a>
-            {/if}
-
-            {#if project.github}
-                <a
-                    href={project.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="text-muted-foreground hover:text-primary"
-                    onclick={stopPropagation}
-                >
-                    <GitHub class="size-4" />
-                </a>
-            {/if}
-        </div>
-        <p
-            class="flex flex-row items-center gap-2 text-muted-foreground text-xs"
-        >
-            {project.date}
-            <ChevronRight class="size-4 text-amber-500 transition-transform group-hover:translate-x-1 group-hover:scale-110"/>
-        </p>
-    </Item>
-{/each}
+                <div class="flex items-center gap-2 min-w-0 flex-1">
+                    <span class="text-sm">{project.name}</span>
+                    <div class="flex items-center gap-1.5 flex-shrink-0">
+                        {#if project.link}
+                            <a
+                                href={project.link}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="text-muted-foreground hover:text-emerald-400 transition-colors"
+                                onclick={stopPropagation}
+                            >
+                                <Link class="size-3" />
+                            </a>
+                        {/if}
+                        <a
+                            href={project.github}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="text-muted-foreground hover:text-foreground transition-colors"
+                            onclick={stopPropagation}
+                        >
+                            <GitHub class="size-3" />
+                        </a>
+                    </div>
+                </div>
+                <div class="flex items-center gap-2 flex-shrink-0">
+                    <span class="text-[11px] text-muted-foreground hidden sm:inline">{project.date}</span>
+                    <ChevronRight class="size-3.5 text-emerald-400 transition-transform group-hover:translate-x-0.5" />
+                </div>
+            </button>
+        {/each}
+    </div>
+</div>

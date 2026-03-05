@@ -22,7 +22,7 @@
 >
 	{#if heading}
 		<CommandPrimitive.GroupHeading
-			class="text-muted-foreground px-2 py-1.5 text-xs font-medium"
+			class="text-emerald-400/70 dark:text-emerald-400/70 px-2 pt-3 pb-1.5 text-xs font-semibold tracking-widest uppercase glow-sm"
 		>
 			{heading}
 		</CommandPrimitive.GroupHeading>
