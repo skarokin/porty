@@ -163,7 +163,7 @@
         },
         {
             name: "grammaCy",
-            description: `generate dependency tree-based grammar checkers for any language, any dataset, and any domain.`,
+            description: `generate dependency tree-based grammar checkers for any language, any dataset, and any domain. my all time favorite project - peak of my creativity.`,
             date: "03/24 - 07/24",
             link: "https://grammacy.com/",
             github: "https://github.com/skarokin/grammaCy",

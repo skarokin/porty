@@ -7,14 +7,16 @@
     import { Spotify } from "$lib/components/spotify";
     import { TechStack } from "$lib/components/tech-stack";
     import { ProjectDetails } from "$lib/components/project-details";
+    import { ExperienceDetails } from "$lib/components/experience-details";
     import { RecentPic } from "$lib/components/recent-pic";
     import type { Project } from "$lib/components/projects";
+    import type { Experience } from "$lib/components/experiences";
     import * as Command from "$lib/components/ui/command";
 
 	import { Command as CommandPrimitive } from "bits-ui";
 
     import { customFilter } from "$lib/fts";
-    import { viewState, selectedProject } from "$lib/stores/viewState";
+    import { viewState, selectedProject, selectedExperience } from "$lib/stores/viewState";
 
     import { onDestroy, onMount } from "svelte";
     import { fly } from "svelte/transition";
@@ -85,6 +87,36 @@
         });
     }
 
+    function saveViewStateAndSelectExperience(experience: Experience) {
+        selectedExperience.set(experience);
+        viewState.update(state => ({
+            ...state,
+            experienceSelected: true,
+            prevInputValue: state.inputValue,
+            inputValue: ""
+        }));
+
+        const items = commandRootPrimitiveRef?.getValidItems();
+        if (!items) return;
+
+        viewState.update(state => ({
+            ...state,
+            selectedExperienceIndex: items.findIndex((item: HTMLElement) => item.hasAttribute('data-selected'))
+        }));
+    }
+
+    async function closeExperienceDetails() {
+        viewState.update(state => ({
+            ...state,
+            experienceSelected: false,
+            inputValue: state.prevInputValue
+        }));
+
+        requestAnimationFrame(() => {
+            commandRootPrimitiveRef?.updateSelectedToIndex($viewState.selectedExperienceIndex);
+        });
+    }
+
     onMount(() => {
         // initial setup based on current visibility
         if (document.visibilityState === "visible") {
@@ -113,7 +145,7 @@
     >
         <!-- value state is only updated on a keyboard input. we want it to also be updated if viewState.inputValue changes -->
         <Command.Input
-            placeholder={$viewState.projectSelected ? `search for stuff about ${$selectedProject?.name}...` : "search for stuff about me..."}
+            placeholder={$viewState.projectSelected ? `search for stuff about ${$selectedProject?.name}...` : $viewState.experienceSelected ? `search for stuff about ${$selectedExperience?.company}...` : "search for stuff about me..."}
             bind:ref={inputRef}
             bind:value={$viewState.inputValue}
             autofocus
@@ -131,6 +163,18 @@
                         }}
                     />
                 </div>
+            {:else if $viewState.experienceSelected}
+                <div in:fly={{ x: 150, duration: 200 }} style="will-change: transform">
+                    <ExperienceDetails
+                        experience={$selectedExperience}
+                        onClose={closeExperienceDetails}
+                        onEscPress={(e: KeyboardEvent) => {
+                            if (e.key === "Escape") {
+                                closeExperienceDetails();
+                            }
+                        }}
+                    />
+                </div>
             {:else}
                 <div in:fly={{ x: -150, duration: 200 }} style="will-change: transform">
                     <Command.Empty>no results found baka ૮₍ ˃ ⤙ ˂ ₎ა</Command.Empty>
@@ -142,7 +186,9 @@
                     </Command.Group>
                     <Command.Separator />
                     <Command.Group heading="experiences">
-                        <Experiences />
+                        <Experiences
+                            saveViewStateAndSelectExperience={saveViewStateAndSelectExperience}
+                        />
                     </Command.Group>
                     <Command.Separator />
                     <Command.Group heading="resume">
