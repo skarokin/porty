@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { List, Item, Group } from "$lib/components/ui/command";
+    import { List, Item, Group, Separator } from "$lib/components/ui/command";
 
     import type { Experience } from "$lib/components/experiences";
     import ChevronLeft from "@lucide/svelte/icons/chevron-left";
@@ -33,17 +33,22 @@
         </Item>
     </Group>
 
+    <Separator />
+
     <Group heading="summary">
         {#each experience.summary as point, i}
             <Item
                 value={`summary-${i}`}
                 keywords={["summary", "work", "details", "description"]}
-                class="pointer-events-none"
+                class="pointer-events-none items-start justify-between"
             >
-                <p class="text-sm text-wrap">{point}</p>
+                <p class="text-sm text-wrap min-w-0 flex-1">{point}</p>
+                <span class="text-xs text-muted-foreground mt-0.5 shrink-0">{i + 1}</span>
             </Item>
         {/each}
     </Group>
+    
+    <Separator />
 
     <Group heading="back">
         <Item

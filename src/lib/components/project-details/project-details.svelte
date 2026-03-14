@@ -1,9 +1,7 @@
 <script lang="ts">
-    import { List, Item, LinkItem, Group } from "$lib/components/ui/command";
+    import { List, Item, LinkItem, Group, Separator } from "$lib/components/ui/command";
 
     import type { Project, TechDetail } from "$lib/components/projects";
-    import GitHub from "@lucide/svelte/icons/github";
-    import Link from "@lucide/svelte/icons/link";
     import ChevronLeft from "@lucide/svelte/icons/chevron-left";
 
     let {
@@ -15,6 +13,15 @@
         onClose: () => void;
         onEscPress: (e: KeyboardEvent) => void;
     }>();
+
+    function formatLinkLabel(url: string) {
+        try {
+            const parsed = new URL(url);
+            return `${parsed.hostname}${parsed.pathname === "/" ? "" : parsed.pathname}`;
+        } catch {
+            return url;
+        }
+    }
 </script>
 
 <svelte:document onkeydown={onEscPress} />
@@ -29,6 +36,8 @@
             {project.description}
         </Item>
     </Group>
+
+    <Separator />
 
     <Group heading="tech stack">
         {#each <TechDetail[]> project.techStack as tech}
@@ -50,6 +59,8 @@
         {/each}
     </Group>
 
+    <Separator />
+
     <Group heading="links">
         {#if project.link}
             <LinkItem
@@ -60,15 +71,12 @@
                 rel="noopener noreferrer"
                 class="flex items-center justify-between gap-2 w-full hover:cursor-pointer"
             >
-                <div class="flex items-center gap-2 flex-shrink-0">
-                    <Link class="size-4" />
-                    <div class="flex items-center gap-2">
-                        <span>visit</span>
-                        <span class="text-muted-foreground text-xs truncate">/ site</span>
-                    </div>
+                <div class="flex items-center gap-2 min-w-0">
+                    <span>visit</span>
+                    <span class="text-muted-foreground text-xs truncate">/ site</span>
                 </div>
                 <p class="text-xs text-muted-foreground min-w-0 truncate">
-                    {project.link}
+                    {formatLinkLabel(project.link)}
                 </p>
             </LinkItem>
         {/if}
@@ -82,19 +90,18 @@
                 rel="noopener noreferrer"
                 class="flex items-center justify-between gap-2 w-full hover:cursor-pointer"
             >
-                <div class="flex items-baseline gap-2 flex-shrink-0">
-                    <GitHub class="size-4" />
-                    <div class="flex items-center gap-2">
-                        <span>src</span>
-                        <span class="text-muted-foreground text-xs truncate">/ github</span>
-                    </div>
+                <div class="flex items-center gap-2 min-w-0">
+                    <span>source</span>
+                    <span class="text-muted-foreground text-xs truncate">/ github</span>
                 </div>
                 <p class="text-xs text-muted-foreground min-w-0 truncate">
-                    {project.github}
+                    {formatLinkLabel(project.github)}
                 </p>
             </LinkItem>
         {/if}
     </Group>
+
+    <Separator />
 
     <Group heading="back">
         <Item

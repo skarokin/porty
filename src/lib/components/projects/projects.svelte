@@ -1,7 +1,5 @@
 <script lang="ts">
     import { Item } from "$lib/components/ui/command";
-    import Link from "@lucide/svelte/icons/link";
-    import GitHub from "@lucide/svelte/icons/github";
     import ChevronRight from "@lucide/svelte/icons/chevron-right";
 
     export type TechDetail = {
@@ -271,10 +269,6 @@
         },
     ];
 
-    // prevents dialog from opening when clicking on github/link icons
-    function stopPropagation(e: MouseEvent) {
-        e.stopPropagation();
-    }
 </script>
 
 {#each projects as project, index (project.name)}
@@ -290,32 +284,7 @@
                 class="flex items-center gap-2 truncate max-w-48 sm:max-w-none"
             >
                 {project.name}
-                <span class="text-muted-foreground text-xs">/</span>
             </div>
-
-            {#if project.link}
-                <a
-                    href={project.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="text-muted-foreground hover:text-primary"
-                    onclick={stopPropagation}
-                >
-                    <Link class="size-4" />
-                </a>
-            {/if}
-
-            {#if project.github}
-                <a
-                    href={project.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="text-muted-foreground hover:text-primary"
-                    onclick={stopPropagation}
-                >
-                    <GitHub class="size-4" />
-                </a>
-            {/if}
         </div>
         <p
             class="flex flex-row items-center gap-2 text-muted-foreground text-xs"
