@@ -5,10 +5,8 @@
     import { Projects } from "$lib/components/projects";
     import { Resume } from "$lib/components/resume";
     import { Spotify } from "$lib/components/spotify";
-    import { TechStack } from "$lib/components/tech-stack";
     import { ProjectDetails } from "$lib/components/project-details";
     import { ExperienceDetails } from "$lib/components/experience-details";
-    import { RecentPic } from "$lib/components/recent-pic";
     import type { Project } from "$lib/components/projects";
     import type { Experience } from "$lib/components/experiences";
     import * as Command from "$lib/components/ui/command";
@@ -197,10 +195,6 @@
                     <Command.Separator />
                     <Command.Group heading="contacts">
                         <Contacts />
-                    </Command.Group>
-                    <Command.Separator />
-                    <Command.Group heading="tech stack">
-                        <TechStack />
                     </Command.Group>
                     <Command.Separator />
                     <Command.Group heading="projects">

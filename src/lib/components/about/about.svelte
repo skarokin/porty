@@ -1,8 +1,6 @@
 <script>
     import sean from "$lib/assets/sean1.jpg";
 
-    import MapPin from "@lucide/svelte/icons/map-pin";
-
     import { Item } from "$lib/components/ui/command";
     import * as Avatar from "$lib/components/ui/avatar/index.js";
 
@@ -15,42 +13,33 @@
     keywords={["about", "sean", "taemin", "kim", "skarokin", "new jersey", "bio", "biography", "location"]}
 >
     <div class="flex flex-row gap-2 items-center">
-        <Avatar.Root class="size-16 sm:size-24 border" loadingStatus="loaded">
+        <Avatar.Root class="size-16 sm:size-20 border" loadingStatus="loaded">
             <Avatar.Image
                 src={sean}
                 alt="Sean Kim"
             />
             <Avatar.Fallback>skim</Avatar.Fallback>
         </Avatar.Root>
-        <div class="flex flex-col gap-2 items-start">
-            <div class="flex flex-col items-start">
-                <div class="text-sm sm:text-base flex items-center gap-2 truncate max-w-48 sm:max-w-none">
-                    <span>sean kim</span>
-                    <span class="text-muted-foreground text-xs truncate">/ skarokin</span>
-                </div>
-                <p class="text-xs sm:text-sm font-sans">김태민</p>
-            </div>
-            <div class="flex flex-row gap-1 items-center text-xs text-muted-foreground">
-                <MapPin />
-                new jersey
-            </div>
+        <div class="flex flex-col items-start gap-1 truncate">
+            <span>sean kim</span>
+            <span class="text-muted-foreground text-xs font-sans truncate">김태민</span>
         </div>
     </div>
-    <div class="text-xs self-start mt-1">
+    <div class="text-xs">
         {#if nowPlaying && nowPlaying.isPlaying}
             <div class="flex flex-col items-start gap-1">
-                <span class="text-muted-foreground text-xs">now playing</span>
-                <a href={nowPlaying.songURL} target="_blank" rel="noopener noreferrer" class="flex items-center gap-1 hover:underline">
-                    <Avatar.Root class="size-8 rounded-sm border">
+                <span class="text-muted-foreground text-xs text-right w-full">now playing</span>
+                <a href={nowPlaying.songURL} target="_blank" rel="noopener noreferrer" class="flex flex-col items-end w-full gap-1 hover:underline">
+                    <Avatar.Root class="size-8 sm:size-12 rounded-sm border">
                         <Avatar.Image
                             src={nowPlaying.albumImageURL}
                             alt={nowPlaying.album}
                         />
                         <Avatar.Fallback>♪</Avatar.Fallback>
                     </Avatar.Root>
-                    <div class="flex flex-col max-w-16 sm:max-w-none truncate">
+                    <div class="flex items-center gap-2 truncate">
                         <span class="truncate">{nowPlaying.title}</span>
-                        <span class="text-muted-foreground truncate">{nowPlaying.artist}</span>
+                        <span class="text-muted-foreground text-xs truncate">/ {nowPlaying.artist}</span>
                     </div>
                 </a>
             </div>
