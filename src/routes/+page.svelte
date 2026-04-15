@@ -133,9 +133,8 @@
     onvisibilitychange={handleVisibilityChange}
 />
 
-<div class="flex flex-col gap-4 justify-center items-center h-full">
+<div class="flex flex-col gap-4 justify-center items-center w-full h-full">
     <Command.Root
-        class="max-w-4xl rounded-lg border shadow-md h-full"
         filter={customFilter}
         loop={true}
         vimBindings={false}
@@ -143,12 +142,18 @@
     >
         <!-- value state is only updated on a keyboard input. we want it to also be updated if viewState.inputValue changes -->
         <Command.Input
-            placeholder={$viewState.projectSelected ? `search for stuff about ${$selectedProject?.name}...` : $viewState.experienceSelected ? `search for stuff about ${$selectedExperience?.company}...` : "search for stuff about me..."}
+            class="text-xs sm:relative"
+            placeholder={
+                $viewState.projectSelected ? `search for stuff about ${$selectedProject?.name}...`
+                : $viewState.experienceSelected ? `search for stuff about ${$selectedExperience?.company}...`
+                : "use kbd! keybind hints scattered" 
+            }
             bind:ref={inputRef}
             bind:value={$viewState.inputValue}
             autofocus
         />
-        <Command.List class="max-h-full" bind:ref={commandListElementRef}>
+
+        <Command.List class="h-full w-full" bind:ref={commandListElementRef}>
             {#if $viewState.projectSelected}
                 <div in:fly={{ x: 150, duration: 200 }} style="will-change: transform">
                     <ProjectDetails
@@ -211,6 +216,8 @@
                     </Command.Group>
                 </div>
             {/if}
+            <!-- empty div for bottom spacing -->
+            <div class="sm:h-6 h-2" />
         </Command.List>
     </Command.Root>
 </div>

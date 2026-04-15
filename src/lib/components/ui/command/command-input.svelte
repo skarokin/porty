@@ -4,6 +4,13 @@
     import ExternalLink from "@lucide/svelte/icons/external-link";
     import Search from "@lucide/svelte/icons/search";
 
+    import { Switch } from "$lib/components/ui/switch";
+    import { Label } from "$lib/components/ui/label";
+
+    import { toggleMode } from "mode-watcher";
+
+    import { themeLoaded, darkChecked} from "$lib/stores/darkMode";
+
     let {
         ref = $bindable(null),
         class: className,
@@ -30,7 +37,7 @@
         bind:value
         {...restProps}
     />
-    <div class="pl-3 h-full flex items-center">
+    <div class="px-3 h-full flex items-center">
         <kbd
             class="hidden sm:inline-flex bg-muted text-muted-foreground pointer-events-none h-5 select-none items-center gap-1 rounded border px-1.5 text-xs mr-2"
         >
@@ -42,5 +49,20 @@
             <ExternalLink class="size-3 text-muted-foreground" />
             <span>enter</span>
         </kbd>
+    </div>
+    <div class="pl-3 border-l h-full flex items-center gap-2">
+        <Switch 
+            id="theme-switch"
+            onclick={toggleMode}
+            bind:checked={$darkChecked}
+            loaded={$themeLoaded}
+        />
+        <Label for="theme-switch" class="text-xs">
+            <kbd
+                class="hidden sm:inline-flex bg-muted text-muted-foreground pointer-events-none h-5 select-none items-center gap-1 rounded border px-1.5 text-xs"
+            >
+                <span>⌘</span><span>l</span>
+            </kbd>
+        </Label>
     </div>
 </div>
