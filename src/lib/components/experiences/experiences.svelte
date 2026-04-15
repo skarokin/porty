@@ -33,18 +33,10 @@
             "date": "02/26 - today",
             "logoComponent": panw,
             "summary": [
-                "via CyberArk acq, technically was full-time in CyberArk but only for a month",
-                "transitioned into the newly-created Foundry team, writing automation and agents for the whole company, not just Identity.",
-                "continued work on the SRE & incident management agent - made it enterprise ready with RBAC, multi-tenancy, better security, better guardrails, \
-                and strict observability and cost control. many success stories, demos to executives, and company-wide adoption.",
-                "templatized the agent as a simple framework for writing and operating agents in prod.",
-                "onboarded 5 engineers to help scale the project, leading the design and architecture effort on scaling to more teams and use cases across the company.",
-                "architecting an A2A gateway to centralize LLM infrastructure — brokers inference between teams' agents and tools \
-                while keeping auth, data, and deployments isolated. unified observability, billing, security, and performance optimizations across all tenants.",
-                "continued work on the auto-remediation platform, adding a phased QA -> staging -> prod rollout process, replaced logs with traces, and made workflow more robust and extendible with Step Functions. \
-                implemented more playbooks, eventually handing off the project to the Identity team.",
-                "working on making the agent more autonomous and giving it a visual interface so it can be auto-triggered by alerts and execute tasks with strong HITL harnesses",
-                "serve as the primary technical lead in the Production Engineering AI Guild, a cross-team effort to adopt AI agents in SRE, devops, and incident management."
+                "via CyberArk acq (was technically full-time in CyberArk but only for a month)",
+                "technical lead for AI agents in production engineering (SRE, devops, etc) teams",
+                "enterprise-ready AI agents: secure, compliant, auditable, accurate - already transforming how SREs work",
+                "production-safe autoremediations: observable, resilient, strict, idempotent, and easy to write - scaling self-healing infrastructure safely"
             ],
         },
         {
@@ -64,11 +56,8 @@
             date: "05/25 - 08/25",
             logoPath: cyberark,
             summary: [
-                "worked in the Identity team, writing automations and driving agentic AI initiatives.",
-                "main intern project - an SRE & incident management AI agent with (at the time) simple read-only integrations to internal systems.",
-                "secondary intern project - an auto-remediation platform where developers write Python playbooks to remediate alerts with deep observability and monitoring of automation performance.",
-                "developed many internal tools, dashboards, and one-off automations.",
-                "contributed performance optimizations & bug fixes to internal tenant management tool."
+                "RnD on AI agents in SRE: foundational work, rolled out internally",
+                "autoremediation platform for toil-heavy alerts: QA-ready, with strictly defined production rollout criteria"
             ],
         },
         {

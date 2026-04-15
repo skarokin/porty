@@ -27,7 +27,7 @@
 
                 setTimeout(() => {
                     contentReady = true;
-                }, 700);
+                }, 1000);
             }, 100);
         }
     });
@@ -138,6 +138,10 @@
                 <span class="text-purple-400">import</span> <span class="text-emerald-400">"github.com/skarokin/porty"</span><br/>
                 <br/>
                 <span class="text-purple-400">func</span> <span class="text-blue-400">main</span>() &#123;
+                <br/>
+                &nbsp;&nbsp;<span class="text-zinc-500">// tip: use your keyboard!</span>
+                <br/>
+                &nbsp;&nbsp;porty.<span class="text-blue-400">EnableKeyboardNavigation = true</span>
                 <br/>
                 &nbsp;&nbsp;porty.<span class="text-blue-400">Serve</span>(<span class="text-emerald-400">":8080"</span>)
                 <br/>

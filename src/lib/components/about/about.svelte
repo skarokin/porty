@@ -25,21 +25,21 @@
             <span class="text-muted-foreground text-xs font-sans truncate">김태민</span>
         </div>
     </div>
-    <div class="text-xs">
+    <div class="text-xs min-w-0 max-w-[50%] flex flex-col items-end">
         {#if nowPlaying && nowPlaying.isPlaying}
-            <div class="flex flex-col items-start gap-1">
+            <div class="flex flex-col items-end gap-1 w-full min-w-0">
                 <span class="text-muted-foreground text-xs text-right w-full">now playing</span>
-                <a href={nowPlaying.songURL} target="_blank" rel="noopener noreferrer" class="flex flex-col items-end w-full gap-1 hover:underline">
-                    <Avatar.Root class="size-8 sm:size-12 rounded-sm border">
+                <a href={nowPlaying.songURL} target="_blank" rel="noopener noreferrer" class="flex flex-col items-end w-full gap-1 hover:underline min-w-0">
+                    <Avatar.Root class="size-8 sm:size-12 rounded-sm border shrink-0">
                         <Avatar.Image
                             src={nowPlaying.albumImageURL}
                             alt={nowPlaying.album}
                         />
                         <Avatar.Fallback>♪</Avatar.Fallback>
                     </Avatar.Root>
-                    <div class="flex items-center gap-2 truncate">
+                    <div class="flex items-center justify-end gap-2 w-full min-w-0">
                         <span class="truncate">{nowPlaying.title}</span>
-                        <span class="text-muted-foreground text-xs truncate">/ {nowPlaying.artist}</span>
+                        <span class="text-muted-foreground text-xs truncate shrink-0">/ {nowPlaying.artist}</span>
                     </div>
                 </a>
             </div>
