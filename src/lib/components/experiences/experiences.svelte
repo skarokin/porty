@@ -40,6 +40,17 @@
             ],
         },
         {
+            company: "cyberark",
+            title: "sre intern",
+            hiddenKeywords: ["site reliability engineer", "site reliability", "cyberark"],
+            date: "05/25 - 01/26",
+            logoPath: cyberark,
+            summary: [
+                "RnD on AI agents in SRE: foundational work, rolled out internally",
+                "autoremediation platform for toil-heavy alerts: QA-ready, with strictly defined production rollout criteria"
+            ],
+        },
+        {
             company: "rutgers",
             title: "cs",
             hiddenKeywords: ["computer science", "rutgers university", "major", "education", "school"],
@@ -47,17 +58,6 @@
             logoPath: rutgers,
             summary: [
                 "twas school"
-            ],
-        },
-        {
-            company: "cyberark",
-            title: "sre intern",
-            hiddenKeywords: ["site reliability engineer", "site reliability", "cyberark"],
-            date: "05/25 - 08/25",
-            logoPath: cyberark,
-            summary: [
-                "RnD on AI agents in SRE: foundational work, rolled out internally",
-                "autoremediation platform for toil-heavy alerts: QA-ready, with strictly defined production rollout criteria"
             ],
         },
         {
