@@ -9,6 +9,7 @@
     import { ExperienceDetails } from "$lib/components/experience-details";
     import type { Project } from "$lib/components/projects";
     import type { Experience } from "$lib/components/experiences";
+    import type { CurrentlyPlayingTrack } from "$lib/types/spotify";
     import * as Command from "$lib/components/ui/command";
 
 	import { Command as CommandPrimitive } from "bits-ui";
@@ -22,9 +23,8 @@
     let { data } = $props();
     let topTracks = $derived(data.topTracks);
 
-    // keep the initial load data in sync with the current page data, but let polling own updates after mount
-    let nowPlaying = $state(data.nowPlaying);
-    let hasError = $state(data.type === "error");
+    let nowPlaying = $state<CurrentlyPlayingTrack | null>(null);
+    let hasError = $state(false);
 
     $effect(() => {
         nowPlaying = data.nowPlaying;
