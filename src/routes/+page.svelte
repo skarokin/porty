@@ -20,11 +20,16 @@
     import { fly } from "svelte/transition";
 
     let { data } = $props();
-    let { topTracks } = data;
+    let topTracks = $derived(data.topTracks);
 
-    // set this separately so that we can use $state() since we poll; might succeed once but fail later
-    let nowPlaying = $state(data.nowPlaying || "");
+    // keep the initial load data in sync with the current page data, but let polling own updates after mount
+    let nowPlaying = $state(data.nowPlaying);
     let hasError = $state(data.type === "error");
+
+    $effect(() => {
+        nowPlaying = data.nowPlaying;
+        hasError = data.type === "error";
+    });
 
     let intervalID: ReturnType<typeof setInterval>;
     let inputRef: HTMLInputElement | null = $state(null);
@@ -217,7 +222,7 @@
                 </div>
             {/if}
             <!-- empty div for bottom spacing -->
-            <div class="sm:h-6 h-2" />
+            <div class="sm:h-6 h-2"></div>
         </Command.List>
     </Command.Root>
 </div>
